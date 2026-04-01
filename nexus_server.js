@@ -132,9 +132,21 @@ app.post('/api/webhook', express.raw({ type: 'application/json' }), async (req, 
 async function enviarEmailConfirmacion(name, email, phone, profession, hasUpsell) {
   const whatsappLink = `https://wa.me/${WHATSAPP_NUMBER.replace(/\s/g, '')}?text=Hola%2C%20acabo%20de%20comprar%20mi%20página%20web%20en%20Nexus%20Digital`;
 
-  const packageInfo = hasUpsell 
-    ? 'Página Web + 15 Posts para Redes ($6,144)'
-    : 'Página Web + Dominio + Hosting Año 1 ($4,399)';
+  const packageInfo = hasUpsell
+    ? `<strong>✅ Página Web Profesional</strong><br>
+       • Diseño profesional y responsivo<br>
+       • Dominio + Hosting (Año 1) incluido<br>
+       • Formulario de contacto + SEO<br><br>
+       <strong>✅ 15 Posts para Redes Sociales</strong><br>
+       • LinkedIn, Instagram, Facebook<br>
+       • Copywriting optimizado<br>
+       • Listos para publicar inmediatamente<br><br>
+       <strong>💰 Total: $6,144 MXN</strong>`
+    : `<strong>✅ Página Web Profesional</strong><br>
+       • Diseño profesional y responsivo<br>
+       • Dominio + Hosting (Año 1) incluido<br>
+       • Formulario de contacto + SEO<br><br>
+       <strong>💰 Total: $4,399 MXN</strong>`;
 
   const htmlContent = `
     <!DOCTYPE html>
