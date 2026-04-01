@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Carrusel 06 - Slide 1/5 Cover</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background: #555; display: flex; align-items: center; justify-content: center; min-height: 100vh; }
+    .instructions { position: fixed; top: 10px; right: 10px; background: white; padding: 8px 12px; border-radius: 8px; font-size: 11px; z-index: 9999; box-shadow: 0 2px 10px rgba(0,0,0,0.3); line-height: 1.6; }
+    .post {
+      width: 1080px; height: 1080px; position: relative; overflow: hidden; flex-shrink: 0;
+      background: #0F1419; font-family: 'Inter', sans-serif;
+    }
+    .bg {
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse at top right, rgba(157,78,221,0.3) 0%, transparent 50%),
+                  radial-gradient(ellipse at bottom left, rgba(157,78,221,0.15) 0%, transparent 50%),
+                  radial-gradient(ellipse at center, rgba(157,78,221,0.08) 0%, transparent 60%);
+    }
+    .content {
+      position: relative; z-index: 2; width: 100%; height: 100%; padding: 72px;
+      display: flex; flex-direction: column; justify-content: space-between;
+    }
+    .logo { font-family: 'Poppins', sans-serif; font-size: 20px; font-weight: 800; color: #9D4EDD; letter-spacing: 2px; }
+    .main { flex: 1; display: flex; flex-direction: column; justify-content: center; gap: 28px; }
+    .label { font-size: 18px; font-weight: 600; color: #9D4EDD; letter-spacing: 4px; text-transform: uppercase; }
+    .title {
+      font-family: 'Poppins', sans-serif; font-size: 88px; font-weight: 900;
+      color: #F8FAFC; line-height: 1.0;
+    }
+    .title span { color: #00D9FF; }
+    .subtitle { font-size: 26px; color: rgba(248,250,252,0.55); line-height: 1.5; max-width: 700px; }
+    /* Two product cards */
+    .product-cards { display: flex; gap: 20px; max-width: 860px; }
+    .product-card {
+      flex: 1; border-radius: 20px; padding: 28px 24px; text-align: center;
+    }
+    .card-web {
+      background: rgba(0,217,255,0.08); border: 1.5px solid rgba(0,217,255,0.3);
+    }
+    .card-combo {
+      background: rgba(157,78,221,0.12); border: 2px solid rgba(157,78,221,0.6);
+      box-shadow: 0 0 30px rgba(157,78,221,0.15);
+    }
+    .card-badge {
+      font-size: 14px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
+      padding: 6px 16px; border-radius: 50px; margin-bottom: 12px; display: inline-block;
+    }
+    .badge-web { background: rgba(0,217,255,0.2); color: #00D9FF; }
+    .badge-combo { background: rgba(157,78,221,0.3); color: #9D4EDD; }
+    .card-title { font-family: 'Poppins', sans-serif; font-size: 24px; font-weight: 800; color: #F8FAFC; margin-bottom: 12px; }
+    .card-price { font-family: 'Poppins', sans-serif; font-size: 42px; font-weight: 900; }
+    .price-web { color: #00D9FF; }
+    .price-combo { color: #9D4EDD; }
+    .card-plus { font-size: 16px; color: rgba(248,250,252,0.45); margin-top: 6px; }
+    .total-row {
+      display: flex; align-items: center; gap: 16px;
+      font-size: 22px; color: rgba(248,250,252,0.5); max-width: 860px;
+    }
+    .total-sep { flex: 1; height: 1px; background: rgba(248,250,252,0.1); }
+    .total-price { font-family: 'Poppins', sans-serif; font-size: 28px; font-weight: 800; color: #9D4EDD; }
+    .swipe { display: flex; align-items: center; justify-content: space-between; }
+    .swipe-text { font-size: 20px; font-weight: 600; color: rgba(255,255,255,0.35); }
+    .dots { display: flex; gap: 8px; }
+    .dot { width: 10px; height: 10px; border-radius: 50%; background: rgba(255,255,255,0.2); }
+    .dot.active { background: #9D4EDD; width: 30px; border-radius: 5px; }
+  </style>
+</head>
+<body>
+  <div class="instructions">Carrusel 06 · Slide 1/5<br>📸 F12 → Capture screenshot</div>
+  <div class="post">
+    <div class="bg"></div>
+    <div class="content">
+      <div class="logo">◇ NEXUS DIGITAL</div>
+      <div class="main">
+        <div class="label">💡 La combinación perfecta</div>
+        <div class="title">Web + Posts:<br><span>el combo</span><br>que potencia</div>
+        <div class="subtitle">La combinación perfecta para profesionales serios.</div>
+        <div class="product-cards">
+          <div class="product-card card-web">
+            <div class="card-badge badge-web">Opción A</div>
+            <div class="card-title">Solo Web</div>
+            <div class="card-price price-web">$4,399</div>
+            <div class="card-plus">MXN</div>
+          </div>
+          <div class="product-card card-combo">
+            <div class="card-badge badge-combo">Opción B</div>
+            <div class="card-title">Web + 15 Posts</div>
+            <div class="card-price price-combo">$6,144</div>
+            <div class="card-plus">MXN · +$1,745</div>
+          </div>
+        </div>
+      </div>
+      <div class="swipe">
+        <div class="swipe-text">Desliza para ver →</div>
+        <div class="dots">
+          <div class="dot active"></div>
+          <div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Post 03 - Entrega 24hrs</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background: #555; display: flex; align-items: center; justify-content: center; min-height: 100vh; }
+    .instructions { position: fixed; top: 10px; right: 10px; background: white; padding: 8px 12px; border-radius: 8px; font-size: 11px; z-index: 9999; box-shadow: 0 2px 10px rgba(0,0,0,0.3); }
+    .post {
+      width: 1080px; height: 1080px; position: relative; overflow: hidden; flex-shrink: 0;
+      background: #0F1419; font-family: 'Inter', sans-serif;
+    }
+    .bg {
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse at center, rgba(0,217,255,0.12) 0%, transparent 65%);
+    }
+    .accent-line {
+      position: absolute; top: 0; left: 0; right: 0; height: 6px;
+      background: linear-gradient(90deg, #00D9FF, #9D4EDD, #00D9FF);
+    }
+    .content {
+      position: relative; z-index: 2;
+      width: 100%; height: 100%;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      padding: 72px;
+      text-align: center;
+    }
+    .logo { font-family: 'Poppins', sans-serif; font-size: 20px; font-weight: 800; color: #00D9FF; letter-spacing: 2px; position: absolute; top: 56px; left: 72px; }
+    .eyebrow { font-size: 18px; font-weight: 600; color: #9D4EDD; letter-spacing: 4px; text-transform: uppercase; margin-bottom: 24px; }
+    .big-number {
+      font-family: 'Poppins', sans-serif;
+      font-size: 200px; font-weight: 900;
+      color: #00D9FF;
+      line-height: 1;
+      letter-spacing: -8px;
+      text-shadow: 0 0 80px rgba(0,217,255,0.4);
+    }
+    .big-label {
+      font-family: 'Poppins', sans-serif;
+      font-size: 56px; font-weight: 800;
+      color: #F8FAFC;
+      margin-top: -16px;
+      margin-bottom: 16px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+    }
+    .desc {
+      font-size: 26px; color: rgba(255,255,255,0.65);
+      line-height: 1.5; max-width: 700px;
+      margin-bottom: 56px;
+    }
+    .timeline {
+      display: flex; align-items: center; gap: 0;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 60px;
+      padding: 24px 40px;
+      gap: 0;
+    }
+    .step {
+      display: flex; flex-direction: column;
+      align-items: center; gap: 8px;
+      padding: 0 32px;
+    }
+    .step-icon { font-size: 32px; }
+    .step-label { font-size: 16px; font-weight: 600; color: #F8FAFC; }
+    .step-sub { font-size: 13px; color: rgba(255,255,255,0.4); }
+    .arrow { font-size: 28px; color: #00D9FF; padding: 0 8px; }
+    .bottom-logo { position: absolute; bottom: 48px; right: 72px; }
+    .diamond { width: 40px; height: 40px; background: linear-gradient(135deg, #00D9FF, #9D4EDD); clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%); }
+  </style>
+</head>
+<body>
+  <div class="instructions">📸 Screenshot: F12 → ⋮ → Capture full size screenshot</div>
+  <div class="post">
+    <div class="bg"></div>
+    <div class="accent-line"></div>
+    <div class="content">
+      <div class="logo">◇ NEXUS DIGITAL</div>
+      <div class="eyebrow">⚡ Velocidad sin igual</div>
+      <div class="big-number">24</div>
+      <div class="big-label">HORAS</div>
+      <div class="desc">Tu página web profesional lista al día siguiente de tu onboarding. Sin esperas. Sin excusas.</div>
+      <div class="timeline">
+        <div class="step">
+          <div class="step-icon">🛒</div>
+          <div class="step-label">Compra</div>
+          <div class="step-sub">Hoy</div>
+        </div>
+        <div class="arrow">→</div>
+        <div class="step">
+          <div class="step-icon">💬</div>
+          <div class="step-label">Onboarding</div>
+          <div class="step-sub">20 minutos</div>
+        </div>
+        <div class="arrow">→</div>
+        <div class="step">
+          <div class="step-icon">🌐</div>
+          <div class="step-label">Tu web lista</div>
+          <div class="step-sub">Al día siguiente</div>
+        </div>
+      </div>
+    </div>
+    <div class="bottom-logo"><div class="diamond"></div></div>
+  </div>
+</body>
+</html>

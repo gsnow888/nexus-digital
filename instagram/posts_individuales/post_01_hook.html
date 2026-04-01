@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Post 01 - Hook</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background: #555; display: flex; align-items: center; justify-content: center; min-height: 100vh; font-family: 'Inter', sans-serif; }
+    .instructions { position: fixed; top: 10px; right: 10px; background: white; padding: 8px 12px; border-radius: 8px; font-size: 11px; z-index: 9999; box-shadow: 0 2px 10px rgba(0,0,0,0.3); line-height: 1.5; }
+    .post {
+      width: 1080px; height: 1080px; position: relative; overflow: hidden; flex-shrink: 0;
+      background: #0F1419;
+    }
+    .bg-gradient {
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse at top right, rgba(157,78,221,0.25) 0%, transparent 60%),
+                  radial-gradient(ellipse at bottom left, rgba(0,217,255,0.15) 0%, transparent 60%);
+    }
+    .grid-lines {
+      position: absolute; inset: 0;
+      background-image: linear-gradient(rgba(0,217,255,0.04) 1px, transparent 1px),
+                        linear-gradient(90deg, rgba(0,217,255,0.04) 1px, transparent 1px);
+      background-size: 60px 60px;
+    }
+    .content {
+      position: relative; z-index: 2;
+      width: 100%; height: 100%;
+      display: flex; flex-direction: column;
+      justify-content: space-between;
+      padding: 64px 72px;
+    }
+    .logo {
+      font-family: 'Poppins', sans-serif;
+      font-size: 22px; font-weight: 800;
+      color: #00D9FF;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+    .logo span { color: rgba(255,255,255,0.4); font-weight: 400; margin-left: 8px; font-size: 16px; }
+    .main {
+      flex: 1; display: flex; flex-direction: column;
+      justify-content: center;
+    }
+    .eyebrow {
+      font-size: 18px; font-weight: 600;
+      color: #9D4EDD;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      margin-bottom: 32px;
+    }
+    .headline {
+      font-family: 'Poppins', sans-serif;
+      font-size: 96px; font-weight: 900;
+      color: #F8FAFC;
+      line-height: 1.0;
+      margin-bottom: 16px;
+    }
+    .headline .highlight { color: #00D9FF; }
+    .subhead {
+      font-size: 28px; font-weight: 400;
+      color: rgba(255,255,255,0.6);
+      line-height: 1.5;
+      margin-top: 24px;
+      max-width: 780px;
+    }
+    .stat-box {
+      margin-top: 56px;
+      background: rgba(0,217,255,0.08);
+      border: 1px solid rgba(0,217,255,0.2);
+      border-left: 4px solid #00D9FF;
+      padding: 24px 32px;
+      border-radius: 12px;
+      display: inline-block;
+    }
+    .stat-text {
+      font-size: 22px; font-weight: 600;
+      color: #F8FAFC;
+    }
+    .stat-text span { color: #00D9FF; }
+    .bottom {
+      display: flex; justify-content: space-between; align-items: flex-end;
+    }
+    .hashtags {
+      font-size: 16px; color: rgba(255,255,255,0.3);
+      line-height: 1.8;
+    }
+    .diamond {
+      width: 56px; height: 56px;
+      background: linear-gradient(135deg, #00D9FF, #9D4EDD);
+      clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+    }
+  </style>
+</head>
+<body>
+  <div class="instructions">📸 Screenshot: F12 → ⋮ → Capture full size screenshot</div>
+  <div class="post">
+    <div class="bg-gradient"></div>
+    <div class="grid-lines"></div>
+    <div class="content">
+      <div class="logo">◇ NEXUS <span>Digital</span></div>
+      <div class="main">
+        <div class="eyebrow">⚠ Pregunta importante</div>
+        <div class="headline">¿Sigues<br>sin página<br><span class="highlight">web?</span></div>
+        <div class="subhead">Mientras tú dudas, tu competencia ya aparece en Google cuando buscan tus servicios.</div>
+        <div class="stat-box">
+          <div class="stat-text">📊 El <span>80% de los clientes</span> busca online antes de contratar a un profesional.</div>
+        </div>
+      </div>
+      <div class="bottom">
+        <div class="hashtags">
+          #PresenciaDigital #PáginaWeb<br>
+          #NexusDigital #Profesionales
+        </div>
+        <div class="diamond"></div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

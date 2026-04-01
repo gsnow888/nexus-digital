@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Carrusel 03 - Slide 4/5</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background: #555; display: flex; align-items: center; justify-content: center; min-height: 100vh; }
+    .instructions { position: fixed; top: 10px; right: 10px; background: white; padding: 8px 12px; border-radius: 8px; font-size: 11px; z-index: 9999; box-shadow: 0 2px 10px rgba(0,0,0,0.3); line-height: 1.6; }
+    .post {
+      width: 1080px; height: 1080px; position: relative; overflow: hidden; flex-shrink: 0;
+      background: #0F1419; font-family: 'Inter', sans-serif;
+    }
+    .bg {
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse at top right, rgba(57,255,20,0.2) 0%, transparent 50%),
+                  radial-gradient(ellipse at bottom left, rgba(57,255,20,0.06) 0%, transparent 50%);
+    }
+    .big-step {
+      position: absolute; right: -20px; bottom: 60px;
+      font-family: 'Poppins', sans-serif; font-size: 400px; font-weight: 900;
+      color: rgba(57,255,20,0.05); line-height: 1; user-select: none;
+    }
+    .content {
+      position: relative; z-index: 2; width: 100%; height: 100%; padding: 72px;
+      display: flex; flex-direction: column; justify-content: space-between;
+    }
+    .logo { font-family: 'Poppins', sans-serif; font-size: 20px; font-weight: 800; color: #39FF14; letter-spacing: 2px; }
+    .main { flex: 1; display: flex; flex-direction: column; justify-content: center; gap: 32px; }
+    .step-badge {
+      display: inline-flex; align-items: center; gap: 12px;
+      background: rgba(57,255,20,0.1); border: 1.5px solid rgba(57,255,20,0.4);
+      border-radius: 50px; padding: 12px 28px;
+      font-size: 20px; font-weight: 700; color: #39FF14; letter-spacing: 2px; text-transform: uppercase;
+      align-self: flex-start;
+    }
+    .step-icon { font-size: 80px; line-height: 1; }
+    .step-title {
+      font-family: 'Poppins', sans-serif; font-size: 74px; font-weight: 900;
+      color: #F8FAFC; line-height: 1.05;
+    }
+    .step-title span { color: #39FF14; }
+    .description {
+      font-size: 26px; color: rgba(248,250,252,0.72); line-height: 1.65; max-width: 780px;
+    }
+    .time-display {
+      background: rgba(57,255,20,0.1); border: 2px solid rgba(57,255,20,0.5);
+      border-radius: 24px; padding: 32px 48px;
+      display: inline-flex; align-items: baseline; gap: 16px; align-self: flex-start;
+    }
+    .time-big {
+      font-family: 'Poppins', sans-serif; font-size: 88px; font-weight: 900; color: #39FF14; line-height: 1;
+    }
+    .time-label { font-size: 28px; font-weight: 700; color: rgba(248,250,252,0.6); }
+    .sub-detail { font-size: 20px; color: rgba(248,250,252,0.45); margin-top: -8px; }
+    .bottom { display: flex; align-items: center; justify-content: space-between; }
+    .dots { display: flex; gap: 8px; }
+    .dot { width: 10px; height: 10px; border-radius: 50%; background: rgba(255,255,255,0.2); }
+    .dot.active { background: #39FF14; width: 30px; border-radius: 5px; }
+  </style>
+</head>
+<body>
+  <div class="instructions">Carrusel 03 · Slide 4/5<br>📸 F12 → Capture screenshot</div>
+  <div class="post">
+    <div class="bg"></div>
+    <div class="big-step">3</div>
+    <div class="content">
+      <div class="logo">◇ NEXUS DIGITAL</div>
+      <div class="main">
+        <div class="step-badge">Paso 3 de 4</div>
+        <div class="step-icon">⚡</div>
+        <div class="step-title">Diseño y<br><span>desarrollo</span></div>
+        <div class="description">
+          Nuestro equipo diseña y desarrolla tu página web basándose en tus referencias.
+          Mismo día o al día siguiente.
+        </div>
+        <div class="time-display">
+          <div class="time-big">24</div>
+          <div class="time-label">HRS</div>
+        </div>
+        <div class="sub-detail">Entrega garantizada al día siguiente del onboarding</div>
+      </div>
+      <div class="bottom">
+        <div class="dots">
+          <div class="dot"></div><div class="dot"></div><div class="dot"></div>
+          <div class="dot active"></div><div class="dot"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

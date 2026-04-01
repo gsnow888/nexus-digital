@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Carrusel 01 - Slide 4/6</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background: #555; display: flex; align-items: center; justify-content: center; min-height: 100vh; }
+    .instructions { position: fixed; top: 10px; right: 10px; background: white; padding: 8px 12px; border-radius: 8px; font-size: 11px; z-index: 9999; box-shadow: 0 2px 10px rgba(0,0,0,0.3); line-height: 1.6; }
+    .post {
+      width: 1080px; height: 1080px; position: relative; overflow: hidden; flex-shrink: 0;
+      background: #0F1419; font-family: 'Inter', sans-serif;
+    }
+    .bg {
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse at bottom right, rgba(57,255,20,0.18) 0%, transparent 55%),
+                  radial-gradient(ellipse at top left, rgba(57,255,20,0.08) 0%, transparent 50%);
+    }
+    .big-number {
+      position: absolute; right: -20px; top: 50%; transform: translateY(-50%);
+      font-family: 'Poppins', sans-serif; font-size: 480px; font-weight: 900;
+      color: rgba(57,255,20,0.06); line-height: 1; user-select: none; pointer-events: none;
+    }
+    .content {
+      position: relative; z-index: 2; width: 100%; height: 100%; padding: 72px;
+      display: flex; flex-direction: column; justify-content: space-between;
+    }
+    .logo { font-family: 'Poppins', sans-serif; font-size: 20px; font-weight: 800; color: #39FF14; letter-spacing: 2px; }
+    .main { flex: 1; display: flex; flex-direction: column; justify-content: center; gap: 36px; }
+    .razon-label {
+      display: inline-flex; align-items: center; gap: 12px;
+      font-size: 18px; font-weight: 700; color: #39FF14; letter-spacing: 3px; text-transform: uppercase;
+    }
+    .razon-badge {
+      width: 44px; height: 44px; border-radius: 50%; background: #39FF14;
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Poppins', sans-serif; font-size: 22px; font-weight: 900; color: #0F1419;
+    }
+    .title {
+      font-family: 'Poppins', sans-serif; font-size: 74px; font-weight: 900;
+      color: #F8FAFC; line-height: 1.05; max-width: 800px;
+    }
+    .title span { color: #39FF14; }
+    .body-text {
+      font-size: 26px; color: rgba(248,250,252,0.75); line-height: 1.6; max-width: 820px;
+    }
+    .stat-box {
+      background: rgba(57,255,20,0.1); border: 1.5px solid rgba(57,255,20,0.35);
+      border-radius: 16px; padding: 28px 36px; display: flex; align-items: center; gap: 24px;
+      max-width: 820px;
+    }
+    .stat-icon { font-size: 36px; }
+    .stat-text { font-size: 22px; font-weight: 600; color: #39FF14; line-height: 1.4; }
+    .stat-text span { color: #F8FAFC; font-weight: 400; }
+    .bottom { display: flex; align-items: center; justify-content: space-between; }
+    .dots { display: flex; gap: 8px; }
+    .dot { width: 10px; height: 10px; border-radius: 50%; background: rgba(255,255,255,0.2); }
+    .dot.active { background: #39FF14; width: 30px; border-radius: 5px; }
+  </style>
+</head>
+<body>
+  <div class="instructions">Carrusel 01 · Slide 4/6<br>📸 F12 → Capture screenshot</div>
+  <div class="post">
+    <div class="bg"></div>
+    <div class="big-number">3</div>
+    <div class="content">
+      <div class="logo">◇ NEXUS DIGITAL</div>
+      <div class="main">
+        <div class="razon-label">
+          <div class="razon-badge">3</div>
+          RAZÓN #3
+        </div>
+        <div class="title">Apareces en<br><span>Google</span></div>
+        <div class="body-text">
+          El SEO básico incluido en tu página te ayuda a aparecer cuando alguien busca
+          "<em>[tu profesión] en [tu ciudad]</em>". Tus competidores ya están ahí.
+        </div>
+        <div class="stat-box">
+          <div class="stat-icon">🔍</div>
+          <div class="stat-text">
+            El <strong>93%</strong> de las experiencias online<br>
+            <span>comienzan con una búsqueda en Google</span>
+          </div>
+        </div>
+      </div>
+      <div class="bottom">
+        <div class="dots">
+          <div class="dot"></div><div class="dot"></div><div class="dot"></div>
+          <div class="dot active"></div><div class="dot"></div><div class="dot"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

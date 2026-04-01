@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Carrusel 06 - Slide 3/5</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background: #555; display: flex; align-items: center; justify-content: center; min-height: 100vh; }
+    .instructions { position: fixed; top: 10px; right: 10px; background: white; padding: 8px 12px; border-radius: 8px; font-size: 11px; z-index: 9999; box-shadow: 0 2px 10px rgba(0,0,0,0.3); line-height: 1.6; }
+    .post {
+      width: 1080px; height: 1080px; position: relative; overflow: hidden; flex-shrink: 0;
+      background: #0F1419; font-family: 'Inter', sans-serif;
+    }
+    .bg {
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse at top right, rgba(157,78,221,0.22) 0%, transparent 50%),
+                  radial-gradient(ellipse at bottom left, rgba(0,217,255,0.1) 0%, transparent 50%);
+    }
+    .content {
+      position: relative; z-index: 2; width: 100%; height: 100%; padding: 64px 72px;
+      display: flex; flex-direction: column; justify-content: space-between;
+    }
+    .logo { font-family: 'Poppins', sans-serif; font-size: 20px; font-weight: 800; color: #9D4EDD; letter-spacing: 2px; }
+    .main { flex: 1; display: flex; flex-direction: column; justify-content: center; gap: 24px; }
+    .title {
+      font-family: 'Poppins', sans-serif; font-size: 60px; font-weight: 900;
+      color: #F8FAFC; line-height: 1.05;
+    }
+    .title span { color: #9D4EDD; }
+    .networks { display: flex; flex-direction: column; gap: 18px; }
+    .network-row { display: flex; flex-direction: column; gap: 10px; }
+    .network-header {
+      display: flex; align-items: center; gap: 12px;
+      font-size: 20px; font-weight: 700; letter-spacing: 1px;
+    }
+    .network-icon { font-size: 28px; }
+    .network-name { font-family: 'Poppins', sans-serif; }
+    .linkedin-color { color: #0A66C2; }
+    .instagram-color { color: #E4405F; }
+    .facebook-color { color: #1877F2; }
+    .posts-row { display: flex; gap: 10px; }
+    .post-square {
+      width: 120px; height: 96px; border-radius: 10px;
+      display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px;
+      font-size: 13px; font-weight: 600; color: rgba(248,250,252,0.6);
+    }
+    .post-num { font-family: 'Poppins', sans-serif; font-size: 22px; font-weight: 900; }
+    .li-color { background: rgba(10,102,194,0.15); border: 1px solid rgba(10,102,194,0.35); }
+    .li-color .post-num { color: #4A9EF8; }
+    .ig-color { background: rgba(228,64,95,0.12); border: 1px solid rgba(228,64,95,0.3); }
+    .ig-color .post-num { color: #F87A96; }
+    .fb-color { background: rgba(24,119,242,0.12); border: 1px solid rgba(24,119,242,0.3); }
+    .fb-color .post-num { color: #6CA8F5; }
+    .caption {
+      font-size: 22px; color: rgba(248,250,252,0.55); text-align: center;
+      background: rgba(255,255,255,0.04); border-radius: 14px; padding: 18px 28px;
+    }
+    .caption span { color: #9D4EDD; font-weight: 600; }
+    .bottom { display: flex; align-items: center; justify-content: space-between; }
+    .dots { display: flex; gap: 8px; }
+    .dot { width: 10px; height: 10px; border-radius: 50%; background: rgba(255,255,255,0.2); }
+    .dot.active { background: #9D4EDD; width: 30px; border-radius: 5px; }
+  </style>
+</head>
+<body>
+  <div class="instructions">Carrusel 06 · Slide 3/5<br>📸 F12 → Capture screenshot</div>
+  <div class="post">
+    <div class="bg"></div>
+    <div class="content">
+      <div class="logo">◇ NEXUS DIGITAL</div>
+      <div class="main">
+        <div class="title">¿Qué incluyen<br>los <span>15 posts?</span></div>
+        <div class="networks">
+          <div class="network-row">
+            <div class="network-header">
+              <span class="network-icon">💼</span>
+              <span class="network-name linkedin-color">LinkedIn</span>
+              <span style="font-size:16px; color:rgba(248,250,252,0.4)">— 5 posts</span>
+            </div>
+            <div class="posts-row">
+              <div class="post-square li-color"><div class="post-num">1</div><div>post</div></div>
+              <div class="post-square li-color"><div class="post-num">2</div><div>post</div></div>
+              <div class="post-square li-color"><div class="post-num">3</div><div>post</div></div>
+              <div class="post-square li-color"><div class="post-num">4</div><div>post</div></div>
+              <div class="post-square li-color"><div class="post-num">5</div><div>post</div></div>
+            </div>
+          </div>
+          <div class="network-row">
+            <div class="network-header">
+              <span class="network-icon">📸</span>
+              <span class="network-name instagram-color">Instagram</span>
+              <span style="font-size:16px; color:rgba(248,250,252,0.4)">— 5 posts</span>
+            </div>
+            <div class="posts-row">
+              <div class="post-square ig-color"><div class="post-num">1</div><div>post</div></div>
+              <div class="post-square ig-color"><div class="post-num">2</div><div>post</div></div>
+              <div class="post-square ig-color"><div class="post-num">3</div><div>post</div></div>
+              <div class="post-square ig-color"><div class="post-num">4</div><div>post</div></div>
+              <div class="post-square ig-color"><div class="post-num">5</div><div>post</div></div>
+            </div>
+          </div>
+          <div class="network-row">
+            <div class="network-header">
+              <span class="network-icon">👥</span>
+              <span class="network-name facebook-color">Facebook</span>
+              <span style="font-size:16px; color:rgba(248,250,252,0.4)">— 5 posts</span>
+            </div>
+            <div class="posts-row">
+              <div class="post-square fb-color"><div class="post-num">1</div><div>post</div></div>
+              <div class="post-square fb-color"><div class="post-num">2</div><div>post</div></div>
+              <div class="post-square fb-color"><div class="post-num">3</div><div>post</div></div>
+              <div class="post-square fb-color"><div class="post-num">4</div><div>post</div></div>
+              <div class="post-square fb-color"><div class="post-num">5</div><div>post</div></div>
+            </div>
+          </div>
+        </div>
+        <div class="caption">Diseñados con <span>tu imagen</span>. Listos para publicar.</div>
+      </div>
+      <div class="bottom">
+        <div class="dots">
+          <div class="dot"></div><div class="dot"></div><div class="dot active"></div>
+          <div class="dot"></div><div class="dot"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

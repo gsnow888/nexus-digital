@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Carrusel 04 - Slide 1/5 Cover</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background: #555; display: flex; align-items: center; justify-content: center; min-height: 100vh; }
+    .instructions { position: fixed; top: 10px; right: 10px; background: white; padding: 8px 12px; border-radius: 8px; font-size: 11px; z-index: 9999; box-shadow: 0 2px 10px rgba(0,0,0,0.3); line-height: 1.6; }
+    .post {
+      width: 1080px; height: 1080px; position: relative; overflow: hidden; flex-shrink: 0;
+      background: #0F1419; font-family: 'Inter', sans-serif;
+    }
+    /* Split background */
+    .bg-left {
+      position: absolute; left: 0; top: 0; width: 50%; height: 100%;
+      background: radial-gradient(ellipse at center, rgba(255,50,50,0.08) 0%, transparent 70%);
+    }
+    .bg-right {
+      position: absolute; right: 0; top: 0; width: 50%; height: 100%;
+      background: radial-gradient(ellipse at center, rgba(57,255,20,0.12) 0%, transparent 70%);
+    }
+    .split-line {
+      position: absolute; left: 50%; top: 0; width: 1px; height: 100%;
+      background: linear-gradient(to bottom, transparent, rgba(248,250,252,0.15), transparent);
+    }
+    .content {
+      position: relative; z-index: 2; width: 100%; height: 100%; padding: 72px;
+      display: flex; flex-direction: column; justify-content: space-between;
+    }
+    .logo { font-family: 'Poppins', sans-serif; font-size: 20px; font-weight: 800; color: #00D9FF; letter-spacing: 2px; }
+    .main { flex: 1; display: flex; flex-direction: column; justify-content: center; gap: 24px; align-items: center; text-align: center; }
+    .label {
+      font-size: 18px; font-weight: 600; color: rgba(248,250,252,0.5); letter-spacing: 4px; text-transform: uppercase;
+    }
+    .title {
+      font-family: 'Poppins', sans-serif; font-size: 96px; font-weight: 900;
+      color: #F8FAFC; line-height: 1.0;
+    }
+    .vs-badge {
+      display: inline-flex; align-items: center; gap: 24px;
+      font-family: 'Poppins', sans-serif; font-size: 60px; font-weight: 900;
+    }
+    .sin { color: rgba(255,80,80,0.85); }
+    .vs { color: rgba(248,250,252,0.3); font-size: 40px; }
+    .con { color: #39FF14; }
+    .subtitle {
+      font-size: 26px; color: rgba(248,250,252,0.55); line-height: 1.5; max-width: 720px;
+    }
+    .swipe { display: flex; align-items: center; justify-content: space-between; }
+    .swipe-text { font-size: 20px; font-weight: 600; color: rgba(255,255,255,0.35); }
+    .dots { display: flex; gap: 8px; }
+    .dot { width: 10px; height: 10px; border-radius: 50%; background: rgba(255,255,255,0.2); }
+    .dot.active { background: #00D9FF; width: 30px; border-radius: 5px; }
+  </style>
+</head>
+<body>
+  <div class="instructions">Carrusel 04 · Slide 1/5<br>📸 F12 → Capture screenshot</div>
+  <div class="post">
+    <div class="bg-left"></div>
+    <div class="bg-right"></div>
+    <div class="split-line"></div>
+    <div class="content">
+      <div class="logo">◇ NEXUS DIGITAL</div>
+      <div class="main">
+        <div class="label">Comparativa</div>
+        <div class="vs-badge">
+          <span class="sin">Sin web</span>
+          <span class="vs">vs</span>
+          <span class="con">Con web</span>
+        </div>
+        <div class="subtitle">La diferencia que hace una página profesional en tu carrera</div>
+      </div>
+      <div class="swipe">
+        <div class="swipe-text">Desliza para ver →</div>
+        <div class="dots">
+          <div class="dot active"></div>
+          <div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

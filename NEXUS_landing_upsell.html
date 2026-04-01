@@ -1221,7 +1221,7 @@
             });
             const { sessionId, error } = await response.json();
             if (error) { alert('Error: ' + error); return; }
-            const stripe = Stripe('pk_test_51THRVKLAHTs5lw4X0YtbCV4XfHrs9zouXYPvD9NPDa8GJLmsfXCaiaG5zreJR5gUim8lhUNRCMeoIXxJeKnlEDGO00kmz3lJc7');
+            const stripe = Stripe('pk_live_51THRVCPv23dXfKs4g0SMarGzj6G8nsFzi2SaeawoQQGZ3cDQKCEEUPUZTmEbX6h3BSbBYMDZmxS8YHWpV6XFkmI800grsJalZ7');
             await stripe.redirectToCheckout({ sessionId });
         } catch (err) {
             alert('Error al conectar con el servidor: ' + err.message);

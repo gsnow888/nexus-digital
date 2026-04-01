@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Carrusel 05 - Slide 2/6</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background: #555; display: flex; align-items: center; justify-content: center; min-height: 100vh; }
+    .instructions { position: fixed; top: 10px; right: 10px; background: white; padding: 8px 12px; border-radius: 8px; font-size: 11px; z-index: 9999; box-shadow: 0 2px 10px rgba(0,0,0,0.3); line-height: 1.6; }
+    .post {
+      width: 1080px; height: 1080px; position: relative; overflow: hidden; flex-shrink: 0;
+      background: #0F1419; font-family: 'Inter', sans-serif;
+    }
+    .bg {
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse at top right, rgba(0,217,255,0.2) 0%, transparent 50%),
+                  radial-gradient(ellipse at bottom left, rgba(0,217,255,0.07) 0%, transparent 50%);
+    }
+    .content {
+      position: relative; z-index: 2; width: 100%; height: 100%; padding: 72px;
+      display: flex; flex-direction: column; justify-content: space-between;
+    }
+    .logo { font-family: 'Poppins', sans-serif; font-size: 20px; font-weight: 800; color: #00D9FF; letter-spacing: 2px; }
+    .main { flex: 1; display: flex; flex-direction: column; justify-content: center; gap: 36px; }
+    .faq-badge {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: rgba(0,217,255,0.1); border: 1.5px solid rgba(0,217,255,0.35);
+      border-radius: 50px; padding: 10px 24px; align-self: flex-start;
+      font-size: 18px; font-weight: 700; color: #00D9FF; letter-spacing: 2px;
+    }
+    .question {
+      font-family: 'Poppins', sans-serif; font-size: 62px; font-weight: 900;
+      color: #00D9FF; line-height: 1.1; max-width: 860px;
+    }
+    .answer-box {
+      background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 20px; padding: 36px 40px; max-width: 860px;
+    }
+    .answer {
+      font-size: 26px; color: rgba(248,250,252,0.82); line-height: 1.7;
+    }
+    /* Timeline visual */
+    .timeline-visual {
+      display: flex; align-items: center; gap: 16px; max-width: 860px;
+    }
+    .tl-item {
+      flex: 1; background: rgba(0,217,255,0.1); border: 1px solid rgba(0,217,255,0.3);
+      border-radius: 12px; padding: 16px; text-align: center;
+    }
+    .tl-emoji { font-size: 28px; margin-bottom: 6px; }
+    .tl-text { font-size: 15px; font-weight: 600; color: rgba(248,250,252,0.7); }
+    .tl-arrow { color: #00D9FF; font-size: 24px; font-weight: 700; }
+    .bottom { display: flex; align-items: center; justify-content: space-between; }
+    .dots { display: flex; gap: 8px; }
+    .dot { width: 10px; height: 10px; border-radius: 50%; background: rgba(255,255,255,0.2); }
+    .dot.active { background: #00D9FF; width: 30px; border-radius: 5px; }
+  </style>
+</head>
+<body>
+  <div class="instructions">Carrusel 05 · Slide 2/6<br>📸 F12 → Capture screenshot</div>
+  <div class="post">
+    <div class="bg"></div>
+    <div class="content">
+      <div class="logo">◇ NEXUS DIGITAL</div>
+      <div class="main">
+        <div class="faq-badge">❓ Pregunta 1</div>
+        <div class="question">¿Cuánto tiempo<br>tarda mi página?</div>
+        <div class="answer-box">
+          <div class="answer">
+            <strong style="color: #00D9FF;">Al día siguiente</strong> de tu onboarding. El onboarding
+            es una llamada de 20 minutos donde nos das toda la info necesaria. Nada más.
+          </div>
+        </div>
+        <div class="timeline-visual">
+          <div class="tl-item">
+            <div class="tl-emoji">🛒</div>
+            <div class="tl-text">Compra</div>
+          </div>
+          <div class="tl-arrow">→</div>
+          <div class="tl-item">
+            <div class="tl-emoji">💬</div>
+            <div class="tl-text">Onboarding 20 min</div>
+          </div>
+          <div class="tl-arrow">→</div>
+          <div class="tl-item" style="background: rgba(0,217,255,0.2); border-color: #00D9FF;">
+            <div class="tl-emoji">🚀</div>
+            <div class="tl-text" style="color: #00D9FF;">¡Online al día siguiente!</div>
+          </div>
+        </div>
+      </div>
+      <div class="bottom">
+        <div class="dots">
+          <div class="dot"></div><div class="dot active"></div>
+          <div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

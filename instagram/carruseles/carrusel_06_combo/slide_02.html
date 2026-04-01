@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Carrusel 06 - Slide 2/5</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background: #555; display: flex; align-items: center; justify-content: center; min-height: 100vh; }
+    .instructions { position: fixed; top: 10px; right: 10px; background: white; padding: 8px 12px; border-radius: 8px; font-size: 11px; z-index: 9999; box-shadow: 0 2px 10px rgba(0,0,0,0.3); line-height: 1.6; }
+    .post {
+      width: 1080px; height: 1080px; position: relative; overflow: hidden; flex-shrink: 0;
+      background: #0F1419; font-family: 'Inter', sans-serif;
+    }
+    .bg-left { position: absolute; left: 0; top: 0; width: 50%; height: 100%; background: radial-gradient(ellipse at center, rgba(0,217,255,0.1) 0%, transparent 70%); }
+    .bg-right { position: absolute; right: 0; top: 0; width: 50%; height: 100%; background: radial-gradient(ellipse at center, rgba(157,78,221,0.15) 0%, transparent 70%); }
+    .split-line { position: absolute; left: 50%; top: 0; width: 1px; height: 100%; background: linear-gradient(to bottom, transparent, rgba(248,250,252,0.12), transparent); }
+    .content {
+      position: relative; z-index: 2; width: 100%; height: 100%; padding: 72px;
+      display: flex; flex-direction: column; justify-content: space-between;
+    }
+    .logo { font-family: 'Poppins', sans-serif; font-size: 20px; font-weight: 800; color: #00D9FF; letter-spacing: 2px; }
+    .main { flex: 1; display: flex; flex-direction: column; justify-content: center; gap: 32px; }
+    .headline {
+      font-family: 'Poppins', sans-serif; font-size: 58px; font-weight: 900;
+      color: #F8FAFC; line-height: 1.05; text-align: center;
+    }
+    .headline .web { color: #00D9FF; }
+    .headline .posts { color: #9D4EDD; }
+    .comparison { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+    .col {
+      border-radius: 20px; padding: 32px 28px; display: flex; flex-direction: column; gap: 16px;
+    }
+    .col-web { background: rgba(0,217,255,0.08); border: 1.5px solid rgba(0,217,255,0.25); }
+    .col-combo { background: rgba(157,78,221,0.1); border: 2px solid rgba(157,78,221,0.45); }
+    .col-header {
+      font-family: 'Poppins', sans-serif; font-size: 22px; font-weight: 800; margin-bottom: 4px;
+    }
+    .col-header-web { color: #00D9FF; }
+    .col-header-combo { color: #9D4EDD; }
+    .col-item { font-size: 18px; color: rgba(248,250,252,0.72); display: flex; align-items: center; gap: 10px; }
+    .col-item .dot-web { width: 8px; height: 8px; border-radius: 50%; background: #00D9FF; flex-shrink: 0; }
+    .col-item .dot-combo { width: 8px; height: 8px; border-radius: 50%; background: #9D4EDD; flex-shrink: 0; }
+    .social-icons { display: flex; gap: 10px; margin-top: 8px; }
+    .social-badge {
+      background: rgba(157,78,221,0.2); border: 1px solid rgba(157,78,221,0.4);
+      border-radius: 8px; padding: 6px 12px; font-size: 14px; font-weight: 600; color: #9D4EDD;
+    }
+    .posts-count {
+      font-family: 'Poppins', sans-serif; font-size: 36px; font-weight: 900; color: #9D4EDD; margin-top: 4px;
+    }
+    .bottom { display: flex; align-items: center; justify-content: space-between; }
+    .dots { display: flex; gap: 8px; }
+    .dot { width: 10px; height: 10px; border-radius: 50%; background: rgba(255,255,255,0.2); }
+    .dot.active { background: #9D4EDD; width: 30px; border-radius: 5px; }
+  </style>
+</head>
+<body>
+  <div class="instructions">Carrusel 06 · Slide 2/5<br>📸 F12 → Capture screenshot</div>
+  <div class="post">
+    <div class="bg-left"></div>
+    <div class="bg-right"></div>
+    <div class="split-line"></div>
+    <div class="content">
+      <div class="logo">◇ NEXUS DIGITAL</div>
+      <div class="main">
+        <div class="headline">Tu <span class="web">web</span> atrae.<br>Tus <span class="posts">posts</span> convierten.</div>
+        <div class="comparison">
+          <div class="col col-web">
+            <div class="col-header col-header-web">Solo Web</div>
+            <div class="col-item"><div class="dot-web"></div>Diseño profesional</div>
+            <div class="col-item"><div class="dot-web"></div>Apareces en Google</div>
+            <div class="col-item"><div class="dot-web"></div>Formulario de contacto</div>
+            <div class="col-item"><div class="dot-web"></div>Dominio + Hosting</div>
+            <div class="col-item" style="color: rgba(248,250,252,0.25)"><div class="dot-web" style="background:rgba(255,255,255,0.15)"></div>Sin contenido en redes</div>
+          </div>
+          <div class="col col-combo">
+            <div class="col-header col-header-combo">Web + Posts</div>
+            <div class="col-item"><div class="dot-combo"></div>Todo lo de web</div>
+            <div class="col-item"><div class="dot-combo"></div>Presencia en redes</div>
+            <div class="col-item"><div class="dot-combo"></div>Engagement con clientes</div>
+            <div class="col-item"><div class="dot-combo"></div>Marca completa</div>
+            <div class="posts-count">15 posts</div>
+            <div class="social-icons">
+              <div class="social-badge">LinkedIn</div>
+              <div class="social-badge">Instagram</div>
+              <div class="social-badge">Facebook</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="bottom">
+        <div class="dots">
+          <div class="dot"></div><div class="dot active"></div>
+          <div class="dot"></div><div class="dot"></div><div class="dot"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

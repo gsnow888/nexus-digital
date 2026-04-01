@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Carrusel 01 - Slide 6/6 CTA</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background: #555; display: flex; align-items: center; justify-content: center; min-height: 100vh; }
+    .instructions { position: fixed; top: 10px; right: 10px; background: white; padding: 8px 12px; border-radius: 8px; font-size: 11px; z-index: 9999; box-shadow: 0 2px 10px rgba(0,0,0,0.3); line-height: 1.6; }
+    .post {
+      width: 1080px; height: 1080px; position: relative; overflow: hidden; flex-shrink: 0;
+      background: #0F1419; font-family: 'Inter', sans-serif;
+    }
+    .bg {
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse at center, rgba(57,255,20,0.12) 0%, transparent 60%),
+                  radial-gradient(ellipse at top right, rgba(157,78,221,0.2) 0%, transparent 50%);
+    }
+    .content {
+      position: relative; z-index: 2; width: 100%; height: 100%; padding: 72px;
+      display: flex; flex-direction: column; justify-content: space-between;
+    }
+    .logo { font-family: 'Poppins', sans-serif; font-size: 20px; font-weight: 800; color: #39FF14; letter-spacing: 2px; }
+    .main { flex: 1; display: flex; flex-direction: column; justify-content: center; gap: 32px; }
+    .razon-label {
+      display: inline-flex; align-items: center; gap: 12px;
+      font-size: 18px; font-weight: 700; color: #39FF14; letter-spacing: 3px; text-transform: uppercase;
+    }
+    .razon-badge {
+      width: 44px; height: 44px; border-radius: 50%; background: #39FF14;
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Poppins', sans-serif; font-size: 22px; font-weight: 900; color: #0F1419;
+    }
+    .title {
+      font-family: 'Poppins', sans-serif; font-size: 58px; font-weight: 900;
+      color: #F8FAFC; line-height: 1.1; max-width: 860px;
+    }
+    .price-display {
+      display: flex; align-items: baseline; gap: 16px; flex-wrap: wrap;
+    }
+    .price-big {
+      font-family: 'Poppins', sans-serif; font-size: 100px; font-weight: 900;
+      color: #39FF14; line-height: 1;
+    }
+    .price-label { font-size: 26px; color: rgba(248,250,252,0.55); }
+    .includes-row {
+      font-size: 22px; color: rgba(248,250,252,0.7); line-height: 1.8;
+    }
+    .includes-row span { color: #39FF14; font-weight: 600; }
+    .cta-box {
+      background: rgba(57,255,20,0.15); border: 2px solid #39FF14;
+      border-radius: 20px; padding: 30px 40px;
+      display: flex; align-items: center; gap: 20px; max-width: 820px;
+    }
+    .cta-icon { font-size: 36px; }
+    .cta-text {
+      font-family: 'Poppins', sans-serif; font-size: 28px; font-weight: 800; color: #F8FAFC;
+    }
+    .urgency {
+      font-size: 20px; font-weight: 700; color: rgba(248,250,252,0.5);
+      letter-spacing: 2px; text-transform: uppercase;
+    }
+    .urgency span { color: #39FF14; }
+    .bottom { display: flex; align-items: center; justify-content: space-between; }
+    .dots { display: flex; gap: 8px; }
+    .dot { width: 10px; height: 10px; border-radius: 50%; background: rgba(255,255,255,0.2); }
+    .dot.active { background: #39FF14; width: 30px; border-radius: 5px; }
+  </style>
+</head>
+<body>
+  <div class="instructions">Carrusel 01 · Slide 6/6<br>📸 F12 → Capture screenshot</div>
+  <div class="post">
+    <div class="bg"></div>
+    <div class="content">
+      <div class="logo">◇ NEXUS DIGITAL</div>
+      <div class="main">
+        <div class="razon-label">
+          <div class="razon-badge">5</div>
+          RAZÓN #5
+        </div>
+        <div class="title">Es más barato<br>de lo que crees</div>
+        <div class="price-display">
+          <div class="price-big">$4,399</div>
+          <div class="price-label">MXN todo incluido</div>
+        </div>
+        <div class="includes-row">
+          <span>✓</span> Dominio &nbsp; <span>✓</span> Hosting &nbsp; <span>✓</span> SEO &nbsp; <span>✓</span> Formulario
+        </div>
+        <div class="cta-box">
+          <div class="cta-icon">🔗</div>
+          <div class="cta-text">Link en bio para tu página web profesional</div>
+        </div>
+        <div class="urgency">Solo <span>30 lugares</span> disponibles</div>
+      </div>
+      <div class="bottom">
+        <div class="dots">
+          <div class="dot"></div><div class="dot"></div><div class="dot"></div>
+          <div class="dot"></div><div class="dot"></div><div class="dot active"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

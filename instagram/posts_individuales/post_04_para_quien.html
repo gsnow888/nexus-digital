@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Post 04 - Para Quién Es</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background: #555; display: flex; align-items: center; justify-content: center; min-height: 100vh; }
+    .instructions { position: fixed; top: 10px; right: 10px; background: white; padding: 8px 12px; border-radius: 8px; font-size: 11px; z-index: 9999; box-shadow: 0 2px 10px rgba(0,0,0,0.3); }
+    .post {
+      width: 1080px; height: 1080px; position: relative; overflow: hidden; flex-shrink: 0;
+      background: #0F1419; font-family: 'Inter', sans-serif;
+    }
+    .bg {
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse at top right, rgba(157,78,221,0.2) 0%, transparent 55%),
+                  radial-gradient(ellipse at bottom left, rgba(0,217,255,0.1) 0%, transparent 55%);
+    }
+    .content {
+      position: relative; z-index: 2;
+      width: 100%; height: 100%;
+      padding: 64px 72px;
+      display: flex; flex-direction: column;
+    }
+    .logo { font-family: 'Poppins', sans-serif; font-size: 20px; font-weight: 800; color: #00D9FF; letter-spacing: 2px; margin-bottom: 48px; }
+    .title {
+      font-family: 'Poppins', sans-serif;
+      font-size: 60px; font-weight: 900;
+      color: #F8FAFC;
+      line-height: 1.1;
+      margin-bottom: 12px;
+    }
+    .title span { color: #00D9FF; }
+    .subtitle { font-size: 22px; color: rgba(255,255,255,0.5); margin-bottom: 48px; }
+    .grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 20px; flex: 1;
+    }
+    .card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 16px;
+      padding: 28px 24px;
+      display: flex; flex-direction: column;
+      align-items: flex-start;
+      transition: all 0.3s;
+    }
+    .card:hover { border-color: rgba(0,217,255,0.3); }
+    .card-icon { font-size: 40px; margin-bottom: 16px; }
+    .card-title { font-family: 'Poppins', sans-serif; font-size: 22px; font-weight: 700; color: #F8FAFC; margin-bottom: 8px; }
+    .card-desc { font-size: 15px; color: rgba(255,255,255,0.45); line-height: 1.5; }
+    .bottom {
+      margin-top: 32px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .cta {
+      background: linear-gradient(135deg, #00D9FF, #9D4EDD);
+      color: #0F1419; font-weight: 800;
+      font-family: 'Poppins', sans-serif;
+      font-size: 20px;
+      padding: 16px 40px; border-radius: 40px;
+    }
+    .hashtags { font-size: 15px; color: rgba(255,255,255,0.25); line-height: 1.8; }
+  </style>
+</head>
+<body>
+  <div class="instructions">📸 Screenshot: F12 → ⋮ → Capture full size screenshot</div>
+  <div class="post">
+    <div class="bg"></div>
+    <div class="content">
+      <div class="logo">◇ NEXUS DIGITAL</div>
+      <div class="title">¿Eres uno<br>de <span>estos?</span></div>
+      <div class="subtitle">Nexus Digital está hecho para profesionales como tú</div>
+      <div class="grid">
+        <div class="card">
+          <div class="card-icon">⚖️</div>
+          <div class="card-title">Abogado/a</div>
+          <div class="card-desc">Clientes que te buscan online antes de llamarte</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">🧠</div>
+          <div class="card-title">Psicólogo/a</div>
+          <div class="card-desc">Pacientes que necesitan ver tu credencial digital</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">🩺</div>
+          <div class="card-title">Doctor/a</div>
+          <div class="card-desc">Especialistas que quieren más pacientes directos</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">🎯</div>
+          <div class="card-title">Coach</div>
+          <div class="card-desc">Tu metodología merece una vitrina profesional</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">💼</div>
+          <div class="card-title">Consultor/a</div>
+          <div class="card-desc">Empresas buscan tu perfil online antes de contratarte</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">🚀</div>
+          <div class="card-title">Emprendedor</div>
+          <div class="card-desc">Tu negocio necesita presencia digital ahora</div>
+        </div>
+      </div>
+      <div class="bottom">
+        <div class="hashtags">#Abogados #Psicólogos #Doctores<br>#Coaches #Consultores #Emprendedores</div>
+        <div class="cta">Esto es para ti →</div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

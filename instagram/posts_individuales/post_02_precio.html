@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Post 02 - Precio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background: #555; display: flex; align-items: center; justify-content: center; min-height: 100vh; }
+    .instructions { position: fixed; top: 10px; right: 10px; background: white; padding: 8px 12px; border-radius: 8px; font-size: 11px; z-index: 9999; box-shadow: 0 2px 10px rgba(0,0,0,0.3); }
+    .post {
+      width: 1080px; height: 1080px; position: relative; overflow: hidden; flex-shrink: 0;
+      background: #0F1419;
+      font-family: 'Inter', sans-serif;
+    }
+    .bg {
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse at top left, rgba(0,217,255,0.12) 0%, transparent 50%),
+                  radial-gradient(ellipse at bottom right, rgba(157,78,221,0.12) 0%, transparent 50%);
+    }
+    .content {
+      position: relative; z-index: 2;
+      width: 100%; height: 100%;
+      display: flex; flex-direction: column;
+      padding: 64px 72px;
+      gap: 0;
+    }
+    .logo { font-family: 'Poppins', sans-serif; font-size: 20px; font-weight: 800; color: #00D9FF; letter-spacing: 2px; }
+    .title {
+      font-family: 'Poppins', sans-serif;
+      font-size: 52px; font-weight: 900;
+      color: #F8FAFC;
+      margin-top: 48px;
+      margin-bottom: 8px;
+    }
+    .subtitle { font-size: 22px; color: rgba(255,255,255,0.5); margin-bottom: 56px; }
+    .cards { display: flex; gap: 32px; flex: 1; }
+    .card {
+      flex: 1; border-radius: 20px;
+      padding: 40px 36px;
+      display: flex; flex-direction: column;
+    }
+    .card-bad {
+      background: rgba(255,60,60,0.08);
+      border: 1px solid rgba(255,60,60,0.25);
+    }
+    .card-good {
+      background: rgba(57,255,20,0.08);
+      border: 2px solid rgba(57,255,20,0.4);
+      position: relative;
+    }
+    .badge {
+      position: absolute; top: -16px; left: 50%; transform: translateX(-50%);
+      background: #39FF14; color: #0F1419;
+      font-weight: 800; font-size: 14px;
+      padding: 6px 20px; border-radius: 20px;
+      white-space: nowrap;
+    }
+    .card-label { font-size: 16px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 24px; }
+    .card-bad .card-label { color: rgba(255,100,100,0.8); }
+    .card-good .card-label { color: #39FF14; }
+    .card-price {
+      font-family: 'Poppins', sans-serif;
+      font-size: 72px; font-weight: 900;
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+    .card-bad .card-price { color: rgba(255,255,255,0.3); text-decoration: line-through; }
+    .card-good .card-price { color: #39FF14; }
+    .card-desc { font-size: 18px; color: rgba(255,255,255,0.5); margin-bottom: 24px; }
+    .card-features { list-style: none; flex: 1; }
+    .card-features li {
+      font-size: 17px; padding: 10px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      display: flex; align-items: center; gap: 10px;
+    }
+    .card-bad .card-features li { color: rgba(255,255,255,0.35); }
+    .card-good .card-features li { color: rgba(255,255,255,0.85); }
+    .icon-bad { color: rgba(255,100,100,0.6); }
+    .icon-good { color: #39FF14; }
+    .savings {
+      margin-top: 40px;
+      background: rgba(57,255,20,0.1);
+      border: 1px solid rgba(57,255,20,0.3);
+      border-radius: 12px;
+      padding: 20px 28px;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .savings-text { font-size: 22px; font-weight: 700; color: #F8FAFC; }
+    .savings-amount { font-family: 'Poppins', sans-serif; font-size: 36px; font-weight: 900; color: #39FF14; }
+  </style>
+</head>
+<body>
+  <div class="instructions">📸 Screenshot: F12 → ⋮ → Capture full size screenshot</div>
+  <div class="post">
+    <div class="bg"></div>
+    <div class="content">
+      <div class="logo">◇ NEXUS DIGITAL</div>
+      <div class="title">Para de pagar de más</div>
+      <div class="subtitle">Tu página web profesional no tiene por qué costar $13,000</div>
+      <div class="cards">
+        <div class="card card-bad">
+          <div class="card-label">Otras agencias</div>
+          <div class="card-price">$13,000+</div>
+          <div class="card-desc">MXN por una web básica</div>
+          <ul class="card-features">
+            <li><span class="icon-bad">✗</span> 30+ días de espera</li>
+            <li><span class="icon-bad">✗</span> Sin dominio incluido</li>
+            <li><span class="icon-bad">✗</span> Sin hosting incluido</li>
+            <li><span class="icon-bad">✗</span> Revisiones extra cobradas</li>
+          </ul>
+        </div>
+        <div class="card card-good">
+          <div class="badge">⭐ MEJOR OPCIÓN</div>
+          <div class="card-label">Nexus Digital</div>
+          <div class="card-price">$4,399</div>
+          <div class="card-desc">MXN todo incluido</div>
+          <ul class="card-features">
+            <li><span class="icon-good">✓</span> Entrega al día siguiente</li>
+            <li><span class="icon-good">✓</span> Dominio 1 año incluido</li>
+            <li><span class="icon-good">✓</span> Hosting 1 año incluido</li>
+            <li><span class="icon-good">✓</span> SEO + Formulario incluidos</li>
+          </ul>
+        </div>
+      </div>
+      <div class="savings">
+        <div class="savings-text">💰 Ahorras hasta</div>
+        <div class="savings-amount">$8,601 MXN</div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
