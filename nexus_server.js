@@ -305,11 +305,11 @@ async function enviarEmailConfirmacion(name, email, phone, profession, hasUpsell
 
                 <div class="next-steps">
                     <div class="next-steps-title">¿Qué sucede ahora?</div>
-                    <div class="step">Te contactaremos en las próximas 24 horas</div>
-                    <div class="step">Agendar reunión de descubrimiento</div>
-                    <div class="step">Recopilar información de tu negocio</div>
-                    <div class="step">Diseño y desarrollo de tu web (5-7 días)</div>
-                    <div class="step">Lanzamiento de tu página</div>
+                    <div class="step">Te contactamos para agendar tu onboarding</div>
+                    <div class="step">Onboarding exprés: llamada de menos de 20 minutos</div>
+                    <div class="step">Al día siguiente recibes tu página web lista</div>
+                    <div class="step">Revisión y ajustes finales</div>
+                    <div class="step">¡Tu página está publicada!</div>
                 </div>
 
                 <!-- WHATSAPP CTA -->
