@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nexus Digital - Email Template Upsell</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background-color: #f8fafc;
+        }
+        .email-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            border: 1px solid #e2e8f0;
+        }
+        .header {
+            background: linear-gradient(135deg, #0F1419 0%, #1A202C 100%);
+            padding: 32px 24px;
+            text-align: center;
+        }
+        .logo-text {
+            color: #00D9FF;
+            font-size: 24px;
+            font-weight: 800;
+            letter-spacing: -1px;
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+        }
+        .header-subtitle {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 12px;
+            margin-top: 8px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        .content {
+            padding: 40px 32px;
+        }
+        .greeting {
+            font-size: 20px;
+            color: #0F1419;
+            font-weight: 700;
+            margin-bottom: 16px;
+            font-family: 'Poppins', sans-serif;
+        }
+        .body-text {
+            font-size: 14px;
+            line-height: 1.8;
+            color: #64748B;
+            margin-bottom: 20px;
+        }
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(135deg, #00D9FF 0%, #9D4EDD 100%);
+            color: #0F1419;
+            padding: 14px 32px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 700;
+            font-family: 'Poppins', sans-serif;
+            font-size: 14px;
+            margin: 24px 0;
+            border: none;
+            cursor: pointer;
+            text-align: center;
+        }
+        .section {
+            background-color: #f8fafc;
+            border-left: 4px solid #00D9FF;
+            padding: 20px;
+            margin: 24px 0;
+            border-radius: 8px;
+        }
+        .section-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: 16px;
+            font-weight: 700;
+            color: #0F1419;
+            margin-bottom: 12px;
+        }
+        .section-text {
+            font-size: 13px;
+            color: #64748B;
+            line-height: 1.7;
+            margin: 0;
+        }
+        .option-box {
+            background: linear-gradient(135deg, rgba(0, 217, 255, 0.1) 0%, rgba(157, 78, 221, 0.05) 100%);
+            border: 1px solid #00D9FF;
+            padding: 20px;
+            margin: 16px 0;
+            border-radius: 8px;
+        }
+        .option-title {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            color: #0F1419;
+            margin-bottom: 8px;
+        }
+        .option-price {
+            font-size: 24px;
+            font-weight: 800;
+            color: #39FF14;
+            margin-bottom: 8px;
+        }
+        .feature-list {
+            list-style: none;
+            padding: 0;
+            margin: 12px 0;
+        }
+        .feature-list li {
+            font-size: 13px;
+            color: #64748B;
+            padding: 6px 0;
+            padding-left: 24px;
+            position: relative;
+        }
+        .feature-list li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #39FF14;
+            font-weight: 700;
+        }
+        .footer {
+            background-color: #0F1419;
+            color: #ffffff;
+            padding: 24px;
+            text-align: center;
+            font-size: 12px;
+            border-top: 1px solid #e2e8f0;
+        }
+        .footer-text {
+            margin: 8px 0;
+            line-height: 1.6;
+        }
+        .divider {
+            height: 1px;
+            background-color: #e2e8f0;
+            margin: 32px 0;
+        }
+        .highlight {
+            color: #00D9FF;
+            font-weight: 700;
+        }
+        .signature {
+            margin-top: 32px;
+            border-top: 1px solid #e2e8f0;
+            padding-top: 16px;
+        }
+        .signature-name {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            color: #0F1419;
+            margin-bottom: 4px;
+        }
+        .signature-role {
+            font-size: 12px;
+            color: #64748B;
+            margin-bottom: 12px;
+        }
+    </style>
+</head>
+<body>
+    <div class="email-container">
+        <!-- HEADER -->
+        <div class="header">
+            <p class="logo-text">◇ NEXUS</p>
+            <p class="header-subtitle">Digital Solutions</p>
+        </div>
+
+        <!-- CONTENT -->
+        <div class="content">
+            <p class="greeting">¡Hola [NOMBRE]! 👋</p>
+            
+            <p class="body-text">
+                Tenemos una noticia emocionante: <span class="highlight">Nexus Digital</span> está lanzando oficialmente hoy y queremos que seas de los primeros.
+            </p>
+
+            <p class="body-text">
+                <strong>Tenemos DOS opciones para ti:</strong>
+            </p>
+
+            <!-- OPTION A -->
+            <div class="option-box">
+                <div class="option-title">OPCIÓN A: Página Web Profesional</div>
+                <div class="option-price">$4,399</div>
+                <ul class="feature-list">
+                    <li>Diseño profesional y responsivo</li>
+                    <li>Formulario de contacto integrado</li>
+                    <li>Optimización SEO</li>
+                    <li>Dominio + Hosting (Año 1) INCLUIDO</li>
+                    <li>Entrega en 5-7 días</li>
+                </ul>
+                <p style="font-size: 12px; color: #64748B; margin: 12px 0 0 0;"><em>Antes: $13,000 | Ahorras: $8,601</em></p>
+            </div>
+
+            <!-- OPTION B -->
+            <div class="option-box">
+                <div class="option-title">✨ OPCIÓN B: Web + 15 Posts para Redes</div>
+                <div class="option-price">$6,144</div>
+                <ul class="feature-list">
+                    <li>TODO lo de Opción A +</li>
+                    <li>15 posts diseñados profesionalmente</li>
+                    <li>Copywriting optimizado</li>
+                    <li>LinkedIn, Instagram, Facebook</li>
+                    <li>Listos para publicar inmediatamente</li>
+                </ul>
+                <p style="font-size: 12px; color: #64748B; margin: 12px 0 0 0;"><em>Antes: $22,000 | Ahorras: $15,856</em></p>
+            </div>
+
+            <p class="body-text" style="text-align: center; margin-top: 24px;">
+                <strong>💡 Tú decides qué necesitas ahora. Ambas incluyen dominio y hosting el primer año.</strong>
+            </p>
+
+            <center style="margin: 32px 0;">
+                <a href="[CTA_LINK]" class="cta-button">
+                    Elegir Mi Opción →
+                </a>
+            </center>
+
+            <div class="section">
+                <div class="section-title">⏰ Oferta Limitada</div>
+                <p class="section-text">
+                    Esta oferta especial es SOLO para los primeros 30 clientes. Solo <strong>X lugares</strong> quedan disponibles.
+                </p>
+            </div>
+
+            <div class="section">
+                <div class="section-title">❓ ¿Preguntas?</div>
+                <p class="section-text">
+                    Responde a este email o contáctanos por WhatsApp. Estamos aquí para aclarar cualquier duda.
+                </p>
+            </div>
+
+            <div class="divider"></div>
+
+            <!-- SIGNATURE -->
+            <div class="signature">
+                <div class="signature-name">Equipo Nexus Digital</div>
+                <div class="signature-role">Agencia de Diseño Web Profesional</div>
+                <p class="body-text" style="margin: 12px 0; font-size: 12px;">
+                    📧 Email: hola@nexus-digital.com<br>
+                    📱 WhatsApp: +52 [TU_NÚMERO]<br>
+                    🌐 Web: www.nexus-digital.com
+                </p>
+            </div>
+
+            <p class="body-text" style="font-size: 12px; color: #a1a5b1; margin-top: 24px;">
+                <em>P.S. Esta es una oferta exclusiva para los primeros 30 clientes. No dejes pasar esta oportunidad.</em>
+            </p>
+        </div>
+
+        <!-- FOOTER -->
+        <div class="footer">
+            <p class="footer-text">
+                © 2024 Nexus Digital. Todos los derechos reservados.<br>
+                Oferta exclusiva para la comunidad Anáhuac.
+            </p>
+            <p class="footer-text">
+                <a href="[UNSUBSCRIBE]" style="color: #00D9FF; text-decoration: none;">Dejar de recibir</a> | 
+                <a href="[PRIVACY]" style="color: #00D9FF; text-decoration: none;">Privacidad</a>
+            </p>
+        </div>
+    </div>
+</body>
+</html>

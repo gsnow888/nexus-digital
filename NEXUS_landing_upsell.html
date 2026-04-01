@@ -1,0 +1,1267 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nexus Digital - Tu Presencia Web en Días</title>
+    <script src="https://js.stripe.com/v3/"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --cyan: #00D9FF;
+            --cyan-dark: #00A8CC;
+            --navy: #0F1419;
+            --navy-light: #1A202C;
+            --violet: #9D4EDD;
+            --green: #39FF14;
+            --white: #F8FAFC;
+            --gray: #64748B;
+            --gray-light: #E2E8F0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--navy);
+            line-height: 1.6;
+            overflow-x: hidden;
+            background: var(--white);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* === HEADER === */
+        header {
+            background: var(--navy);
+            color: var(--white);
+            padding: 16px 24px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(0, 217, 255, 0.1);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 24px;
+            font-weight: 800;
+            font-family: 'Poppins', sans-serif;
+            color: var(--cyan);
+        }
+
+        .logo-mark {
+            width: 32px;
+            height: 32px;
+            background: linear-gradient(135deg, var(--cyan) 0%, var(--violet) 100%);
+            clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+            animation: rotateSlow 6s linear infinite;
+        }
+
+        @keyframes rotateSlow {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--white);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--cyan);
+        }
+
+        /* === HERO === */
+        .hero {
+            background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 100%);
+            position: relative;
+            overflow: hidden;
+            padding: 100px 24px 80px;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(0, 217, 255, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(157, 78, 221, 0.15) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .hero-content {
+            max-width: 700px;
+            position: relative;
+            z-index: 2;
+            animation: slideUp 0.8s ease-out;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero h1 {
+            font-family: 'Poppins', sans-serif;
+            font-size: clamp(36px, 7vw, 56px);
+            font-weight: 800;
+            margin-bottom: 24px;
+            line-height: 1.1;
+            color: var(--white);
+        }
+
+        .hero h1 .cyan {
+            background: linear-gradient(135deg, var(--cyan) 0%, var(--violet) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero p {
+            font-size: 18px;
+            color: rgba(255, 255, 255, 0.85);
+            margin-bottom: 32px;
+            line-height: 1.8;
+        }
+
+        .urgency-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(0, 217, 255, 0.1);
+            border: 1px solid var(--cyan);
+            padding: 12px 20px;
+            border-radius: 50px;
+            color: var(--cyan);
+            font-weight: 600;
+            font-size: 14px;
+            margin-bottom: 32px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { box-shadow: 0 0 20px rgba(0, 217, 255, 0.3); }
+            50% { box-shadow: 0 0 40px rgba(0, 217, 255, 0.6); }
+        }
+
+        .pricing-hero {
+            background: linear-gradient(135deg, rgba(0, 217, 255, 0.1) 0%, rgba(157, 78, 221, 0.1) 100%);
+            border: 1px solid var(--cyan);
+            border-radius: 16px;
+            padding: 32px;
+            margin-bottom: 32px;
+            backdrop-filter: blur(10px);
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 24px;
+        }
+
+        .price-column {
+            text-align: center;
+        }
+
+        .original-price {
+            font-size: 28px;
+            color: #EF4444;
+            text-decoration: line-through;
+            margin-bottom: 8px;
+            font-weight: 700;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .new-price {
+            font-family: 'Poppins', sans-serif;
+            font-size: 48px;
+            font-weight: 800;
+            color: var(--green);
+            margin-bottom: 8px;
+        }
+
+        .discount-label {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--cyan) 0%, var(--violet) 100%);
+            color: var(--navy);
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .bonus-box {
+            background: linear-gradient(135deg, var(--cyan) 0%, var(--violet) 100%);
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 32px;
+            color: var(--navy);
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .bonus-icon {
+            font-size: 40px;
+            flex-shrink: 0;
+        }
+
+        .bonus-content h3 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .bonus-content p {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        .cta-button {
+            background: linear-gradient(135deg, var(--cyan) 0%, var(--violet) 100%);
+            color: var(--navy);
+            border: none;
+            padding: 16px 40px;
+            font-size: 16px;
+            font-weight: 700;
+            font-family: 'Poppins', sans-serif;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0, 217, 255, 0.3);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 15px 50px rgba(0, 217, 255, 0.5);
+        }
+
+        /* === FEATURES === */
+        .features-section {
+            padding: 80px 24px;
+            background: var(--white);
+        }
+
+        .section-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: 40px;
+            font-weight: 800;
+            text-align: center;
+            margin-bottom: 60px;
+            color: var(--navy);
+        }
+
+        .section-title .cyan {
+            color: var(--cyan);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .feature-card {
+            background: linear-gradient(135deg, var(--white) 0%, rgba(0, 217, 255, 0.02) 100%);
+            border: 1px solid var(--gray-light);
+            border-left: 4px solid var(--cyan);
+            border-radius: 12px;
+            padding: 32px;
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--cyan);
+            box-shadow: 0 20px 50px rgba(0, 217, 255, 0.15);
+        }
+
+        .feature-icon {
+            font-size: 40px;
+            margin-bottom: 16px;
+        }
+
+        .feature-card h4 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .feature-card p {
+            font-size: 14px;
+            color: var(--gray);
+        }
+
+        /* === TESTIMONIALS === */
+        .testimonials-section {
+            padding: 80px 24px;
+            background: var(--white);
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .testimonial-card {
+            background: linear-gradient(135deg, var(--white) 0%, rgba(0, 217, 255, 0.02) 100%);
+            border: 1px solid var(--gray-light);
+            border-radius: 12px;
+            padding: 28px;
+            transition: all 0.3s ease;
+        }
+
+        .testimonial-card:hover {
+            border-color: var(--cyan);
+            box-shadow: 0 10px 40px rgba(0, 217, 255, 0.1);
+        }
+
+        .stars {
+            color: var(--cyan);
+            font-size: 16px;
+            margin-bottom: 12px;
+            letter-spacing: 2px;
+        }
+
+        .testimonial-text {
+            font-size: 14px;
+            color: var(--gray);
+            margin-bottom: 16px;
+            line-height: 1.8;
+            font-style: italic;
+        }
+
+        .testimonial-author {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            color: var(--navy);
+            font-size: 14px;
+            margin-bottom: 4px;
+        }
+
+        .testimonial-role {
+            font-size: 12px;
+            color: var(--gray);
+        }
+
+        /* === FAQ === */
+        .faq-section {
+            padding: 80px 24px;
+            background: linear-gradient(135deg, rgba(0, 217, 255, 0.02) 0%, rgba(157, 78, 221, 0.02) 100%);
+        }
+
+        .faq-container {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            background: white;
+            border: 1px solid var(--gray-light);
+            border-radius: 12px;
+            margin-bottom: 16px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .faq-item:hover {
+            border-color: var(--cyan);
+            box-shadow: 0 5px 20px rgba(0, 217, 255, 0.1);
+        }
+
+        .faq-question {
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            color: var(--navy);
+            font-size: 16px;
+        }
+
+        .faq-toggle {
+            color: var(--cyan);
+            font-size: 24px;
+            transition: transform 0.3s ease;
+        }
+
+        .faq-item.active .faq-toggle {
+            transform: rotate(180deg);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            padding: 0 20px;
+            color: var(--gray);
+            font-size: 14px;
+            line-height: 1.8;
+            transition: all 0.3s ease;
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 500px;
+            padding: 0 20px 20px 20px;
+        }
+
+        /* === FORM === */
+        .form-section {
+            background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 100%);
+            padding: 80px 24px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .form-container {
+            max-width: 500px;
+            margin: 0 auto;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(0, 217, 255, 0.05) 100%);
+            border: 1px solid rgba(0, 217, 255, 0.3);
+            backdrop-filter: blur(10px);
+            padding: 48px;
+            border-radius: 16px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .form-container h2 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 32px;
+            font-weight: 800;
+            color: var(--white);
+            margin-bottom: 16px;
+        }
+
+        .form-container > p {
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 32px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--white);
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 12px 16px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(0, 217, 255, 0.3);
+            color: var(--white);
+            border-radius: 8px;
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--cyan);
+            background: rgba(0, 217, 255, 0.1);
+            box-shadow: 0 0 20px rgba(0, 217, 255, 0.3);
+        }
+
+        .form-submit {
+            width: 100%;
+            background: linear-gradient(135deg, var(--green) 0%, var(--cyan) 100%);
+            color: var(--navy);
+            border: none;
+            padding: 14px;
+            border-radius: 8px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 12px;
+            box-shadow: 0 10px 30px rgba(57, 255, 20, 0.3);
+        }
+
+        .form-submit:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 50px rgba(57, 255, 20, 0.5);
+        }
+
+        /* === MODAL UPSELL === */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(4px);
+        }
+
+        .modal.show {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background: var(--white);
+            padding: 48px;
+            border-radius: 16px;
+            max-width: 500px;
+            width: 90%;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            animation: slideIn 0.3s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateY(20px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .modal-header {
+            text-align: center;
+            margin-bottom: 24px;
+        }
+
+        .modal-icon {
+            font-size: 60px;
+            margin-bottom: 16px;
+        }
+
+        .modal h2 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 28px;
+            font-weight: 800;
+            color: var(--navy);
+            margin-bottom: 8px;
+        }
+
+        .modal-subtitle {
+            color: var(--gray);
+            font-size: 14px;
+        }
+
+        .modal-body {
+            margin-bottom: 32px;
+        }
+
+        .modal-price {
+            background: linear-gradient(135deg, rgba(0, 217, 255, 0.1) 0%, rgba(157, 78, 221, 0.1) 100%);
+            border: 1px solid var(--cyan);
+            padding: 24px;
+            border-radius: 12px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .modal-price-label {
+            color: var(--gray);
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+
+        .modal-price-amount {
+            font-family: 'Poppins', sans-serif;
+            font-size: 36px;
+            font-weight: 800;
+            color: var(--cyan);
+        }
+
+        .modal-benefits {
+            list-style: none;
+            margin-bottom: 24px;
+        }
+
+        .modal-benefits li {
+            padding: 12px 0;
+            padding-left: 28px;
+            position: relative;
+            color: var(--gray);
+            font-size: 14px;
+        }
+
+        .modal-benefits li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: var(--green);
+            font-weight: 800;
+            font-size: 18px;
+        }
+
+        .modal-actions {
+            display: flex;
+            gap: 12px;
+        }
+
+        .btn-accept {
+            flex: 1;
+            background: linear-gradient(135deg, var(--cyan) 0%, var(--violet) 100%);
+            color: var(--navy);
+            padding: 14px;
+            border: none;
+            border-radius: 8px;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-accept:hover {
+            transform: translateY(-2px);
+        }
+
+        .btn-skip {
+            flex: 1;
+            background: var(--gray-light);
+            color: var(--navy);
+            padding: 14px;
+            border: none;
+            border-radius: 8px;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-skip:hover {
+            background: #d0d5dd;
+        }
+
+        /* === FOOTER === */
+        footer {
+            background: var(--navy);
+            color: var(--white);
+            text-align: center;
+            padding: 40px 24px;
+            border-top: 1px solid rgba(0, 217, 255, 0.1);
+        }
+
+        footer p {
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        /* === COUNTER === */
+        .counter-box {
+            background: rgba(0, 217, 255, 0.1);
+            border: 1px solid var(--cyan);
+            padding: 24px;
+            border-radius: 12px;
+            text-align: center;
+            margin-bottom: 32px;
+            backdrop-filter: blur(10px);
+        }
+
+        .counter-number {
+            font-family: 'Poppins', sans-serif;
+            font-size: 48px;
+            font-weight: 800;
+            color: var(--green);
+            margin-bottom: 8px;
+        }
+
+        .counter-label {
+            color: var(--gray);
+            font-size: 14px;
+        }
+
+        /* === TIMER === */
+        .timer-container {
+            position: fixed;
+            top: 80px;
+            right: 24px;
+            background: linear-gradient(135deg, #EF4444 0%, #DC2626 100%);
+            color: white;
+            padding: 16px 24px;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(239, 68, 68, 0.4);
+            z-index: 99;
+            animation: slideInRight 0.5s ease-out;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(100px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .timer-label {
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+            opacity: 0.9;
+        }
+
+        .timer-display {
+            font-size: 36px;
+            font-weight: 800;
+            text-align: center;
+            line-height: 1;
+            margin-bottom: 8px;
+        }
+
+        .timer-message {
+            font-size: 12px;
+            text-align: center;
+            opacity: 0.95;
+            font-weight: 500;
+        }
+
+        .timer-warning {
+            animation: pulse 1s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                box-shadow: 0 10px 40px rgba(239, 68, 68, 0.4);
+            }
+            50% {
+                box-shadow: 0 10px 60px rgba(239, 68, 68, 0.7);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .timer-container {
+                top: 70px;
+                right: 8px;
+                padding: 6px 10px;
+                min-width: unset;
+            }
+
+            .timer-display {
+                font-size: 18px;
+                margin-bottom: 2px;
+            }
+
+            .timer-label {
+                font-size: 9px;
+            }
+
+            .timer-message {
+                font-size: 9px;
+            }
+        }
+
+        /* === RESPONSIVE === */
+        @media (max-width: 768px) {
+            .hero {
+                padding: 60px 24px 50px;
+            }
+
+            .hero h1 {
+                font-size: 32px;
+            }
+
+            .nav-links {
+                gap: 16px;
+                font-size: 12px;
+            }
+
+            .pricing-hero {
+                flex-direction: column;
+                padding: 24px;
+            }
+
+            .form-container {
+                padding: 32px;
+            }
+
+            .section-title {
+                font-size: 28px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- TIMER URGENCY -->
+<div class="timer-container" id="timerContainer">
+    <div class="timer-label">⏰ Oferta Expira En:</div>
+    <div class="timer-display" id="timerDisplay">10:00</div>
+    <div class="timer-message">Apúrate, quedan pocos lugares</div>
+</div>
+
+<!-- HEADER -->
+<header>
+    <div class="header-content">
+        <div class="logo">
+            <div class="logo-mark"></div>
+            NEXUS
+        </div>
+        <nav class="nav-links">
+            <li><a href="#features">Características</a></li>
+            <li><a href="#register">Registrarse</a></li>
+        </nav>
+    </div>
+</header>
+
+<!-- HERO SECTION -->
+<section class="hero">
+    <div class="container">
+        <div class="hero-content">
+            <div class="urgency-badge">
+                ⚡ OFERTA LIMITADA - Solo 30 personas
+            </div>
+            
+            <h1>Tu <span class="cyan">Página Web Profesional</span> en Días</h1>
+            
+            <p>Presencia digital completa para abogados, psicólogos, doctores y emprendedores. Diseño web + opción de 15 posts para redes.</p>
+
+            <div class="counter-box">
+                <div class="counter-number" id="counter">28</div>
+                <div class="counter-label">de 30 lugares disponibles</div>
+            </div>
+
+            <div class="pricing-hero">
+                <div class="price-column">
+                    <div class="original-price">Antes: $13,000</div>
+                </div>
+                <div style="color: var(--cyan); font-size: 42px; font-weight: 800;">→</div>
+                <div class="price-column">
+                    <div class="new-price">$4,399</div>
+                    <div class="discount-label">70% OFF</div>
+                </div>
+            </div>
+
+            <div class="bonus-box">
+                <div class="bonus-icon">💻</div>
+                <div class="bonus-content">
+                    <h3>PÁGINA WEB INCLUIDA</h3>
+                    <p>Diseño profesional, formulario, SEO, dominio + hosting (año 1)</p>
+                </div>
+            </div>
+
+            <p style="text-align: center; color: rgba(255,255,255,0.8); font-size: 13px; margin-top: 20px; margin-bottom: 24px;">
+                <strong>+ Opción de agregar 15 posts para redes por +$1,745</strong>
+            </p>
+
+            <button class="cta-button" onclick="document.querySelector('.form-section').scrollIntoView({behavior: 'smooth'})">
+                🚀 Comienza Ahora
+            </button>
+        </div>
+    </div>
+</section>
+
+<!-- FEATURES SECTION -->
+<section class="features-section" id="features">
+    <div class="container">
+        <h2 class="section-title">¿Qué <span class="cyan">Incluye</span> Tu Página Web?</h2>
+        
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">💻</div>
+                <h4>Diseño Web Moderno</h4>
+                <p>Responsive, rápido y profesional. Se ve perfectamente en móvil, tablet y desktop.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">🎯</div>
+                <h4>Optimizado para Tu Industria</h4>
+                <p>Plantillas y textos diseñados específicamente para abogados, psicólogos, médicos y más.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">⚙️</div>
+                <h4>Totalmente Funcional</h4>
+                <p>Formulario de contacto, galería, portafolio y CRM integrado para gestionar leads.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">🔒</div>
+                <h4>Seguridad & Dominio</h4>
+                <p>Certificado SSL incluido + tu dominio propio + hosting el primer año gratis.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">📈</div>
+                <h4>Posicionamiento SEO</h4>
+                <p>Optimizado para Google. Aparece en búsquedas de clientes que buscan tus servicios.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">⚡</div>
+                <h4>Velocidad Optimizada</h4>
+                <p>Carga rápida = mejor experiencia + más conversiones.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials-section">
+    <div class="container">
+        <h2 class="section-title">Lo Que Dicen <span class="cyan">Nuestros Clientes</span></h2>
+
+        <div class="testimonials-grid">
+            <div class="testimonial-card">
+                <div class="stars">⭐⭐⭐⭐⭐</div>
+                <div class="testimonial-text">"Mi página web cambió completamente mi negocio. Ahora recibo consultas de personas que me encuentran en Google. ¡La mejor inversión que he hecho!"</div>
+                <div class="testimonial-author">Dra. María González</div>
+                <div class="testimonial-role">Psicóloga Clínica - CDMX</div>
+            </div>
+
+            <div class="testimonial-card">
+                <div class="stars">⭐⭐⭐⭐⭐</div>
+                <div class="testimonial-text">"Profesional, moderno y los posts me ahorraron muchas horas de trabajo. Muy recomendado para emprendedores que no tienen tiempo para diseño."</div>
+                <div class="testimonial-author">Lic. Carlos Méndez</div>
+                <div class="testimonial-role">Abogado Tributarista - Monterrey</div>
+            </div>
+
+            <div class="testimonial-card">
+                <div class="stars">⭐⭐⭐⭐⭐</div>
+                <div class="testimonial-text">"El formulario de contacto integrado hace muy fácil que mis clientes potenciales se comuniquen. Excelente relación precio-calidad."</div>
+                <div class="testimonial-author">Ing. Laura Rodríguez</div>
+                <div class="testimonial-role">Coach de Negocios - Guadalajara</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FAQ SECTION -->
+<section class="faq-section" id="faq">
+    <div class="container">
+        <h2 class="section-title">Preguntas <span class="cyan">Frecuentes</span></h2>
+
+        <div class="faq-container">
+            <div class="faq-item" onclick="toggleFAQ(this)">
+                <div class="faq-question">
+                    ¿Cuánto tiempo tarda en estar lista mi página?
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    Entre 5-7 días después del registro. Nos comunicaremos para recopilar información de tu negocio, luego diseñamos y te compartimos el resultado para ajustes finales.
+                </div>
+            </div>
+
+            <div class="faq-item" onclick="toggleFAQ(this)">
+                <div class="faq-question">
+                    ¿Puedo hacer cambios después?
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    Sí, incluye revisiones ilimitadas durante el proceso de desarrollo. Queremos que quedes 100% satisfecho con tu página antes de lanzarla.
+                </div>
+            </div>
+
+            <div class="faq-item" onclick="toggleFAQ(this)">
+                <div class="faq-question">
+                    ¿Qué pasa con el hosting después del primer año?
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    El primer año de hosting está incluido. Después puedes renovar por una cuota anual baja (~$600/año), o contratarnos para mantenimiento continuo.
+                </div>
+            </div>
+
+            <div class="faq-item" onclick="toggleFAQ(this)">
+                <div class="faq-question">
+                    ¿Mi página es segura?
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    Sí. Incluye certificado SSL (HTTPS), backups automáticos y protección contra ataques. La información de ti y tus clientes está completamente segura.
+                </div>
+            </div>
+
+            <div class="faq-item" onclick="toggleFAQ(this)">
+                <div class="faq-question">
+                    ¿Cómo funcionan los 15 posts para redes?
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    Diseñamos 15 posts profesionales (imágenes + textos) optimizados para LinkedIn, Instagram y Facebook. Vienen listos para publicar o los adaptas a tu estilo personal.
+                </div>
+            </div>
+
+            <div class="faq-item" onclick="toggleFAQ(this)">
+                <div class="faq-question">
+                    ¿Qué profesiones pueden usar Nexus?
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    Perfecta para abogados, psicólogos, médicos, coaches, consultores, emprendedores, freelancers y marcas personales. Si tu servicio requiere presencia web profesional, es para ti.
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FORM SECTION -->
+<section class="form-section" id="register">
+    <div class="form-container">
+        <h2>Comienza Tu Transformación</h2>
+        <p>Completa el formulario. En 24 horas te contactaremos para confirmar tu lugar y discutir opciones.</p>
+
+        <form onsubmit="handleSubmit(event)">
+            <div class="form-group">
+                <label for="name">Nombre Completo *</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email *</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+
+            <div class="form-group">
+                <label for="phone">WhatsApp/Teléfono *</label>
+                <input type="tel" id="phone" name="phone" required>
+            </div>
+
+            <div class="form-group">
+                <label for="profession">¿Cuál es tu profesión? *</label>
+                <select id="profession" name="profession" required>
+                    <option value="">Selecciona una opción</option>
+                    <option value="Abogado/a">Abogado/a</option>
+                    <option value="Psicólogo/a">Psicólogo/a</option>
+                    <option value="Doctor/a">Doctor/a</option>
+                    <option value="Coach">Coach o Consultor</option>
+                    <option value="Emprendedor">Emprendedor</option>
+                    <option value="Freelancer">Freelancer</option>
+                    <option value="Otro">Otro</option>
+                </select>
+            </div>
+
+            <button type="submit" class="form-submit">
+                🛒 Comprar Ahora - $4,399
+            </button>
+            <p style="text-align: center; font-size: 12px; color: rgba(255,255,255,0.7); margin-top: 16px;">
+                (Opciones de pago al confirmar)
+            </p>
+        </form>
+    </div>
+</section>
+
+<!-- UPSELL MODAL -->
+<div id="upsellModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <div class="modal-icon">📱</div>
+            <h2>¿Quieres Maximizar tu Presencia?</h2>
+            <p class="modal-subtitle">Agrega 15 posts profesionales para tus redes</p>
+        </div>
+
+        <div class="modal-body">
+            <div class="modal-price">
+                <div class="modal-price-label">15 Posts Diseñados + Copywriting</div>
+                <div class="modal-price-amount">+$1,745</div>
+            </div>
+
+            <ul class="modal-benefits">
+                <li>15 posts diseñados profesionalmente</li>
+                <li>Copywriting optimizado para cada red</li>
+                <li>LinkedIn, Instagram y Facebook</li>
+                <li>Listos para publicar inmediatamente</li>
+                <li>Estilo consistente con tu marca</li>
+            </ul>
+
+            <p style="font-size: 13px; color: var(--gray); text-align: center;">
+                <strong>Total con upsell: $6,144</strong> (vs $8,000+ en agencias)
+            </p>
+        </div>
+
+        <div class="modal-actions">
+            <button class="btn-accept" onclick="confirmUpsell()">
+                ✅ Sí, Agregar Posts
+            </button>
+            <button class="btn-skip" onclick="skipUpsell()">
+                Continuar sin Posts
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+    <p>&copy; 2024 <strong>NEXUS DIGITAL</strong> - Diseño Web Profesional</p>
+    <p style="font-size: 12px; margin-top: 12px;">Oferta exclusiva para egresados, estudiantes y profesionales de la Universidad Anáhuac</p>
+</footer>
+
+<script>
+    // === TIMER FUNCTION ===
+    function startTimer() {
+        let timeLeft = 600; // 10 minutos en segundos
+        const timerDisplay = document.getElementById('timerDisplay');
+        const timerContainer = document.getElementById('timerContainer');
+
+        const timerInterval = setInterval(() => {
+            const minutes = Math.floor(timeLeft / 60);
+            const seconds = timeLeft % 60;
+            
+            // Formato MM:SS
+            timerDisplay.textContent = 
+                String(minutes).padStart(2, '0') + ':' + 
+                String(seconds).padStart(2, '0');
+
+            // Cambiar color si faltan menos de 2 minutos
+            if (timeLeft < 120) {
+                timerContainer.classList.add('timer-warning');
+            }
+
+            // Si llega a 0, reiniciar
+            if (timeLeft <= 0) {
+                timeLeft = 600;
+                timerContainer.classList.remove('timer-warning');
+            }
+
+            timeLeft--;
+        }, 1000);
+    }
+
+    // Iniciar timer cuando carga la página
+    window.addEventListener('load', startTimer);
+
+    function toggleFAQ(element) {
+        element.classList.toggle('active');
+        
+        // Cerrar otros items
+        document.querySelectorAll('.faq-item').forEach(item => {
+            if (item !== element && item.classList.contains('active')) {
+                item.classList.remove('active');
+            }
+        });
+    }
+
+    async function redirectToCheckout(hasUpsell) {
+        const data = window.customerData;
+        try {
+            const response = await fetch('/api/create-checkout-session', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ ...data, hasUpsell })
+            });
+            const { sessionId, error } = await response.json();
+            if (error) { alert('Error: ' + error); return; }
+            const stripe = Stripe('pk_test_51THRVKLAHTs5lw4X0YtbCV4XfHrs9zouXYPvD9NPDa8GJLmsfXCaiaG5zreJR5gUim8lhUNRCMeoIXxJeKnlEDGO00kmz3lJc7');
+            await stripe.redirectToCheckout({ sessionId });
+        } catch (err) {
+            alert('Error al conectar con el servidor: ' + err.message);
+        }
+    }
+
+    function handleSubmit(event) {
+        event.preventDefault();
+
+        const name = document.getElementById('name').value;
+        const email = document.getElementById('email').value;
+        const phone = document.getElementById('phone').value;
+
+        const profession = document.getElementById('profession').value;
+
+        // Guardar datos del cliente
+        window.customerData = { name, email, phone, profession };
+
+        // Mostrar modal de upsell
+        document.getElementById('upsellModal').classList.add('show');
+
+        // Actualizar counter
+        const counter = document.getElementById('counter');
+        const currentValue = parseInt(counter.textContent);
+        if (currentValue > 1) {
+            counter.textContent = currentValue - 1;
+        }
+
+        // No enviar formulario aún
+        event.target.reset();
+    }
+
+    function confirmUpsell() {
+        document.getElementById('upsellModal').classList.remove('show');
+        redirectToCheckout(true);
+    }
+
+    function skipUpsell() {
+        document.getElementById('upsellModal').classList.remove('show');
+        redirectToCheckout(false);
+    }
+
+    // Simular counter inicial
+    window.addEventListener('load', () => {
+        const counter = document.getElementById('counter');
+        const randomSpots = Math.floor(Math.random() * 5) + 26;
+        counter.textContent = randomSpots;
+    });
+</script>
+
+</body>
+</html>

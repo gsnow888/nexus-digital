@@ -1,0 +1,105 @@
+<!-- AGREGAR AL FINAL DEL HEAD (antes de </head>) -->
+
+<!-- STRIPE LIBRARY -->
+<script src="https://js.stripe.com/v3/"></script>
+
+<!-- SCRIPT DE INTEGRACIÓN STRIPE (agregar antes de </body>) -->
+<script>
+    const stripe = Stripe('pk_test_YOUR_STRIPE_PUBLIC_KEY'); // Reemplazar con tu clave pública
+
+    function handleSubmit(event) {
+        event.preventDefault();
+        
+        const name = document.getElementById('name').value;
+        const email = document.getElementById('email').value;
+        const phone = document.getElementById('phone').value;
+        const profession = document.getElementById('profession').value;
+
+        // Guardar datos del cliente
+        window.customerData = { name, email, phone, profession };
+
+        // Mostrar modal de upsell
+        document.getElementById('upsellModal').classList.add('show');
+
+        // Actualizar counter
+        const counter = document.getElementById('counter');
+        const currentValue = parseInt(counter.textContent);
+        if (currentValue > 1) {
+            counter.textContent = currentValue - 1;
+        }
+
+        // No enviar formulario aún
+        event.target.reset();
+    }
+
+    async function confirmUpsell() {
+        const data = window.customerData;
+        
+        try {
+            // Crear sesión de checkout en Stripe
+            const response = await fetch('https://tu-dominio.com/api/create-checkout-session', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    name: data.name,
+                    email: data.email,
+                    phone: data.phone,
+                    profession: data.profession,
+                    hasUpsell: true // Con posts
+                })
+            });
+
+            const session = await response.json();
+
+            // Redirigir a Stripe Checkout
+            await stripe.redirectToCheckout({ sessionId: session.sessionId });
+
+        } catch (error) {
+            console.error('Error:', error);
+            alert('Error al procesar el pago. Intenta de nuevo.');
+        }
+
+        document.getElementById('upsellModal').classList.remove('show');
+    }
+
+    async function skipUpsell() {
+        const data = window.customerData;
+        
+        try {
+            // Crear sesión de checkout en Stripe (sin posts)
+            const response = await fetch('https://tu-dominio.com/api/create-checkout-session', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    name: data.name,
+                    email: data.email,
+                    phone: data.phone,
+                    profession: data.profession,
+                    hasUpsell: false // Solo web
+                })
+            });
+
+            const session = await response.json();
+
+            // Redirigir a Stripe Checkout
+            await stripe.redirectToCheckout({ sessionId: session.sessionId });
+
+        } catch (error) {
+            console.error('Error:', error);
+            alert('Error al procesar el pago. Intenta de nuevo.');
+        }
+
+        document.getElementById('upsellModal').classList.remove('show');
+    }
+
+    // Simular counter inicial
+    window.addEventListener('load', () => {
+        const counter = document.getElementById('counter');
+        const randomSpots = Math.floor(Math.random() * 5) + 26;
+        counter.textContent = randomSpots;
+    });
+</script>

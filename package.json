@@ -1,0 +1,29 @@
+{
+  "name": "nexus-digital-server",
+  "version": "1.0.0",
+  "description": "Servidor de pagos Nexus Digital - Stripe + Email + WhatsApp",
+  "main": "nexus_server.js",
+  "scripts": {
+    "start": "node nexus_server.js",
+    "dev": "nodemon nexus_server.js"
+  },
+  "keywords": [
+    "stripe",
+    "payment",
+    "nexus",
+    "digital"
+  ],
+  "author": "Nexus Digital",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2",
+    "stripe": "^13.0.0",
+    "nodemailer": "^6.9.7",
+    "dotenv": "^16.3.1",
+    "cors": "^2.8.5",
+    "body-parser": "^1.20.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.2"
+  }
+}
