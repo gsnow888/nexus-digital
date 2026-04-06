@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Quiénes Somos 01 – Nexus Digital</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: #555;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      min-height: 100vh;
+      padding: 40px 0;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .instructions {
+      position: fixed;
+      top: 12px;
+      right: 12px;
+      background: rgba(0,0,0,0.75);
+      color: #fff;
+      font-family: 'Inter', sans-serif;
+      font-size: 11px;
+      line-height: 1.5;
+      padding: 8px 12px;
+      border-radius: 6px;
+      z-index: 9999;
+      text-align: right;
+    }
+
+    .story {
+      width: 1080px;
+      height: 1920px;
+      flex-shrink: 0;
+      background: #0F1419;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .top-bar {
+      width: 100%;
+      height: 12px;
+      background: linear-gradient(90deg, #00D9FF 0%, #9D4EDD 50%, #00D9FF 100%);
+      flex-shrink: 0;
+    }
+
+    /* Decorative elements */
+    .bg-circle-1 {
+      position: absolute;
+      width: 700px;
+      height: 700px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(0,217,255,0.07) 0%, transparent 70%);
+      top: -200px;
+      right: -200px;
+    }
+    .bg-circle-2 {
+      position: absolute;
+      width: 500px;
+      height: 500px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(157,78,221,0.07) 0%, transparent 70%);
+      bottom: 200px;
+      left: -120px;
+    }
+
+    /* Grid lines accent */
+    .grid-accent {
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background-image:
+        linear-gradient(rgba(0,217,255,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,217,255,0.03) 1px, transparent 1px);
+      background-size: 80px 80px;
+    }
+
+    .content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      padding: 70px 80px 80px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .section-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(0,217,255,0.12);
+      border: 2px solid #00D9FF;
+      color: #00D9FF;
+      font-family: 'Poppins', sans-serif;
+      font-size: 26px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      padding: 12px 28px;
+      border-radius: 50px;
+      align-self: flex-start;
+      margin-bottom: 52px;
+    }
+
+    /* Brand name */
+    .brand-headline {
+      font-family: 'Poppins', sans-serif;
+      font-size: 96px;
+      font-weight: 900;
+      line-height: 1;
+      margin-bottom: 20px;
+      background: linear-gradient(135deg, #00D9FF 0%, #9D4EDD 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .subtitle {
+      font-family: 'Inter', sans-serif;
+      font-size: 32px;
+      font-weight: 500;
+      color: rgba(248,250,252,0.75);
+      line-height: 1.4;
+      margin-bottom: 52px;
+    }
+
+    /* Body text */
+    .body-text {
+      font-family: 'Inter', sans-serif;
+      font-size: 30px;
+      font-weight: 400;
+      line-height: 1.65;
+      color: rgba(248,250,252,0.85);
+      margin-bottom: 56px;
+      padding: 40px 44px;
+      background: rgba(0,217,255,0.05);
+      border-left: 4px solid #00D9FF;
+      border-radius: 0 16px 16px 0;
+    }
+
+    /* Value pills */
+    .pills-row {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      margin-bottom: 52px;
+    }
+
+    .pill {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      background: rgba(0,217,255,0.08);
+      border: 2px solid rgba(0,217,255,0.3);
+      border-radius: 16px;
+      padding: 26px 36px;
+    }
+
+    .pill-icon {
+      font-size: 36px;
+      flex-shrink: 0;
+    }
+
+    .pill-text {
+      font-family: 'Poppins', sans-serif;
+      font-size: 30px;
+      font-weight: 700;
+      color: #F8FAFC;
+    }
+
+    /* Logo mark + location */
+    .logo-section {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      margin-bottom: 44px;
+    }
+
+    .diamond-shape {
+      width: 90px;
+      height: 90px;
+      background: linear-gradient(135deg, #00D9FF 0%, #9D4EDD 100%);
+      transform: rotate(45deg);
+      border-radius: 14px;
+      flex-shrink: 0;
+      box-shadow: 0 0 40px rgba(0,217,255,0.4);
+    }
+
+    .location-text {
+      font-family: 'Poppins', sans-serif;
+      font-size: 28px;
+      font-weight: 600;
+      color: rgba(248,250,252,0.65);
+    }
+
+    /* CTA */
+    .cta-box {
+      background: linear-gradient(135deg, #00D9FF 0%, #9D4EDD 100%);
+      border-radius: 20px;
+      padding: 38px 48px;
+      text-align: center;
+      margin-top: auto;
+    }
+
+    .cta-text {
+      font-family: 'Poppins', sans-serif;
+      font-size: 34px;
+      font-weight: 800;
+      color: #F8FAFC;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="instructions">
+    <strong>quienes_somos_01.html</strong><br />
+    1080 × 1920 px<br />
+    Nexus Digital Stories
+  </div>
+
+  <div class="story">
+    <div class="top-bar"></div>
+    <div class="grid-accent"></div>
+    <div class="bg-circle-1"></div>
+    <div class="bg-circle-2"></div>
+
+    <div class="content">
+
+      <div class="section-tag">◇ Quiénes Somos</div>
+
+      <div class="brand-headline">Nexus<br />Digital</div>
+
+      <p class="subtitle">Presencia digital profesional<br />para expertos como tú</p>
+
+      <p class="body-text">
+        Somos una agencia especializada en crear páginas web para profesionales independientes. Creemos que tener presencia digital no debe ser caro ni tardado.
+      </p>
+
+      <!-- Value pills -->
+      <div class="pills-row">
+        <div class="pill">
+          <span class="pill-icon">⚡</span>
+          <span class="pill-text">Entrega rápida</span>
+        </div>
+        <div class="pill">
+          <span class="pill-icon">💰</span>
+          <span class="pill-text">Precio justo</span>
+        </div>
+        <div class="pill">
+          <span class="pill-icon">🏆</span>
+          <span class="pill-text">Calidad profesional</span>
+        </div>
+      </div>
+
+      <!-- Logo + location -->
+      <div class="logo-section">
+        <div class="diamond-shape"></div>
+        <span class="location-text">Anáhuac, México</span>
+      </div>
+
+      <!-- CTA -->
+      <div class="cta-box">
+        <p class="cta-text">🔗 Link en bio</p>
+      </div>
+
+    </div>
+  </div>
+
+</body>
+</html>

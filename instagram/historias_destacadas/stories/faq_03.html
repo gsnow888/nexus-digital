@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Story FAQ 3</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background: #555; display: flex; align-items: center; justify-content: center; min-height: 100vh; }
+    .instructions { position: fixed; top: 10px; right: 10px; background: white; padding: 8px 12px; border-radius: 8px; font-size: 11px; z-index: 9999; box-shadow: 0 2px 10px rgba(0,0,0,0.3); line-height: 1.6; }
+    .story { width: 1080px; height: 1920px; position: relative; overflow: hidden; flex-shrink: 0; background: #0F1419; font-family: 'Inter', sans-serif; }
+    .bg { position: absolute; inset: 0; background: radial-gradient(ellipse at bottom right, rgba(0,217,255,0.2) 0%, transparent 55%); }
+    .top-bar { position: absolute; top: 0; left: 0; right: 0; height: 6px; background: linear-gradient(90deg, #9D4EDD, #00D9FF); }
+    .content { position: relative; z-index: 2; width: 100%; height: 100%; padding: 80px 72px; display: flex; flex-direction: column; justify-content: space-between; }
+    .logo { font-family: 'Poppins', sans-serif; font-size: 28px; font-weight: 800; color: #00D9FF; letter-spacing: 2px; }
+    .center { flex: 1; display: flex; flex-direction: column; justify-content: center; gap: 40px; }
+    .section-tag { display: inline-block; background: rgba(157,78,221,0.15); border: 1px solid rgba(157,78,221,0.4); color: #9D4EDD; font-size: 20px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; padding: 10px 24px; border-radius: 40px; align-self: flex-start; }
+    .question { font-family: 'Poppins', sans-serif; font-size: 68px; font-weight: 900; color: #F8FAFC; line-height: 1.05; }
+    .question span { color: #00D9FF; }
+    .answer-box { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-left: 5px solid #00D9FF; border-radius: 16px; padding: 40px; }
+    .answer { font-size: 32px; color: rgba(255,255,255,0.8); line-height: 1.6; }
+    .answer strong { color: #F8FAFC; }
+    .items { display: flex; flex-direction: column; gap: 16px; }
+    .item { background: rgba(0,217,255,0.06); border: 1px solid rgba(0,217,255,0.15); border-radius: 12px; padding: 24px 28px; font-size: 26px; color: #F8FAFC; display: flex; align-items: center; gap: 16px; }
+    .item span { color: #00D9FF; font-size: 28px; }
+    .cta-box { background: linear-gradient(135deg, rgba(0,217,255,0.1), rgba(157,78,221,0.1)); border: 1px solid rgba(0,217,255,0.2); border-radius: 20px; padding: 40px; text-align: center; }
+    .cta-text { font-size: 28px; color: rgba(255,255,255,0.7); margin-bottom: 16px; }
+    .cta-link { font-family: 'Poppins', sans-serif; font-size: 32px; font-weight: 800; color: #00D9FF; }
+  </style>
+</head>
+<body>
+  <div class="instructions">FAQ Story 3/3 · 1080x1920<br>📸 F12 → Capture screenshot</div>
+  <div class="story">
+    <div class="bg"></div>
+    <div class="top-bar"></div>
+    <div class="content">
+      <div class="logo">◇ NEXUS DIGITAL</div>
+      <div class="center">
+        <div class="section-tag">❓ Preguntas Frecuentes</div>
+        <div class="question">¿Necesito saber<br>de <span>tecnología?</span></div>
+        <div class="answer-box">
+          <div class="answer"><strong>Para nada.</strong> Nosotros nos encargamos de absolutamente todo.</div>
+        </div>
+        <div class="items">
+          <div class="item"><span>✓</span> Registro del dominio</div>
+          <div class="item"><span>✓</span> Configuración del hosting</div>
+          <div class="item"><span>✓</span> Diseño y desarrollo</div>
+          <div class="item"><span>✓</span> Publicación online</div>
+          <div class="item"><span>✓</span> Tú solo das la información</div>
+        </div>
+      </div>
+      <div class="cta-box">
+        <div class="cta-text">Sin complicaciones técnicas</div>
+        <div class="cta-link">🔗 Link en bio → $4,399</div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "Servidor de pagos Nexus Digital - Stripe + Email + WhatsApp",
   "main": "nexus_server.js",
+  "engines": {
+    "node": ">=18"
+  },
   "scripts": {
     "start": "node nexus_server.js",
     "dev": "nodemon nexus_server.js"

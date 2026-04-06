@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Testimonios 01 – Nexus Digital</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: #555;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      min-height: 100vh;
+      padding: 40px 0;
+      font-family: 'Inter', sans-serif;
+    }
+
+    /* Instructions div */
+    .instructions {
+      position: fixed;
+      top: 12px;
+      right: 12px;
+      background: rgba(0,0,0,0.75);
+      color: #fff;
+      font-family: 'Inter', sans-serif;
+      font-size: 11px;
+      line-height: 1.5;
+      padding: 8px 12px;
+      border-radius: 6px;
+      z-index: 9999;
+      text-align: right;
+    }
+
+    /* Story canvas */
+    .story {
+      width: 1080px;
+      height: 1920px;
+      flex-shrink: 0;
+      background: #0F1419;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ── Top bar ── */
+    .top-bar {
+      width: 100%;
+      height: 12px;
+      background: linear-gradient(90deg, #FFD700 0%, #FFA500 50%, #FFD700 100%);
+      flex-shrink: 0;
+    }
+
+    /* ── Decorative background circles ── */
+    .bg-circle-1 {
+      position: absolute;
+      width: 600px;
+      height: 600px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255,215,0,0.07) 0%, transparent 70%);
+      top: -150px;
+      right: -150px;
+    }
+    .bg-circle-2 {
+      position: absolute;
+      width: 500px;
+      height: 500px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(157,78,221,0.07) 0%, transparent 70%);
+      bottom: 200px;
+      left: -100px;
+    }
+
+    /* ── Main content wrapper ── */
+    .content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      padding: 70px 80px 80px;
+      position: relative;
+      z-index: 2;
+    }
+
+    /* ── Section tag ── */
+    .section-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(255,215,0,0.15);
+      border: 2px solid #FFD700;
+      color: #FFD700;
+      font-family: 'Poppins', sans-serif;
+      font-size: 26px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      padding: 12px 28px;
+      border-radius: 50px;
+      align-self: flex-start;
+      margin-bottom: 52px;
+    }
+
+    /* ── Headline ── */
+    .headline {
+      font-family: 'Poppins', sans-serif;
+      font-size: 68px;
+      font-weight: 900;
+      line-height: 1.1;
+      color: #F8FAFC;
+      margin-bottom: 60px;
+    }
+    .headline span {
+      color: #FFD700;
+    }
+
+    /* ── Testimonial card ── */
+    .testimonial-card {
+      background: rgba(255,215,0,0.06);
+      border: 2px solid rgba(255,215,0,0.35);
+      border-radius: 28px;
+      padding: 56px 56px 52px;
+      position: relative;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .quote-mark {
+      font-family: 'Poppins', sans-serif;
+      font-size: 120px;
+      line-height: 0.7;
+      color: #FFD700;
+      opacity: 0.4;
+      margin-bottom: 20px;
+      font-weight: 900;
+    }
+
+    .quote-text {
+      font-family: 'Inter', sans-serif;
+      font-size: 32px;
+      font-weight: 500;
+      line-height: 1.6;
+      color: #F8FAFC;
+      flex: 1;
+      margin-bottom: 52px;
+    }
+
+    .stars {
+      font-size: 42px;
+      letter-spacing: 4px;
+      margin-bottom: 30px;
+    }
+
+    .author-row {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+    }
+
+    .author-avatar {
+      width: 88px;
+      height: 88px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #FFD700, #FFA500);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Poppins', sans-serif;
+      font-size: 36px;
+      font-weight: 800;
+      color: #0F1419;
+      flex-shrink: 0;
+    }
+
+    .author-info {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .author-name {
+      font-family: 'Poppins', sans-serif;
+      font-size: 30px;
+      font-weight: 700;
+      color: #FFD700;
+    }
+
+    .author-profession {
+      font-family: 'Inter', sans-serif;
+      font-size: 24px;
+      font-weight: 500;
+      color: rgba(248,250,252,0.65);
+    }
+
+    /* ── Bottom CTA ── */
+    .cta-box {
+      margin-top: 48px;
+      background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+      border-radius: 20px;
+      padding: 36px 48px;
+      text-align: center;
+    }
+
+    .cta-text {
+      font-family: 'Poppins', sans-serif;
+      font-size: 32px;
+      font-weight: 800;
+      color: #0F1419;
+      line-height: 1.3;
+    }
+
+    /* ── Brand footer ── */
+    .brand-footer {
+      margin-top: 40px;
+      text-align: center;
+    }
+
+    .brand-name {
+      font-family: 'Poppins', sans-serif;
+      font-size: 26px;
+      font-weight: 700;
+      color: rgba(248,250,252,0.35);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Instructions -->
+  <div class="instructions">
+    <strong>testimonios_01.html</strong><br />
+    1080 × 1920 px<br />
+    Nexus Digital Stories
+  </div>
+
+  <!-- Story canvas -->
+  <div class="story">
+    <div class="top-bar"></div>
+
+    <!-- Decorative circles -->
+    <div class="bg-circle-1"></div>
+    <div class="bg-circle-2"></div>
+
+    <div class="content">
+
+      <!-- Section tag -->
+      <div class="section-tag">⭐ Testimonios</div>
+
+      <!-- Headline -->
+      <h1 class="headline">Lo que dicen<br /><span>nuestros clientes</span></h1>
+
+      <!-- Testimonial card -->
+      <div class="testimonial-card">
+        <div class="quote-mark">"</div>
+        <p class="quote-text">
+          Mi página web estuvo lista al día siguiente. El onboarding fue rapidísimo y el diseño superó mis expectativas. Ya recibo consultas por el formulario.
+        </p>
+        <div class="stars">⭐⭐⭐⭐⭐</div>
+        <div class="author-row">
+          <div class="author-avatar">CM</div>
+          <div class="author-info">
+            <span class="author-name">Dr. Carlos Mendoza</span>
+            <span class="author-profession">Médico Especialista</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- CTA box -->
+      <div class="cta-box">
+        <p class="cta-text">¿Listo para tu transformación?<br />🔗 Link en bio</p>
+      </div>
+
+      <!-- Brand footer -->
+      <div class="brand-footer">
+        <span class="brand-name">Nexus Digital</span>
+      </div>
+
+    </div>
+  </div>
+
+</body>
+</html>

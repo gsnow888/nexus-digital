@@ -1167,6 +1167,9 @@
 </footer>
 
 <script>
+    let stripeInstance;
+    let checkoutInProgress = false;
+
     // === TIMER FUNCTION ===
     function startTimer() {
         let timeLeft = 600; // 10 minutos en segundos
@@ -1211,20 +1214,50 @@
         });
     }
 
+    async function getStripeInstance() {
+        if (stripeInstance) {
+            return stripeInstance;
+        }
+
+        const response = await fetch('/api/config');
+        if (!response.ok) {
+            throw new Error('No se pudo cargar la configuración pública.');
+        }
+        const config = await response.json();
+
+        if (!config.stripePublicKey) {
+            throw new Error('Falta STRIPE_PUBLIC_KEY en el servidor.');
+        }
+
+        stripeInstance = Stripe(config.stripePublicKey);
+        return stripeInstance;
+    }
+
     async function redirectToCheckout(hasUpsell) {
+        if (checkoutInProgress) {
+            return;
+        }
+
         const data = window.customerData;
         try {
+            checkoutInProgress = true;
             const response = await fetch('/api/create-checkout-session', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ ...data, hasUpsell })
             });
+            if (!response.ok) {
+                const failure = await response.json();
+                throw new Error(failure.error || 'No se pudo iniciar el checkout.');
+            }
             const { sessionId, error } = await response.json();
             if (error) { alert('Error: ' + error); return; }
-            const stripe = Stripe('pk_live_51THRVCPv23dXfKs4g0SMarGzj6G8nsFzi2SaeawoQQGZ3cDQKCEEUPUZTmEbX6h3BSbBYMDZmxS8YHWpV6XFkmI800grsJalZ7');
+            const stripe = await getStripeInstance();
             await stripe.redirectToCheckout({ sessionId });
         } catch (err) {
             alert('Error al conectar con el servidor: ' + err.message);
+        } finally {
+            checkoutInProgress = false;
         }
     }
 

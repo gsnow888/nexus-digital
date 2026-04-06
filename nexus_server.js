@@ -10,8 +10,14 @@ const nodemailer = require('nodemailer');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 
+const fs = require('fs');
 const path = require('path');
 const app = express();
+const logoPath = path.join(__dirname, 'logo.png');
+const hasCheckoutLogo = fs.existsSync(logoPath);
+const dataDirectory = path.join(__dirname, 'data');
+const leadsFilePath = path.join(dataDirectory, 'leads.json');
+const paymentsFilePath = path.join(dataDirectory, 'payments.json');
 
 // Servir archivos estáticos
 app.use(express.static(path.join(__dirname)));
@@ -23,8 +29,19 @@ app.get('/', (req, res) => {
 
 // Middleware
 app.use(cors());
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use((req, res, next) => {
+  if (req.path === '/api/webhook') {
+    return next();
+  }
+
+  return bodyParser.json()(req, res, (jsonError) => {
+    if (jsonError) {
+      return next(jsonError);
+    }
+
+    return bodyParser.urlencoded({ extended: true })(req, res, next);
+  });
+});
 
 // ============================================
 // CONFIGURACIÓN DE EMAIL
@@ -42,6 +59,106 @@ const transporter = nodemailer.createTransport({
 // ============================================
 const WHATSAPP_NUMBER = process.env.WHATSAPP_NUMBER || '+52 443 1009 366';
 const WEBSITE_URL = process.env.WEBSITE_URL || 'https://nexus-digital.com';
+const STRIPE_PUBLIC_KEY = process.env.STRIPE_PUBLIC_KEY || '';
+const ADMIN_API_KEY = process.env.ADMIN_API_KEY || '';
+
+function ensureDataFile(filePath) {
+  if (!fs.existsSync(dataDirectory)) {
+    fs.mkdirSync(dataDirectory, { recursive: true });
+  }
+
+  if (!fs.existsSync(filePath)) {
+    fs.writeFileSync(filePath, '[]\n', 'utf8');
+  }
+}
+
+function readJsonArray(filePath) {
+  ensureDataFile(filePath);
+
+  try {
+    const contents = fs.readFileSync(filePath, 'utf8');
+    const parsed = JSON.parse(contents);
+    return Array.isArray(parsed) ? parsed : [];
+  } catch (error) {
+    console.error(`Error al leer ${filePath}:`, error);
+    return [];
+  }
+}
+
+function writeJsonArray(filePath, items) {
+  ensureDataFile(filePath);
+  fs.writeFileSync(filePath, JSON.stringify(items, null, 2) + '\n', 'utf8');
+}
+
+function appendJsonRecord(filePath, record) {
+  const currentItems = readJsonArray(filePath);
+  currentItems.push(record);
+  writeJsonArray(filePath, currentItems);
+}
+
+function createLeadRecord({ name, email, phone, profession, hasUpsell, stage, sessionId }) {
+  return {
+    id: `${Date.now()}-${Math.random().toString(36).slice(2, 10)}`,
+    createdAt: new Date().toISOString(),
+    name,
+    email,
+    phone,
+    profession,
+    hasUpsell,
+    stage,
+    sessionId: sessionId || null
+  };
+}
+
+function getPublicConfig() {
+  return {
+    stripePublicKey: STRIPE_PUBLIC_KEY,
+    whatsappNumber: WHATSAPP_NUMBER,
+    websiteUrl: WEBSITE_URL
+  };
+}
+
+function getConfigStatus() {
+  return {
+    stripePublicKey: Boolean(STRIPE_PUBLIC_KEY),
+    stripeSecretKey: Boolean(process.env.STRIPE_SECRET_KEY),
+    stripeWebhookSecret: Boolean(process.env.STRIPE_WEBHOOK_SECRET),
+    emailUser: Boolean(process.env.EMAIL_USER),
+    emailPassword: Boolean(process.env.EMAIL_PASSWORD),
+    websiteUrl: Boolean(WEBSITE_URL),
+    whatsappNumber: Boolean(WHATSAPP_NUMBER),
+    adminApiKey: Boolean(ADMIN_API_KEY)
+  };
+}
+
+function getMissingConfig() {
+  return Object.entries(getConfigStatus())
+    .filter(([, isPresent]) => !isPresent)
+    .map(([key]) => key);
+}
+
+function getWhatsappLink(message) {
+  const normalizedNumber = WHATSAPP_NUMBER.replace(/[^\d]/g, '');
+  return `https://wa.me/${normalizedNumber}?text=${encodeURIComponent(message)}`;
+}
+
+function requireAdminApiKey(req, res, next) {
+  if (!ADMIN_API_KEY) {
+    return res.status(503).json({ error: 'ADMIN_API_KEY no está configurada en el servidor.' });
+  }
+
+  const authHeader = req.headers.authorization || '';
+  const bearerPrefix = 'Bearer ';
+  const providedToken = authHeader.startsWith(bearerPrefix)
+    ? authHeader.slice(bearerPrefix.length).trim()
+    : '';
+
+  if (providedToken !== ADMIN_API_KEY) {
+    return res.status(401).json({ error: 'No autorizado.' });
+  }
+
+  return next();
+}
 
 // ============================================
 // RUTA 1: CREAR SESIÓN DE PAGO STRIPE
@@ -49,11 +166,34 @@ const WEBSITE_URL = process.env.WEBSITE_URL || 'https://nexus-digital.com';
 app.post('/api/create-checkout-session', async (req, res) => {
   try {
     const { name, email, phone, profession, hasUpsell } = req.body;
+    const trimmedName = typeof name === 'string' ? name.trim() : '';
+    const trimmedEmail = typeof email === 'string' ? email.trim() : '';
+    const trimmedPhone = typeof phone === 'string' ? phone.trim() : '';
+    const trimmedProfession = typeof profession === 'string' ? profession.trim() : '';
+    const wantsUpsell = hasUpsell === true || hasUpsell === 'true';
+
+    if (!trimmedName || !trimmedEmail || !trimmedPhone || !trimmedProfession) {
+      return res.status(400).json({ error: 'Faltan datos obligatorios del cliente.' });
+    }
+
+    if (!process.env.STRIPE_SECRET_KEY) {
+      return res.status(500).json({ error: 'Stripe no está configurado en el servidor.' });
+    }
 
     // Definir precio basado en upsell
     const basePrice = 4399 * 100; // Stripe maneja en centavos
-    const upsellPrice = hasUpsell ? (1745 * 100) : 0;
+    const upsellPrice = wantsUpsell ? (1745 * 100) : 0;
     const totalPrice = basePrice + upsellPrice;
+    const productData = {
+      name: 'Página Web Profesional',
+      description: wantsUpsell
+        ? 'Diseño Web + 15 Posts para Redes'
+        : 'Diseño Web + Dominio + Hosting (Año 1)'
+    };
+
+    if (hasCheckoutLogo) {
+      productData.images = [`${WEBSITE_URL}/logo.png`];
+    }
 
     // Crear sesión Stripe
     const session = await stripe.checkout.sessions.create({
@@ -62,30 +202,34 @@ app.post('/api/create-checkout-session', async (req, res) => {
         {
           price_data: {
             currency: 'mxn',
-            product_data: {
-              name: 'Página Web Profesional',
-              description: hasUpsell 
-                ? 'Diseño Web + 15 Posts para Redes' 
-                : 'Diseño Web + Dominio + Hosting (Año 1)',
-              images: [`${WEBSITE_URL}/logo.png`]
-            },
+            product_data: productData,
             unit_amount: totalPrice
           },
           quantity: 1
         }
       ],
-      customer_email: email,
+      customer_email: trimmedEmail,
       metadata: {
-        name,
-        email,
-        phone,
-        profession,
-        hasUpsell: hasUpsell.toString()
+        name: trimmedName,
+        email: trimmedEmail,
+        phone: trimmedPhone,
+        profession: trimmedProfession,
+        hasUpsell: String(wantsUpsell)
       },
       success_url: `${WEBSITE_URL}/success?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${WEBSITE_URL}/cancel`,
       mode: 'payment'
     });
+
+    appendJsonRecord(leadsFilePath, createLeadRecord({
+      name: trimmedName,
+      email: trimmedEmail,
+      phone: trimmedPhone,
+      profession: trimmedProfession,
+      hasUpsell: wantsUpsell,
+      stage: 'checkout_created',
+      sessionId: session.id
+    }));
 
     res.json({ sessionId: session.id });
   } catch (error) {
@@ -101,6 +245,10 @@ app.post('/api/webhook', express.raw({ type: 'application/json' }), async (req, 
   const sig = req.headers['stripe-signature'];
 
   try {
+    if (!process.env.STRIPE_WEBHOOK_SECRET) {
+      throw new Error('Falta STRIPE_WEBHOOK_SECRET en el servidor.');
+    }
+
     const event = stripe.webhooks.constructEvent(
       req.body,
       sig,
@@ -111,11 +259,22 @@ app.post('/api/webhook', express.raw({ type: 'application/json' }), async (req, 
     if (event.type === 'checkout.session.completed') {
       const session = event.data.object;
       const { name, email, phone, profession, hasUpsell } = session.metadata;
+      const wantsUpsell = hasUpsell === 'true';
 
       // Enviar email de confirmación
-      await enviarEmailConfirmacion(name, email, phone, profession, hasUpsell === 'true');
+      await enviarEmailConfirmacion(name, email, phone, profession, wantsUpsell);
 
-      // Aquí puedes guardar en base de datos
+      appendJsonRecord(paymentsFilePath, {
+        id: session.id,
+        createdAt: new Date().toISOString(),
+        paymentStatus: session.payment_status,
+        amountTotal: session.amount_total,
+        currency: session.currency,
+        customerDetails: session.customer_details || null,
+        metadata: session.metadata || {},
+        hasUpsell: wantsUpsell
+      });
+
       console.log(`✅ Pago exitoso: ${email}`);
     }
 
@@ -130,7 +289,7 @@ app.post('/api/webhook', express.raw({ type: 'application/json' }), async (req, 
 // FUNCIÓN: ENVIAR EMAIL DE CONFIRMACIÓN
 // ============================================
 async function enviarEmailConfirmacion(name, email, phone, profession, hasUpsell) {
-  const whatsappLink = `https://wa.me/${WHATSAPP_NUMBER.replace(/\s/g, '')}?text=Hola%2C%20acabo%20de%20comprar%20mi%20página%20web%20en%20Nexus%20Digital`;
+  const whatsappLink = getWhatsappLink('Hola, acabo de comprar mi pagina web en Nexus Digital');
 
   const packageInfo = hasUpsell
     ? `<strong>✅ Página Web Profesional</strong><br>
@@ -387,6 +546,49 @@ app.get('/api/checkout-session/:sessionId', async (req, res) => {
   }
 });
 
+app.get('/api/config', (_req, res) => {
+  res.json(getPublicConfig());
+});
+
+app.get('/api/health', (_req, res) => {
+  const missingConfig = getMissingConfig();
+  const payload = {
+    ok: missingConfig.length === 0,
+    timestamp: new Date().toISOString(),
+    config: getConfigStatus(),
+    storage: {
+      dataDirectory,
+      leadsFilePath,
+      paymentsFilePath
+    }
+  };
+
+  if (missingConfig.length > 0) {
+    return res.status(503).json({
+      ...payload,
+      missingConfig
+    });
+  }
+
+  return res.json(payload);
+});
+
+app.get('/api/admin/summary', requireAdminApiKey, (_req, res) => {
+  const leads = readJsonArray(leadsFilePath);
+  const payments = readJsonArray(paymentsFilePath);
+  const paidRevenue = payments.reduce((sum, payment) => {
+    return sum + (typeof payment.amountTotal === 'number' ? payment.amountTotal : 0);
+  }, 0);
+
+  res.json({
+    leads: leads.length,
+    payments: payments.length,
+    revenueMxn: paidRevenue / 100,
+    latestLead: leads[leads.length - 1] || null,
+    latestPayment: payments[payments.length - 1] || null
+  });
+});
+
 // ============================================
 // RUTA: PÁGINA DE ÉXITO
 // ============================================
@@ -414,18 +616,64 @@ app.get('/success', (_req, res) => {
     <p>Tu compra fue procesada correctamente.</p>
     <p>Revisa tu correo — te enviamos una confirmación con todos los detalles de tu pedido.</p>
     <p>Nos pondremos en contacto en las próximas <strong>24 horas</strong> para comenzar con tu proyecto.</p>
-    <a href="https://wa.me/524431009366?text=Hola%2C%20acabo%20de%20comprar%20mi%20página%20web%20en%20Nexus%20Digital" class="whatsapp-btn">💬 Contactar por WhatsApp</a>
+    <a href="${getWhatsappLink('Hola, acabo de comprar mi pagina web en Nexus Digital')}" class="whatsapp-btn">💬 Contactar por WhatsApp</a>
   </div>
 </body>
 </html>`);
+});
+
+app.get('/cancel', (_req, res) => {
+  res.send(`<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pago Cancelado - Nexus Digital</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    body { margin: 0; font-family: 'Inter', sans-serif; background: #0F1419; color: #F8FAFC; display: flex; align-items: center; justify-content: center; min-height: 100vh; }
+    .card { background: #1A202C; border: 1px solid rgba(0,217,255,0.2); border-radius: 16px; padding: 48px 40px; max-width: 500px; text-align: center; }
+    h1 { font-family: 'Poppins', sans-serif; color: #00D9FF; font-size: 28px; margin-bottom: 16px; }
+    p { color: rgba(255,255,255,0.7); line-height: 1.7; margin-bottom: 12px; }
+    .cta { display: inline-block; background: linear-gradient(135deg, #00D9FF 0%, #9D4EDD 100%); color: #0F1419; padding: 14px 32px; border-radius: 8px; text-decoration: none; font-weight: 700; font-size: 16px; margin-top: 24px; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>Pago Cancelado</h1>
+    <p>No se realizó ningún cobro.</p>
+    <p>Si quieres, puedes volver a la landing y retomar el proceso cuando estés listo.</p>
+    <a href="/" class="cta">Volver a la oferta</a>
+  </div>
+</body>
+</html>`);
+});
+
+app.use((err, _req, res, _next) => {
+  console.error('Unhandled server error:', err);
+
+  if (err.type === 'entity.parse.failed') {
+    return res.status(400).json({ error: 'JSON inválido en la solicitud.' });
+  }
+
+  return res.status(500).json({ error: 'Error interno del servidor.' });
 });
 
 // ============================================
 // PUERTO
 // ============================================
 const PORT = process.env.PORT || 3000;
+ensureDataFile(leadsFilePath);
+ensureDataFile(paymentsFilePath);
+
 app.listen(PORT, () => {
+  const missingConfig = getMissingConfig();
   console.log(`🚀 Servidor Nexus Digital corriendo en puerto ${PORT}`);
   console.log(`📧 Email configurado: ${process.env.EMAIL_USER}`);
   console.log(`💬 WhatsApp: ${WHATSAPP_NUMBER}`);
+  console.log(`🗂️  Data dir: ${dataDirectory}`);
+
+  if (missingConfig.length > 0) {
+    console.warn(`⚠️  Configuración faltante: ${missingConfig.join(', ')}`);
+  }
 });

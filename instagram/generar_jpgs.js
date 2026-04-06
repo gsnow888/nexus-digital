@@ -50,11 +50,27 @@ const posts = [
   { file: 'carruseles/carrusel_06_combo/slide_03.html', out: 'carruseles/carrusel_06_combo/slide_03.jpg' },
   { file: 'carruseles/carrusel_06_combo/slide_04.html', out: 'carruseles/carrusel_06_combo/slide_04.jpg' },
   { file: 'carruseles/carrusel_06_combo/slide_05_cta.html', out: 'carruseles/carrusel_06_combo/slide_05_cta.jpg' },
-  // Historias destacadas (1080x1920)
+  // Historias destacadas - covers (1080x1920)
   { file: 'historias_destacadas/faq.html', out: 'historias_destacadas/faq.jpg', w: 1080, h: 1920 },
   { file: 'historias_destacadas/testimonios.html', out: 'historias_destacadas/testimonios.jpg', w: 1080, h: 1920 },
   { file: 'historias_destacadas/quienes_somos.html', out: 'historias_destacadas/quienes_somos.jpg', w: 1080, h: 1920 },
   { file: 'historias_destacadas/para_quien_es.html', out: 'historias_destacadas/para_quien_es.jpg', w: 1080, h: 1920 },
+  // Stories FAQ
+  { file: 'historias_destacadas/stories/faq_01.html', out: 'historias_destacadas/stories/faq_01.jpg', w: 1080, h: 1920 },
+  { file: 'historias_destacadas/stories/faq_02.html', out: 'historias_destacadas/stories/faq_02.jpg', w: 1080, h: 1920 },
+  { file: 'historias_destacadas/stories/faq_03.html', out: 'historias_destacadas/stories/faq_03.jpg', w: 1080, h: 1920 },
+  // Stories Testimonios
+  { file: 'historias_destacadas/stories/testimonios_01.html', out: 'historias_destacadas/stories/testimonios_01.jpg', w: 1080, h: 1920 },
+  { file: 'historias_destacadas/stories/testimonios_02.html', out: 'historias_destacadas/stories/testimonios_02.jpg', w: 1080, h: 1920 },
+  { file: 'historias_destacadas/stories/testimonios_03.html', out: 'historias_destacadas/stories/testimonios_03.jpg', w: 1080, h: 1920 },
+  // Stories Quiénes Somos
+  { file: 'historias_destacadas/stories/quienes_somos_01.html', out: 'historias_destacadas/stories/quienes_somos_01.jpg', w: 1080, h: 1920 },
+  { file: 'historias_destacadas/stories/quienes_somos_02.html', out: 'historias_destacadas/stories/quienes_somos_02.jpg', w: 1080, h: 1920 },
+  { file: 'historias_destacadas/stories/quienes_somos_03.html', out: 'historias_destacadas/stories/quienes_somos_03.jpg', w: 1080, h: 1920 },
+  // Stories Para Quién Es
+  { file: 'historias_destacadas/stories/para_quien_es_01.html', out: 'historias_destacadas/stories/para_quien_es_01.jpg', w: 1080, h: 1920 },
+  { file: 'historias_destacadas/stories/para_quien_es_02.html', out: 'historias_destacadas/stories/para_quien_es_02.jpg', w: 1080, h: 1920 },
+  { file: 'historias_destacadas/stories/para_quien_es_03.html', out: 'historias_destacadas/stories/para_quien_es_03.jpg', w: 1080, h: 1920 },
 ];
 
 (async () => {

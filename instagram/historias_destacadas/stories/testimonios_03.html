@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Testimonios 03 – Nexus Digital</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: #555;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      min-height: 100vh;
+      padding: 40px 0;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .instructions {
+      position: fixed;
+      top: 12px;
+      right: 12px;
+      background: rgba(0,0,0,0.75);
+      color: #fff;
+      font-family: 'Inter', sans-serif;
+      font-size: 11px;
+      line-height: 1.5;
+      padding: 8px 12px;
+      border-radius: 6px;
+      z-index: 9999;
+      text-align: right;
+    }
+
+    .story {
+      width: 1080px;
+      height: 1920px;
+      flex-shrink: 0;
+      background: #0F1419;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .top-bar {
+      width: 100%;
+      height: 12px;
+      background: linear-gradient(90deg, #FFD700 0%, #FFA500 50%, #FFD700 100%);
+      flex-shrink: 0;
+    }
+
+    .bg-circle-1 {
+      position: absolute;
+      width: 600px;
+      height: 600px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255,215,0,0.07) 0%, transparent 70%);
+      top: -100px;
+      right: -100px;
+    }
+    .bg-circle-2 {
+      position: absolute;
+      width: 500px;
+      height: 500px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(0,217,255,0.05) 0%, transparent 70%);
+      bottom: 150px;
+      left: -80px;
+    }
+
+    .content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      padding: 70px 80px 80px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .section-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(255,215,0,0.15);
+      border: 2px solid #FFD700;
+      color: #FFD700;
+      font-family: 'Poppins', sans-serif;
+      font-size: 26px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      padding: 12px 28px;
+      border-radius: 50px;
+      align-self: flex-start;
+      margin-bottom: 44px;
+    }
+
+    .headline {
+      font-family: 'Poppins', sans-serif;
+      font-size: 64px;
+      font-weight: 900;
+      line-height: 1.1;
+      color: #F8FAFC;
+      margin-bottom: 52px;
+    }
+    .headline span { color: #FFD700; }
+
+    /* Small testimonial cards */
+    .mini-card {
+      background: rgba(255,215,0,0.06);
+      border: 2px solid rgba(255,215,0,0.3);
+      border-radius: 24px;
+      padding: 42px 48px;
+      margin-bottom: 28px;
+      position: relative;
+    }
+
+    .mini-quote-mark {
+      font-family: 'Poppins', sans-serif;
+      font-size: 72px;
+      line-height: 0.6;
+      color: #FFD700;
+      opacity: 0.35;
+      margin-bottom: 12px;
+      font-weight: 900;
+    }
+
+    .mini-quote {
+      font-family: 'Inter', sans-serif;
+      font-size: 28px;
+      font-weight: 500;
+      line-height: 1.55;
+      color: #F8FAFC;
+      margin-bottom: 28px;
+    }
+
+    .mini-author-row {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+    }
+
+    .mini-avatar {
+      width: 62px;
+      height: 62px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #FFD700, #FFA500);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Poppins', sans-serif;
+      font-size: 24px;
+      font-weight: 800;
+      color: #0F1419;
+      flex-shrink: 0;
+    }
+
+    .mini-name {
+      font-family: 'Poppins', sans-serif;
+      font-size: 24px;
+      font-weight: 700;
+      color: #FFD700;
+    }
+
+    /* Social proof section */
+    .social-proof {
+      text-align: center;
+      margin-bottom: 44px;
+      padding: 36px 40px;
+      background: rgba(255,215,0,0.04);
+      border-radius: 24px;
+      border: 1px solid rgba(255,215,0,0.15);
+    }
+
+    .big-stars {
+      font-size: 52px;
+      letter-spacing: 6px;
+      margin-bottom: 18px;
+    }
+
+    .satisfaction-text {
+      font-family: 'Poppins', sans-serif;
+      font-size: 30px;
+      font-weight: 700;
+      color: #FFD700;
+    }
+
+    /* CTA */
+    .cta-box {
+      background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+      border-radius: 20px;
+      padding: 36px 48px;
+      text-align: center;
+      margin-top: auto;
+    }
+
+    .cta-text {
+      font-family: 'Poppins', sans-serif;
+      font-size: 30px;
+      font-weight: 800;
+      color: #0F1419;
+      line-height: 1.35;
+    }
+
+    .brand-footer {
+      margin-top: 32px;
+      text-align: center;
+    }
+
+    .brand-name {
+      font-family: 'Poppins', sans-serif;
+      font-size: 24px;
+      font-weight: 700;
+      color: rgba(248,250,252,0.3);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="instructions">
+    <strong>testimonios_03.html</strong><br />
+    1080 × 1920 px<br />
+    Nexus Digital Stories
+  </div>
+
+  <div class="story">
+    <div class="top-bar"></div>
+
+    <div class="bg-circle-1"></div>
+    <div class="bg-circle-2"></div>
+
+    <div class="content">
+
+      <div class="section-tag">⭐ Testimonios</div>
+
+      <h1 class="headline">Profesionales que<br /><span>confiaron en nosotros</span></h1>
+
+      <!-- Card 1 -->
+      <div class="mini-card">
+        <div class="mini-quote-mark">"</div>
+        <p class="mini-quote">El proceso fue tan fácil que no lo podía creer. Web lista en un día.</p>
+        <div class="mini-author-row">
+          <div class="mini-avatar">RV</div>
+          <span class="mini-name">Coach Rodrigo V.</span>
+        </div>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="mini-card">
+        <div class="mini-quote-mark">"</div>
+        <p class="mini-quote">Mis pacientes me dicen que mi página se ve muy profesional. Valió cada peso.</p>
+        <div class="mini-author-row">
+          <div class="mini-avatar">MF</div>
+          <span class="mini-name">Psic. María F.</span>
+        </div>
+      </div>
+
+      <!-- Social proof -->
+      <div class="social-proof">
+        <div class="big-stars">⭐⭐⭐⭐⭐</div>
+        <p class="satisfaction-text">100% de clientes satisfechos</p>
+      </div>
+
+      <!-- CTA -->
+      <div class="cta-box">
+        <p class="cta-text">🔗 Link en bio → Solo 30 lugares</p>
+      </div>
+
+      <div class="brand-footer">
+        <span class="brand-name">Nexus Digital</span>
+      </div>
+
+    </div>
+  </div>
+
+</body>
+</html>

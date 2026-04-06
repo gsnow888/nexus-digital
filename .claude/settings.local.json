@@ -4,7 +4,14 @@
       "Read(//Users/gregoriosc/nexus claude /$HOME/**)",
       "Bash(find /Users/gregoriosc -maxdepth 2 -name *.md)",
       "Bash(open \"/Users/gregoriosc/nexus claude /NEXUS_landing_upsell.html\")",
-      "Bash(open \"http://localhost:3000\")"
+      "Bash(open \"http://localhost:3000\")",
+      "Bash(node \"/Users/gregoriosc/.claude/plugins/cache/openai-codex/codex/1.0.2/scripts/codex-companion.mjs\" task --fresh \"Mejora la landing page de Nexus Digital \\(Northpoint\\) para que se vea excelente en teléfonos. Agrega efectos visuales bonitos: animaciones suaves, gradientes, efectos hover, transiciones. Asegúrate que sea completamente responsive en móvil con buen espaciado, tipografía legible y layout adaptado.\")",
+      "Bash(npm install:*)",
+      "Bash(sudo npm:*)",
+      "Bash(node \"/Users/gregoriosc/.claude/plugins/cache/openai-codex/codex/1.0.2/scripts/codex-companion.mjs\" task --fresh \"Mejora la landing page de Nexus Digital para que se vea excelente en teléfonos móviles. Los archivos de la landing están en ~/nexus claude/NEXUS_landing_upsell.html y ~/nexus claude/landing_stripe_integration.html. Agrega: 1\\) diseño completamente responsive con media queries para móvil, 2\\) animaciones suaves \\(fade-in, slide-up al hacer scroll\\), 3\\) gradientes y efectos visuales modernos, 4\\) tipografía legible en pantallas pequeñas, 5\\) botones grandes y fáciles de tocar en móvil, 6\\) spacing y padding adecuados para móvil. Implementa los cambios directamente en los archivos HTML.\" --write)",
+      "Bash(codex --version)",
+      "Bash(node \"/Users/gregoriosc/.claude/plugins/cache/openai-codex/codex/1.0.2/scripts/codex-companion.mjs\" task --fresh \"Mejora la landing page de Nexus Digital para que se vea excelente en teléfonos móviles. Los archivos están en el directorio actual: NEXUS_landing_upsell.html y landing_stripe_integration.html. Agrega: 1\\) diseño completamente responsive con media queries para móvil, 2\\) animaciones suaves \\(fade-in, slide-up\\), 3\\) gradientes y efectos visuales modernos, 4\\) tipografía legible en pantallas pequeñas, 5\\) botones grandes fáciles de tocar, 6\\) spacing adecuado para móvil. Implementa los cambios directamente en los archivos HTML.\")",
+      "Bash(PATH=\"/usr/local/bin:$PATH\" node \"/Users/gregoriosc/.claude/plugins/cache/openai-codex/codex/1.0.2/scripts/codex-companion.mjs\" setup --json)"
     ]
   }
 }
