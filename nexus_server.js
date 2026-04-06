@@ -62,6 +62,22 @@ const WEBSITE_URL = process.env.WEBSITE_URL || 'https://nexus-digital.com';
 const STRIPE_PUBLIC_KEY = process.env.STRIPE_PUBLIC_KEY || '';
 const ADMIN_API_KEY = process.env.ADMIN_API_KEY || '';
 
+function normalizeBaseUrl(value) {
+  if (!value || typeof value !== 'string') {
+    return 'https://nexus-digital.com';
+  }
+
+  const trimmedValue = value.trim().replace(/\/+$/, '');
+
+  try {
+    return new URL(trimmedValue).toString().replace(/\/+$/, '');
+  } catch (_error) {
+    return 'https://nexus-digital.com';
+  }
+}
+
+const NORMALIZED_WEBSITE_URL = normalizeBaseUrl(WEBSITE_URL);
+
 function ensureDataFile(filePath) {
   if (!fs.existsSync(dataDirectory)) {
     fs.mkdirSync(dataDirectory, { recursive: true });
@@ -114,7 +130,7 @@ function getPublicConfig() {
   return {
     stripePublicKey: STRIPE_PUBLIC_KEY,
     whatsappNumber: WHATSAPP_NUMBER,
-    websiteUrl: WEBSITE_URL
+    websiteUrl: NORMALIZED_WEBSITE_URL
   };
 }
 
@@ -125,7 +141,7 @@ function getConfigStatus() {
     stripeWebhookSecret: Boolean(process.env.STRIPE_WEBHOOK_SECRET),
     emailUser: Boolean(process.env.EMAIL_USER),
     emailPassword: Boolean(process.env.EMAIL_PASSWORD),
-    websiteUrl: Boolean(WEBSITE_URL),
+    websiteUrl: Boolean(NORMALIZED_WEBSITE_URL),
     whatsappNumber: Boolean(WHATSAPP_NUMBER),
     adminApiKey: Boolean(ADMIN_API_KEY)
   };
@@ -191,10 +207,6 @@ app.post('/api/create-checkout-session', async (req, res) => {
         : 'Diseño Web + Dominio + Hosting (Año 1)'
     };
 
-    if (hasCheckoutLogo) {
-      productData.images = [`${WEBSITE_URL}/logo.png`];
-    }
-
     // Crear sesión Stripe
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ['card'],
@@ -216,8 +228,8 @@ app.post('/api/create-checkout-session', async (req, res) => {
         profession: trimmedProfession,
         hasUpsell: String(wantsUpsell)
       },
-      success_url: `${WEBSITE_URL}/success?session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: `${WEBSITE_URL}/cancel`,
+      success_url: `${NORMALIZED_WEBSITE_URL}/success?session_id={CHECKOUT_SESSION_ID}`,
+      cancel_url: `${NORMALIZED_WEBSITE_URL}/cancel`,
       mode: 'payment'
     });
 
