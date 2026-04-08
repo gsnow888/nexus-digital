@@ -859,6 +859,67 @@
                 font-size: 28px;
             }
         }
+
+        /* === HOW IT WORKS (IA PROCESS) === */
+        .how-it-works-section {
+            padding: 80px 24px;
+            background: linear-gradient(135deg, rgba(0, 217, 255, 0.05) 0%, rgba(157, 78, 221, 0.05) 100%);
+        }
+
+        .process-timeline {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 32px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .process-step {
+            position: relative;
+            text-align: center;
+        }
+
+        .step-number {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--cyan) 0%, var(--violet) 100%);
+            color: var(--navy);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Poppins', sans-serif;
+            font-size: 28px;
+            font-weight: 800;
+            margin: 0 auto 20px;
+            box-shadow: 0 10px 30px rgba(0, 217, 255, 0.3);
+        }
+
+        .step-icon {
+            font-size: 48px;
+            margin-bottom: 16px;
+        }
+
+        .process-step h4 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--navy);
+            margin-bottom: 12px;
+        }
+
+        .process-step p {
+            font-size: 14px;
+            color: var(--gray);
+            line-height: 1.6;
+        }
+
+        @media (max-width: 768px) {
+            .process-timeline {
+                grid-template-columns: 1fr;
+                gap: 24px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -891,10 +952,14 @@
             <div class="urgency-badge">
                 ⚡ OFERTA LIMITADA - Solo 30 personas
             </div>
+
+            <div style="display: inline-flex; align-items: center; gap: 8px; background: rgba(0, 217, 255, 0.1); border: 1px solid var(--cyan); padding: 10px 18px; border-radius: 50px; color: var(--cyan); font-weight: 600; font-size: 13px; margin-bottom: 24px; margin-left: 0;">
+                🤖 Powered by AI - Revisado por Profesionales
+            </div>
             
-            <h1>Tu <span class="cyan">Página Web Profesional</span> en Días</h1>
-            
-            <p>Presencia digital completa para abogados, psicólogos, doctores y emprendedores. Diseño web + opción de 15 posts para redes.</p>
+            <h1>Página Web Profesional con <span class="cyan">IA</span> en 5-7 Días</h1>
+
+            <p>Tu presencia digital lista mientras tú enfocas en tu negocio. Diseñada por inteligencia artificial, revisada por humanos. Incluye web + opción de 15 posts para redes automáticos.</p>
 
             <div class="counter-box">
                 <div class="counter-number" id="counter">28</div>
@@ -913,15 +978,15 @@
             </div>
 
             <div class="bonus-box">
-                <div class="bonus-icon">💻</div>
+                <div class="bonus-icon">🤖</div>
                 <div class="bonus-content">
-                    <h3>PÁGINA WEB INCLUIDA</h3>
-                    <p>Diseño profesional, formulario, SEO, dominio + hosting (año 1)</p>
+                    <h3>DISEÑADA POR IA AVANZADA</h3>
+                    <p>Análisis de tu industria + diseño optimizado automáticamente + SEO integrado desde el inicio</p>
                 </div>
             </div>
 
             <p style="text-align: center; color: rgba(255,255,255,0.8); font-size: 13px; margin-top: 20px; margin-bottom: 24px;">
-                <strong>+ Opción de agregar 15 posts para redes por +$1,745</strong>
+                <strong>+ Opción: 15 posts automáticos con IA para LinkedIn, Instagram, Facebook (+$1,745)</strong>
             </p>
 
             <button class="cta-button" onclick="document.querySelector('.form-section').scrollIntoView({behavior: 'smooth'})">
@@ -931,46 +996,83 @@
     </div>
 </section>
 
+<!-- HOW IT WORKS - IA PROCESS -->
+<section class="how-it-works-section">
+    <div class="container">
+        <h2 class="section-title">¿Cómo Funciona <span class="cyan">Nuestra IA</span>?</h2>
+
+        <div class="process-timeline">
+            <div class="process-step">
+                <div class="step-number">1</div>
+                <div class="step-icon">📋</div>
+                <h4>Completas Formulario</h4>
+                <p>Nos cuentas tu profesión, servicios y objetivos en 5 minutos.</p>
+            </div>
+
+            <div class="process-step">
+                <div class="step-number">2</div>
+                <div class="step-icon">🤖</div>
+                <h4>IA Analiza & Diseña</h4>
+                <p>Nuestros algoritmos crean un diseño profesional optimizado para tu industria.</p>
+            </div>
+
+            <div class="process-step">
+                <div class="step-number">3</div>
+                <div class="step-icon">👥</div>
+                <h4>Revisor Humano</h4>
+                <p>Un especialista revisa, ajusta y perfecciona antes de entregarla.</p>
+            </div>
+
+            <div class="process-step">
+                <div class="step-number">4</div>
+                <div class="step-icon">🚀</div>
+                <h4>¡Lanzada!</h4>
+                <p>Tu web sube en vivo en 5-7 días, lista para generar leads.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
 <!-- FEATURES SECTION -->
 <section class="features-section" id="features">
     <div class="container">
-        <h2 class="section-title">¿Qué <span class="cyan">Incluye</span> Tu Página Web?</h2>
+        <h2 class="section-title">Tu Página Web <span class="cyan">Optimizada por IA</span></h2>
         
         <div class="features-grid">
             <div class="feature-card">
-                <div class="feature-icon">💻</div>
-                <h4>Diseño Web Moderno</h4>
-                <p>Responsive, rápido y profesional. Se ve perfectamente en móvil, tablet y desktop.</p>
+                <div class="feature-icon">🤖</div>
+                <h4>Diseño Generado por IA</h4>
+                <p>Nuestra IA crea un diseño moderno, responsive y profesional en minutos. Responsive, rápido en móvil, tablet y desktop.</p>
             </div>
 
             <div class="feature-card">
                 <div class="feature-icon">🎯</div>
-                <h4>Optimizado para Tu Industria</h4>
-                <p>Plantillas y textos diseñados específicamente para abogados, psicólogos, médicos y más.</p>
-            </div>
-
-            <div class="feature-card">
-                <div class="feature-icon">⚙️</div>
-                <h4>Totalmente Funcional</h4>
-                <p>Formulario de contacto, galería, portafolio y CRM integrado para gestionar leads.</p>
-            </div>
-
-            <div class="feature-card">
-                <div class="feature-icon">🔒</div>
-                <h4>Seguridad & Dominio</h4>
-                <p>Certificado SSL incluido + tu dominio propio + hosting el primer año gratis.</p>
-            </div>
-
-            <div class="feature-card">
-                <div class="feature-icon">📈</div>
-                <h4>Posicionamiento SEO</h4>
-                <p>Optimizado para Google. Aparece en búsquedas de clientes que buscan tus servicios.</p>
+                <h4>Adaptado a Tu Profesión (IA)</h4>
+                <p>La IA analiza tu industria y crea plantillas específicamente para abogados, psicólogos, médicos, coaches y más.</p>
             </div>
 
             <div class="feature-card">
                 <div class="feature-icon">⚡</div>
-                <h4>Velocidad Optimizada</h4>
-                <p>Carga rápida = mejor experiencia + más conversiones.</p>
+                <h4>SEO Auto-Optimizado</h4>
+                <p>Nuestros algoritmos optimizan automáticamente cada página para Google. Aparece en búsquedas donde tus clientes te buscan.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">⚙️</div>
+                <h4>Funcionalidades Completas</h4>
+                <p>Formulario de contacto inteligente, galería, portafolio y CRM integrado. Todo configurado automáticamente por IA.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">🔒</div>
+                <h4>Seguridad Integrada</h4>
+                <p>Certificado SSL + dominio propio + hosting año 1 gratis. Protección automática contra amenazas.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">🚀</div>
+                <h4>Velocidad Máxima</h4>
+                <p>Optimización de velocidad impulsada por IA. Carga rápida = mejor experiencia + más conversiones.</p>
             </div>
         </div>
     </div>
@@ -979,7 +1081,7 @@
 <!-- TESTIMONIALS -->
 <section class="testimonials-section">
     <div class="container">
-        <h2 class="section-title">Lo Que Dicen <span class="cyan">Nuestros Clientes</span></h2>
+        <h2 class="section-title">Testimonios de <span class="cyan">Clientes Reales</span> que Confían en Nuestra IA</h2>
 
         <div class="testimonials-grid">
             <div class="testimonial-card">
@@ -1014,61 +1116,71 @@
         <div class="faq-container">
             <div class="faq-item" onclick="toggleFAQ(this)">
                 <div class="faq-question">
-                    ¿Cuánto tiempo tarda en estar lista mi página?
+                    🤖 ¿Cómo funciona exactamente la IA en el diseño?
                     <span class="faq-toggle">+</span>
                 </div>
                 <div class="faq-answer">
-                    Tu página web se entrega al día siguiente del onboarding. El onboarding es una llamada de menos de 20 minutos donde recopilamos toda la información de tu negocio.
+                    Nuestra IA analiza tu profesión, servicios, competencia local y tendencias de diseño para crear un layout único y optimizado. Luego un profesional humano revisa cada detalle para asegurar que refleje tu marca perfectamente.
                 </div>
             </div>
 
             <div class="faq-item" onclick="toggleFAQ(this)">
                 <div class="faq-question">
-                    ¿Puedo hacer cambios después?
+                    🔒 ¿Es seguro usar IA para diseñar mi web?
                     <span class="faq-toggle">+</span>
                 </div>
                 <div class="faq-answer">
-                    Sí, incluye revisiones ilimitadas durante el proceso de desarrollo. Queremos que quedes 100% satisfecho con tu página antes de lanzarla.
+                    100% seguro. La IA es solo una herramienta para generar el diseño inicial rápidamente. Un especialista humano revisa, ajusta y perfecciona antes de lanzar. Tu información nunca se comparte con terceros.
                 </div>
             </div>
 
             <div class="faq-item" onclick="toggleFAQ(this)">
                 <div class="faq-question">
-                    ¿Qué pasa con el hosting después del primer año?
+                    ⏱️ ¿Realmente se entrega en 5-7 días?
                     <span class="faq-toggle">+</span>
                 </div>
                 <div class="faq-answer">
-                    El primer año de hosting está incluido. Después puedes renovar por una cuota anual baja (~$600/año), o contratarnos para mantenimiento continuo.
+                    Sí. La IA genera el diseño en horas (no días). Luego nuestro equipo hace revisión humana en 24-48h, y está lista. El onboarding es una llamada de 20 minutos para darle toda la información a la IA.
                 </div>
             </div>
 
             <div class="faq-item" onclick="toggleFAQ(this)">
                 <div class="faq-question">
-                    ¿Mi página es segura?
+                    ✏️ ¿Puedo hacer cambios después si la IA no me gustó?
                     <span class="faq-toggle">+</span>
                 </div>
                 <div class="faq-answer">
-                    Sí. Incluye certificado SSL (HTTPS), backups automáticos y protección contra ataques. La información de ti y tus clientes está completamente segura.
+                    Sí. Incluye revisiones ilimitadas durante el desarrollo. Si hay algo que cambiar, nos lo dices y ya sea la IA o nosotros lo ajustamos. Queremos que quedes 100% satisfecho.
                 </div>
             </div>
 
             <div class="faq-item" onclick="toggleFAQ(this)">
                 <div class="faq-question">
-                    ¿Cómo funcionan los 15 posts para redes?
+                    📱 ¿Los posts generados por IA se ven profesionales?
                     <span class="faq-toggle">+</span>
                 </div>
                 <div class="faq-answer">
-                    Diseñamos 15 posts profesionales (imágenes + textos) optimizados para LinkedIn, Instagram y Facebook. Vienen listos para publicar o los adaptas a tu estilo personal.
+                    Muy profesionales. La IA crea 15 posts (imágenes + textos) diseñados para LinkedIn, Instagram y Facebook con tu identidad visual. Salen listos para publicar, pero los puedes adaptar a tu estilo personal si quieres.
                 </div>
             </div>
 
             <div class="faq-item" onclick="toggleFAQ(this)">
                 <div class="faq-question">
-                    ¿Qué profesiones pueden usar Nexus?
+                    🔍 ¿La IA genera el SEO automáticamente?
                     <span class="faq-toggle">+</span>
                 </div>
                 <div class="faq-answer">
-                    Perfecta para abogados, psicólogos, médicos, coaches, consultores, emprendedores, freelancers y marcas personales. Si tu servicio requiere presencia web profesional, es para ti.
+                    Sí. Nuestros algoritmos optimizan automáticamente el SEO mientras diseñan. Esto significa que tu página aparece en Google desde el día uno, sin trabajo adicional de tu parte.
+                </div>
+            </div>
+
+            <div class="faq-item" onclick="toggleFAQ(this)">
+                <div class="faq-question">
+                    ✅ ¿Qué profesiones trabajan con Nexus?
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    Abogados, psicólogos, médicos, coaches, consultores, emprendedores, freelancers y marcas personales. Si ofrecés servicios profesionales, la IA está entrenada para tu industria.
                 </div>
             </div>
         </div>
