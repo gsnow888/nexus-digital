@@ -127,10 +127,12 @@
         }
 
         .hero-content {
-            max-width: 700px;
+            max-width: 900px;
             position: relative;
             z-index: 2;
             animation: slideUp 0.8s ease-out;
+            margin: 0 auto;
+            text-align: center;
         }
 
         @keyframes slideUp {
@@ -165,6 +167,7 @@
             color: rgba(255, 255, 255, 0.85);
             margin-bottom: 32px;
             line-height: 1.8;
+            text-align: center;
         }
 
         .urgency-badge {
@@ -275,6 +278,7 @@
             display: inline-flex;
             align-items: center;
             gap: 8px;
+            margin: 0 auto;
         }
 
         .cta-button:hover {
@@ -961,19 +965,33 @@
 
             <p>Tu presencia digital lista mientras tú enfocas en tu negocio. Diseñada por inteligencia artificial, revisada por humanos. Incluye web + opción de 15 posts para redes automáticos.</p>
 
-            <div class="counter-box">
-                <div class="counter-number" id="counter">28</div>
-                <div class="counter-label">de 30 lugares disponibles</div>
+            <div style="display: flex; justify-content: center; gap: 40px; margin: 32px 0; flex-wrap: wrap;">
+                <div style="text-align: center;">
+                    <div style="font-size: 32px; font-weight: 800; color: var(--green); margin-bottom: 8px;">50+</div>
+                    <div style="color: rgba(255,255,255,0.8); font-size: 14px;">Webs Creadas</div>
+                </div>
+                <div style="text-align: center;">
+                    <div style="font-size: 32px; font-weight: 800; color: var(--green); margin-bottom: 8px;">4.9⭐</div>
+                    <div style="color: rgba(255,255,255,0.8); font-size: 14px;">Satisfacción Clientes</div>
+                </div>
+                <div style="text-align: center;">
+                    <div style="font-size: 32px; font-weight: 800; color: var(--green); margin-bottom: 8px;">5-7 días</div>
+                    <div style="color: rgba(255,255,255,0.8); font-size: 14px;">De Entrega Garantizada</div>
+                </div>
             </div>
 
-            <div class="pricing-hero">
-                <div class="price-column">
-                    <div class="original-price">Antes: $13,000</div>
+            <div style="background: linear-gradient(135deg, rgba(0, 217, 255, 0.1) 0%, rgba(157, 78, 221, 0.1) 100%); border: 1px solid var(--cyan); border-radius: 16px; padding: 32px; margin-bottom: 32px; backdrop-filter: blur(10px); display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: 30px;">
+                <div style="text-align: center; flex: 1; min-width: 200px;">
+                    <div style="color: rgba(255,255,255,0.6); font-size: 13px; margin-bottom: 12px; text-transform: uppercase; letter-spacing: 1px;">Otras Agencias</div>
+                    <div style="font-size: 36px; color: #EF4444; text-decoration: line-through; margin-bottom: 8px; font-weight: 700; font-family: 'Poppins', sans-serif;">$13,000+</div>
+                    <div style="color: rgba(255,255,255,0.7); font-size: 13px;">Tardan 30-60 días</div>
                 </div>
-                <div style="color: var(--cyan); font-size: 42px; font-weight: 800;">→</div>
-                <div class="price-column">
-                    <div class="new-price">$4,399</div>
-                    <div class="discount-label">70% OFF</div>
+                <div style="color: var(--cyan); font-size: 48px; font-weight: 800;">VS</div>
+                <div style="text-align: center; flex: 1; min-width: 200px;">
+                    <div style="color: rgba(255,255,255,0.6); font-size: 13px; margin-bottom: 12px; text-transform: uppercase; letter-spacing: 1px;">NEXUS DIGITAL</div>
+                    <div style="font-size: 48px; font-weight: 800; color: var(--green); margin-bottom: 8px; font-family: 'Poppins', sans-serif;">$4,399</div>
+                    <div style="color: rgba(255,255,255,0.7); font-size: 13px;">5-7 días entrega</div>
+                    <div style="display: inline-block; background: linear-gradient(135deg, var(--cyan) 0%, var(--violet) 100%); color: var(--navy); padding: 6px 14px; border-radius: 20px; font-size: 12px; font-weight: 700; margin-top: 8px;">70% MÁS BARATO</div>
                 </div>
             </div>
 
