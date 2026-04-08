@@ -316,23 +316,25 @@
         }
 
         .feature-card {
-            background: linear-gradient(135deg, var(--white) 0%, rgba(0, 217, 255, 0.02) 100%);
-            border: 1px solid var(--gray-light);
-            border-left: 4px solid var(--cyan);
+            background: linear-gradient(135deg, rgba(0, 217, 255, 0.08) 0%, rgba(157, 78, 221, 0.08) 100%);
+            border: 2px solid var(--cyan);
             border-radius: 12px;
             padding: 32px;
             transition: all 0.3s ease;
+            text-align: center;
         }
 
         .feature-card:hover {
             transform: translateY(-8px);
             border-color: var(--cyan);
-            box-shadow: 0 20px 50px rgba(0, 217, 255, 0.15);
+            box-shadow: 0 20px 50px rgba(0, 217, 255, 0.2);
+            background: linear-gradient(135deg, rgba(0, 217, 255, 0.12) 0%, rgba(157, 78, 221, 0.12) 100%);
         }
 
         .feature-icon {
             font-size: 40px;
             margin-bottom: 16px;
+            display: block;
         }
 
         .feature-card h4 {
@@ -456,12 +458,16 @@
             color: var(--gray);
             font-size: 14px;
             line-height: 1.8;
-            transition: all 0.3s ease;
+            transition: max-height 0.4s ease, padding 0.4s ease, opacity 0.4s ease;
+            opacity: 0;
+            visibility: hidden;
         }
 
         .faq-item.active .faq-answer {
             max-height: 500px;
             padding: 0 20px 20px 20px;
+            opacity: 1;
+            visibility: visible;
         }
 
         /* === FORM === */
@@ -971,6 +977,24 @@
                 margin-bottom: 24px;
             }
 
+            .hero-content > div[style*="display: flex"][style*="justify-content: center"] {
+                gap: 20px !important;
+                margin: 24px 0 !important;
+            }
+
+            .hero-content > div[style*="display: flex"][style*="justify-content: center"] > div {
+                text-align: center;
+            }
+
+            .hero-content > div[style*="display: flex"][style*="justify-content: center"] div[style*="font-size: 32px"] {
+                font-size: 24px !important;
+                margin-bottom: 6px !important;
+            }
+
+            .hero-content > div[style*="display: flex"][style*="justify-content: center"] div[style*="color: rgba"] {
+                font-size: 12px !important;
+            }
+
             .urgency-badge {
                 padding: 10px 16px;
                 font-size: 12px;
@@ -997,7 +1021,7 @@
             }
 
             .feature-card {
-                padding: 20px;
+                padding: 16px;
             }
 
             .feature-icon {
@@ -1006,12 +1030,13 @@
             }
 
             .feature-card h4 {
-                font-size: 15px;
+                font-size: 14px;
                 margin-bottom: 8px;
             }
 
             .feature-card p {
                 font-size: 12px;
+                line-height: 1.5;
             }
 
             .testimonial-card {
@@ -1156,12 +1181,12 @@
 </head>
 <body>
 
-<!-- TIMER URGENCY -->
-<div class="timer-container" id="timerContainer">
+<!-- TIMER URGENCY - DESHABILITADO -->
+<!-- <div class="timer-container" id="timerContainer">
     <div class="timer-label">⏰ Oferta Expira En:</div>
     <div class="timer-display" id="timerDisplay">10:00</div>
     <div class="timer-message">Apúrate, quedan pocos lugares</div>
-</div>
+</div> -->
 
 <!-- HEADER -->
 <header>
