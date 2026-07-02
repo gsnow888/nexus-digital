@@ -784,6 +784,174 @@ footer .logo{font-size:16px}
 @media(max-width:900px){
   .test-grid{grid-template-columns:1fr}
 }
+
+/* ─────────────────────────────────────
+   HERO VIDEO BACKGROUND
+───────────────────────────────────── */
+.hero-video-bg{
+  position:absolute;inset:0;z-index:0;overflow:hidden
+}
+.hero-video-bg video{
+  width:100%;height:100%;object-fit:cover;
+  opacity:.32;pointer-events:none
+}
+.hero-video-overlay{
+  position:absolute;inset:0;z-index:1;
+  background:linear-gradient(180deg,rgba(7,9,15,.55) 0%,rgba(7,9,15,.15) 45%,rgba(7,9,15,.90) 100%)
+}
+
+/* ─────────────────────────────────────
+   HERO CENTERED
+───────────────────────────────────── */
+.hero-inner{text-align:center}
+.hero-eyebrow{margin-left:auto;margin-right:auto}
+.hero h1{margin-left:auto;margin-right:auto}
+.hero-desc{margin-left:auto;margin-right:auto;max-width:580px}
+.hero-actions{justify-content:center}
+
+/* ─────────────────────────────────────
+   AURORA BORDER — METRIC CARDS
+───────────────────────────────────── */
+@keyframes aurora-spin{
+  0%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0% 50%}
+}
+.metric-card{
+  position:relative;
+  background:transparent;
+  padding:0;overflow:visible
+}
+.metric-card-inner{
+  position:relative;z-index:2;
+  background:var(--navy2);
+  border-radius:14px;
+  padding:32px 28px;
+  display:flex;flex-direction:column;gap:8px;
+  height:100%;
+  transition:background .25s,transform .25s
+}
+.metric-card::before{
+  content:'';
+  position:absolute;inset:-2px;
+  background:linear-gradient(135deg,#00C8F0,#8B6CF6,#F0507A,#F0B400,#00C8F0,#8B6CF6);
+  background-size:300% 300%;
+  animation:aurora-spin 4s linear infinite;
+  border-radius:16px;
+  z-index:1;
+  opacity:.8
+}
+.metric-card:hover .metric-card-inner{background:var(--navy3);transform:translateY(-3px)}
+.hero-metrics{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:16px;
+  background:transparent;border:none;overflow:visible;
+  border-radius:0
+}
+
+/* ─────────────────────────────────────
+   SERVICE CARDS — HOVER VIDEO
+───────────────────────────────────── */
+.srv-card{overflow:hidden;transition:transform .3s,box-shadow .3s}
+.srv-card:hover{transform:translateY(-6px);box-shadow:0 20px 60px rgba(0,200,240,.12)}
+.srv-video-wrap{
+  position:absolute;inset:0;opacity:0;
+  transition:opacity .5s;z-index:0;overflow:hidden
+}
+.srv-video-wrap video{
+  width:100%;height:100%;object-fit:cover;
+  filter:brightness(.32) saturate(1.4)
+}
+.srv-card:hover .srv-video-wrap{opacity:1}
+.srv-card .srv-icon,
+.srv-card h3,
+.srv-card p,
+.srv-card .srv-bullets,
+.srv-card .rec-badge{position:relative;z-index:1}
+
+/* ─────────────────────────────────────
+   SERVICES — CENTERED HEADER
+───────────────────────────────────── */
+#servicios .sec-header{text-align:center}
+#servicios .sec-lead{max-width:600px;margin:0 auto}
+
+/* ─────────────────────────────────────
+   PROCESO — CENTERED + IMAGES
+───────────────────────────────────── */
+#proceso .sec-header{text-align:center}
+#proceso .sec-lead{max-width:600px;margin:0 auto}
+.tl-step{display:grid;grid-template-columns:80px 1fr auto;gap:0 32px;align-items:start;padding:48px 0;border-bottom:1px solid var(--border)}
+.tl-step:last-child{border-bottom:none}
+.tl-img{
+  width:220px;height:160px;border-radius:14px;overflow:hidden;
+  flex-shrink:0;border:1px solid var(--card-border)
+}
+.tl-img img{width:100%;height:100%;object-fit:cover;display:block}
+
+/* ─────────────────────────────────────
+   PORTFOLIO — HOVER + CLICKABLE
+───────────────────────────────────── */
+.proy-card{
+  cursor:pointer;
+  transition:transform .35s cubic-bezier(.22,.68,0,1.2),box-shadow .35s
+}
+.proy-card:hover{
+  transform:translateY(-10px) scale(1.01);
+  box-shadow:0 24px 72px rgba(0,200,240,.18)
+}
+.proy-card:hover .proy-overlay{
+  background:linear-gradient(180deg,transparent 0%,rgba(0,200,240,.08) 40%,rgba(7,9,15,.88) 100%)
+}
+
+/* ─────────────────────────────────────
+   DIFFERENTIATORS — PAIN POINT STYLE
+───────────────────────────────────── */
+.pq-card{
+  transition:background .25s,transform .25s,border-color .25s;
+  cursor:default
+}
+.pq-card:hover{
+  background:rgba(0,200,240,.05);
+  transform:translateY(-4px);
+  border-color:rgba(0,200,240,.2)
+}
+
+/* ─────────────────────────────────────
+   PRICING NOTE
+───────────────────────────────────── */
+.precio-note-estimacion{
+  text-align:center;
+  margin-top:40px;
+  padding:20px 32px;
+  background:rgba(0,200,240,.05);
+  border:1px solid rgba(0,200,240,.12);
+  border-radius:12px;
+  font-size:13px;
+  color:var(--muted);
+  line-height:1.7;
+  max-width:680px;
+  margin-left:auto;
+  margin-right:auto
+}
+.precio-note-estimacion strong{color:var(--white)}
+
+/* ─────────────────────────────────────
+   SCROLL REVEAL ANIMATIONS
+───────────────────────────────────── */
+@keyframes fadeUp{
+  from{opacity:0;transform:translateY(28px)}
+  to{opacity:1;transform:translateY(0)}
+}
+.fade-up{opacity:0;animation:fadeUp .7s ease forwards}
+.fade-up-d1{animation-delay:.1s}
+.fade-up-d2{animation-delay:.22s}
+.fade-up-d3{animation-delay:.34s}
+.fade-up-d4{animation-delay:.46s}
+
+@keyframes float-idle{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-6px)}
+}
+.float-idle{animation:float-idle 5s ease-in-out infinite}
 </style>
 </head>
 <body>
@@ -814,17 +982,25 @@ footer .logo{font-size:16px}
      HERO
 ═══════════════════════════════════ -->
 <section class="hero">
+  <!-- Video background (Higgsfield) -->
+  <div class="hero-video-bg">
+    <video id="hero-vid" autoplay muted loop playsinline preload="none" data-job="c5c32803-f0d5-45bb-9890-c3f6692e8b9e">
+      <!-- src injected by init script once Higgsfield job completes -->
+    </video>
+  </div>
+  <div class="hero-video-overlay"></div>
+
   <div class="hero-bg"></div>
   <div class="hero-glow-r"></div>
   <div class="hero-glow-l"></div>
-  <div class="hero-inner">
+  <div class="hero-inner" style="position:relative;z-index:2">
     <div class="hero-eyebrow">
       <span class="eyebrow-dot"></span>
       Agencia Digital — México
     </div>
 
     <h1>Construimos presencia<br>digital que <em>genera resultados.</em></h1>
-    <p class="hero-desc">Diseño web, e-commerce, contenido y automatización. Todo lo que un negocio necesita para crecer online — en un solo lugar, con un solo equipo.</p>
+    <p class="hero-desc">Diseño web, e-commerce, automatización e IA.<br>Todo lo que tu negocio necesita para digitalizarse — en un solo equipo, sin complicaciones.</p>
 
     <div class="hero-actions">
       <a href="https://wa.me/524431009366?text=Hola%2C+quiero+hablar+sobre+mi+proyecto" target="_blank" class="btn-primary">
@@ -837,27 +1013,35 @@ footer .logo{font-size:16px}
       </a>
     </div>
 
-    <!-- Metric Cards -->
+    <!-- Metric Cards — Aurora Border -->
     <div class="hero-metrics fade">
       <div class="metric-card">
-        <div class="metric-label">Proyectos entregados</div>
-        <div class="metric-num">4<span class="unit">+</span></div>
-        <div class="metric-sub">Cada uno con entregable 100% funcional</div>
+        <div class="metric-card-inner">
+          <div class="metric-label">Horas ahorradas</div>
+          <div class="metric-num">80<span class="unit">%</span></div>
+          <div class="metric-sub">Menos trabajo manual con automatización bien hecha</div>
+        </div>
       </div>
       <div class="metric-card">
-        <div class="metric-label">Tiempo de entrega</div>
-        <div class="metric-num">6<span class="unit"> días</span></div>
-        <div class="metric-sub">En promedio, para una web completa</div>
+        <div class="metric-card-inner">
+          <div class="metric-label">Tiempo de entrega</div>
+          <div class="metric-num">6<span class="unit"> días</span></div>
+          <div class="metric-sub">Para un sitio web completo, listo para vender</div>
+        </div>
       </div>
       <div class="metric-card">
-        <div class="metric-label">Conversión e-commerce</div>
-        <div class="metric-num">3<span class="unit">×</span></div>
-        <div class="metric-sub">Más ventas con un checkout bien diseñado</div>
+        <div class="metric-card-inner">
+          <div class="metric-label">Más conversión</div>
+          <div class="metric-num">3<span class="unit">×</span></div>
+          <div class="metric-sub">Al corregir fricción en el proceso de compra</div>
+        </div>
       </div>
       <div class="metric-card">
-        <div class="metric-label">Código custom</div>
-        <div class="metric-num">100<span class="unit">%</span></div>
-        <div class="metric-sub">Sin plantillas. Sin atajos. Todo a la medida.</div>
+        <div class="metric-card-inner">
+          <div class="metric-label">Código 100% custom</div>
+          <div class="metric-num">0<span class="unit"> plantillas</span></div>
+          <div class="metric-sub">Tu proyecto, construido desde cero para ti</div>
+        </div>
       </div>
     </div>
   </div>
@@ -881,7 +1065,8 @@ footer .logo{font-size:16px}
 
     <!-- Web -->
     <div class="srv-card">
-      <div class="srv-icon ic-cyan">
+      <div class="srv-video-wrap"><video autoplay muted loop playsinline data-job="c709b139-87ce-45e6-95b7-418b03b20c8a" src="https://d8j0ntlcm91z4.cloudfront.net/user_3D23yzFtlb1xro9OnHvN4Qfo7fR/hf_20260702_183115_c709b139-87ce-45e6-95b7-418b03b20c8a.mp4"></video></div>
+      <div class="srv-icon ic-cyan" style="position:relative;z-index:1">
         <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#00C8F0" stroke-width="1.6" stroke-linecap="round">
           <rect x="2" y="3" width="20" height="14" rx="2"/>
           <path d="M8 21h8M12 17v4"/>
@@ -902,7 +1087,8 @@ footer .logo{font-size:16px}
 
     <!-- E-commerce -->
     <div class="srv-card">
-      <div class="srv-icon ic-violet">
+      <div class="srv-video-wrap"><video autoplay muted loop playsinline data-job="9995be44-ce0d-451d-b7c1-99d8e87ecaac" src="https://d8j0ntlcm91z4.cloudfront.net/user_3D23yzFtlb1xro9OnHvN4Qfo7fR/hf_20260702_183133_9995be44-ce0d-451d-b7c1-99d8e87ecaac.mp4"></video></div>
+      <div class="srv-icon ic-violet" style="position:relative;z-index:1">
         <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#A888FF" stroke-width="1.6" stroke-linecap="round">
           <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/>
           <path d="M3 6h18"/>
@@ -923,7 +1109,8 @@ footer .logo{font-size:16px}
 
     <!-- Redes -->
     <div class="srv-card">
-      <div class="srv-icon ic-teal">
+      <div class="srv-video-wrap"><video autoplay muted loop playsinline data-job="4993bb5c-0730-44a6-bf83-808baecd0c06" src="https://d8j0ntlcm91z4.cloudfront.net/user_3D23yzFtlb1xro9OnHvN4Qfo7fR/hf_20260702_183117_4993bb5c-0730-44a6-bf83-808baecd0c06.mp4"></video></div>
+      <div class="srv-icon ic-teal" style="position:relative;z-index:1">
         <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#00C8B4" stroke-width="1.6" stroke-linecap="round">
           <rect x="3" y="3" width="7" height="7" rx="1"/>
           <rect x="14" y="3" width="7" height="7" rx="1"/>
@@ -945,7 +1132,8 @@ footer .logo{font-size:16px}
 
     <!-- WhatsApp -->
     <div class="srv-card">
-      <div class="srv-icon ic-amber">
+      <div class="srv-video-wrap"><video autoplay muted loop playsinline data-job="2412b1db-5e41-411a-bdd6-4d6ac8241882" src="https://d8j0ntlcm91z4.cloudfront.net/user_3D23yzFtlb1xro9OnHvN4Qfo7fR/hf_20260702_183113_2412b1db-5e41-411a-bdd6-4d6ac8241882.mp4"></video></div>
+      <div class="srv-icon ic-amber" style="position:relative;z-index:1">
         <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#F0B400" stroke-width="1.6" stroke-linecap="round">
           <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/>
           <path d="M8 10h.01M12 10h.01M16 10h.01"/>
@@ -965,8 +1153,9 @@ footer .logo{font-size:16px}
 
     <!-- Branding (recomendado) -->
     <div class="srv-card">
+      <div class="srv-video-wrap"><video autoplay muted loop playsinline data-job="1535b2d3-ae18-453a-a7f9-7a235d289c3f" src="https://d8j0ntlcm91z4.cloudfront.net/user_3D23yzFtlb1xro9OnHvN4Qfo7fR/hf_20260702_183110_1535b2d3-ae18-453a-a7f9-7a235d289c3f.mp4"></video></div>
       <div class="rec-badge">★ Recomendado</div>
-      <div class="srv-icon ic-rose">
+      <div class="srv-icon ic-rose" style="position:relative;z-index:1">
         <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#F0507A" stroke-width="1.6" stroke-linecap="round">
           <circle cx="12" cy="12" r="10"/>
           <circle cx="12" cy="12" r="4"/>
@@ -990,7 +1179,8 @@ footer .logo{font-size:16px}
 
     <!-- Automatización procesos -->
     <div class="srv-card">
-      <div class="srv-icon ic-blue">
+      <div class="srv-video-wrap"><video autoplay muted loop playsinline data-job="1535b2d3-ae18-453a-a7f9-7a235d289c3f" src="https://d8j0ntlcm91z4.cloudfront.net/user_3D23yzFtlb1xro9OnHvN4Qfo7fR/hf_20260702_183110_1535b2d3-ae18-453a-a7f9-7a235d289c3f.mp4"></video></div>
+      <div class="srv-icon ic-blue" style="position:relative;z-index:1">
         <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#3C8CFF" stroke-width="1.6" stroke-linecap="round">
           <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/>
         </svg>
@@ -1314,16 +1504,16 @@ footer .logo{font-size:16px}
           <circle cx="22" cy="22" r="18"/>
           <polyline points="12,22 19,29 33,15"/>
         </svg>
-        <h3>Entrega en 5–7 días</h3>
-        <p>Lo que otras agencias tardan un mes, nosotros lo entregamos en días. Sin esperas innecesarias. Sin excusas. Tu tiempo es dinero.</p>
+        <h3>Tu negocio deja de perder clientes por mala presencia digital</h3>
+        <p>Un sitio lento, genérico o desactualizado aleja clientes antes de que te conozcan. Lo corregimos en menos de una semana — con diseño que transmite confianza desde el primer segundo.</p>
       </div>
 
       <div class="pq-card">
         <svg class="pq-icon" viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
           <path d="M22 4l4 14h14l-11 8 4 14-11-8-11 8 4-14-11-8h14z"/>
         </svg>
-        <h3>Diseñado para convertir</h3>
-        <p>Cada decisión de diseño tiene un objetivo: que los visitantes se conviertan en clientes. No diseñamos para portafolios.</p>
+        <h3>Dejamos de robarte horas respondiendo WhatsApp a las 2 AM</h3>
+        <p>Con un chatbot bien configurado, tu negocio atiende, califica y registra leads automáticamente — sin que tú tengas que estar pegado al teléfono. Tú duermes; el bot trabaja.</p>
       </div>
 
       <div class="pq-card">
@@ -1333,8 +1523,8 @@ footer .logo{font-size:16px}
           <rect x="6" y="24" width="14" height="14" rx="2"/>
           <rect x="24" y="24" width="14" height="14" rx="2"/>
         </svg>
-        <h3>Todo en un solo lugar</h3>
-        <p>Web, contenido, automatización, branding — un solo equipo, una sola visión. Sin coordinar cinco proveedores diferentes.</p>
+        <h3>Sin coordinar cinco proveedores que nunca se entienden</h3>
+        <p>Web, contenido, automatización, branding y anuncios — en un solo equipo con una sola visión. Menos fricción, más velocidad, resultados que se ven en el mismo mes.</p>
       </div>
 
       <div class="pq-card">
@@ -1343,8 +1533,8 @@ footer .logo{font-size:16px}
           <rect x="17" y="26" width="10" height="10"/>
           <line x1="22" y1="8" x2="22" y2="14"/>
         </svg>
-        <h3>Estrategia, no solo ejecución</h3>
-        <p>Antes de construir, pensamos. Te decimos qué necesitas y por qué — no solo lo que nos pides, sino lo que va a funcionar para tu negocio.</p>
+        <h3>Tu tienda online de vende 24/7, no solo cuando tú estás disponible</h3>
+        <p>Un e-commerce optimizado elimina la fricción en el carrito, acepta pagos automáticos y sigue vendiendo mientras tú duermes, vacacioans o te enfocar en crecer.</p>
       </div>
 
       <div class="pq-card">
@@ -1353,8 +1543,8 @@ footer .logo{font-size:16px}
           <path d="M5 29a2 2 0 012-2h8M5 21h8M5 13h8"/>
           <circle cx="9" cy="35" r="2"/>
         </svg>
-        <h3>Comunicación directa</h3>
-        <p>Sin intermediarios. Sin tickets. Hablas directamente con quien hace el trabajo. Respuesta garantizada en menos de 2 horas.</p>
+        <h3>Sin esperar semanas para una respuesta de tu agencia</h3>
+        <p>Hablas directo con quien construye tu proyecto. Respuesta en menos de 2 horas. Sin tickets, sin intermediarios, sin "el diseñador está en otra reunión".</p>
       </div>
 
       <div class="pq-card">
@@ -1363,8 +1553,8 @@ footer .logo{font-size:16px}
           <path d="M30 8v8h8"/>
           <path d="M22 16v6l4 4"/>
         </svg>
-        <h3>Relación de largo plazo</h3>
-        <p>No desaparecemos después de entregar. Somos tu equipo digital de confianza para todo lo que venga después del lanzamiento.</p>
+        <h3>No te dejamos solo después del lanzamiento</h3>
+        <p>La mayoría de agencias desaparecen al entregar. Nosotros nos quedamos: soporte, mejoras, estrategia y escalabilidad. Tu inversión sigue creciendo con el tiempo.</p>
       </div>
 
     </div>
@@ -1511,6 +1701,12 @@ footer .logo{font-size:16px}
       </div>
 
     </div>
+
+    <div class="precio-note-estimacion fade">
+      <strong>Nota:</strong> Los precios mostrados son estimaciones de referencia. Cada empresa tiene necesidades distintas — la propuesta final se personaliza según el alcance real de tu proyecto.<br>
+      <span style="color:var(--cyan);font-weight:500">¿Tienes dudas? Agenda una llamada sin costo y te damos un estimado exacto en 24 horas.</span>
+    </div>
+
   </div>
 </section>
 
@@ -1662,6 +1858,77 @@ document.getElementById('upsell-overlay').addEventListener('click', function(e) 
   if (e.target === this) cerrarUpsell();
 });
 document.addEventListener('keydown', e => { if (e.key === 'Escape') cerrarUpsell(); });
+
+// ── PORTFOLIO — Clickable cards ────────────────────────────────────────────────
+const PROYECTO_LINKS = {
+  'Hotel La Parroquia': 'https://wa.me/524431009366?text=Vi+el+proyecto+del+Hotel+La+Parroquia',
+  'BalanzByCris':       'https://wa.me/524431009366?text=Vi+el+proyecto+de+BalanzByCris',
+  'Bywell':             'https://wa.me/524431009366?text=Vi+el+proyecto+de+Bywell',
+  'Northpoint Capital': 'https://wa.me/524431009366?text=Vi+el+proyecto+de+Northpoint',
+  'Buper':              'https://wa.me/524431009366?text=Vi+el+proyecto+de+Buper',
+};
+document.querySelectorAll('.proy-card').forEach(card => {
+  const title = card.querySelector('h3')?.textContent?.trim();
+  const link = title && PROYECTO_LINKS[title];
+  if (link) {
+    card.addEventListener('click', () => window.open(link, '_blank'));
+  }
+});
+
+// ── HIGGSFIELD VIDEO INJECTION ─────────────────────────────────────────────────
+// Polls job status and injects src when ready. Job IDs stored in data-job attr.
+const HIGGSFIELD_JOBS = {};
+document.querySelectorAll('video[data-job]').forEach(v => {
+  const id = v.dataset.job;
+  if (id) HIGGSFIELD_JOBS[id] = v;
+});
+
+async function checkVideoJob(jobId, videoEl) {
+  try {
+    const r = await fetch(`/api/higgsfield-status?job=${jobId}`);
+    if (!r.ok) return;
+    const d = await r.json();
+    if (d.url) {
+      videoEl.src = d.url;
+      videoEl.load();
+      videoEl.play().catch(() => {});
+    }
+  } catch(_) {}
+}
+
+// On load, attempt to play any video already having a src
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('video[data-job]').forEach(v => {
+    if (v.src) { v.play().catch(() => {}); }
+  });
+});
+
+// ── SERVICE CARD VIDEO — play on hover ─────────────────────────────────────────
+document.querySelectorAll('.srv-card').forEach(card => {
+  const vid = card.querySelector('.srv-video-wrap video');
+  if (!vid) return;
+  card.addEventListener('mouseenter', () => {
+    if (vid.src && vid.paused) vid.play().catch(() => {});
+  });
+  card.addEventListener('mouseleave', () => {
+    if (!vid.paused) vid.pause();
+  });
+});
+
+// ── SCROLL REVEAL ──────────────────────────────────────────────────────────────
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.style.animationPlayState = 'running';
+      io.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.fade,.fade-up').forEach(el => {
+  el.style.animationPlayState = 'paused';
+  io.observe(el);
+});
 </script>
 </body>
 </html>
