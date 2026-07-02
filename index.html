@@ -1358,7 +1358,9 @@ footer .logo{font-size:16px}
     margin-top:7px;flex-shrink:0
   }
 
-  /* Videos de servicios — hint táctil si no hay autoplay */
+  /* Videos de servicios — siempre visibles en mobile (no hay hover) */
+  .srv-video-wrap{opacity:.38!important}
+  .srv-video-wrap video{filter:brightness(.45) saturate(1.3)}
   .srv-video-hint{
     display:block;
     font-size:12px;color:var(--cyan);
@@ -2535,17 +2537,37 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 
-// ── SERVICE CARD VIDEO — play on hover ─────────────────────────────────────────
+// ── SERVICE CARD VIDEO — hover (desktop) + IntersectionObserver (mobile) ──────
+const isMobileDevice = () => window.innerWidth <= 768;
+
 document.querySelectorAll('.srv-card').forEach(card => {
   const vid = card.querySelector('.srv-video-wrap video');
   if (!vid) return;
+  // Desktop: play on hover, pause on leave
   card.addEventListener('mouseenter', () => {
-    if (vid.src && vid.paused) vid.play().catch(() => {});
+    if (!isMobileDevice() && vid.src && vid.paused) vid.play().catch(() => {});
   });
   card.addEventListener('mouseleave', () => {
-    if (!vid.paused) vid.pause();
+    if (!isMobileDevice() && !vid.paused) vid.pause();
   });
 });
+
+// Mobile: play when card enters viewport, pause when it leaves (ahorra batería)
+(function(){
+  if (!isMobileDevice()) return;
+  const mobileVidObserver = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      const vid = e.target.querySelector('.srv-video-wrap video');
+      if (!vid || !vid.src) return;
+      if (e.isIntersecting) {
+        vid.play().catch(() => {});
+      } else {
+        vid.pause();
+      }
+    });
+  }, { threshold: 0.25 });
+  document.querySelectorAll('.srv-card').forEach(card => mobileVidObserver.observe(card));
+})();
 
 // ── SCROLL REVEAL — handled by the single io observer above ────────────────
 
