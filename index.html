@@ -1,1864 +1,1667 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nexus Digital - Tu Presencia Web en Días</title>
-    <script src="https://js.stripe.com/v3/"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        :root {
-            --cyan: #00D9FF;
-            --cyan-dark: #00A8CC;
-            --navy: #0F1419;
-            --navy-light: #1A202C;
-            --violet: #9D4EDD;
-            --green: #39FF14;
-            --white: #F8FAFC;
-            --gray: #64748B;
-            --gray-light: #E2E8F0;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            font-family: 'Inter', sans-serif;
-            color: var(--navy);
-            line-height: 1.6;
-            overflow-x: hidden;
-            background: var(--white);
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 24px;
-        }
-
-        /* === HEADER === */
-        header {
-            background: var(--navy);
-            color: var(--white);
-            padding: 16px 24px;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(0, 217, 255, 0.1);
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
-        }
-
-        .header-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            font-size: 24px;
-            font-weight: 800;
-            font-family: 'Poppins', sans-serif;
-            color: var(--cyan);
-        }
-
-        .logo-mark {
-            width: 32px;
-            height: 32px;
-            background: linear-gradient(135deg, var(--cyan) 0%, var(--violet) 100%);
-            clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
-            animation: rotateSlow 6s linear infinite;
-        }
-
-        @keyframes rotateSlow {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 32px;
-            list-style: none;
-        }
-
-        .nav-links a {
-            color: var(--white);
-            text-decoration: none;
-            font-size: 14px;
-            font-weight: 500;
-            transition: color 0.3s ease;
-        }
-
-        .nav-links a:hover {
-            color: var(--cyan);
-        }
-
-        /* === HERO === */
-        .hero {
-            background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 100%);
-            position: relative;
-            overflow: hidden;
-            padding: 100px 24px 80px;
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: 
-                radial-gradient(circle at 20% 50%, rgba(0, 217, 255, 0.15) 0%, transparent 50%),
-                radial-gradient(circle at 80% 80%, rgba(157, 78, 221, 0.15) 0%, transparent 50%);
-            pointer-events: none;
-        }
-
-        .hero-content {
-            max-width: 900px;
-            position: relative;
-            z-index: 2;
-            animation: slideUp 0.8s ease-out;
-            margin: 0 auto;
-            text-align: center;
-        }
-
-        @keyframes slideUp {
-            from {
-                opacity: 0;
-                transform: translateY(40px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .hero h1 {
-            font-family: 'Poppins', sans-serif;
-            font-size: clamp(36px, 7vw, 56px);
-            font-weight: 800;
-            margin-bottom: 24px;
-            line-height: 1.1;
-            color: var(--white);
-        }
-
-        .hero h1 .cyan {
-            background: linear-gradient(135deg, var(--cyan) 0%, var(--violet) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .hero p {
-            font-size: 18px;
-            color: rgba(255, 255, 255, 0.85);
-            margin-bottom: 32px;
-            line-height: 1.8;
-            text-align: center;
-        }
-
-        .urgency-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background: rgba(0, 217, 255, 0.1);
-            border: 1px solid var(--cyan);
-            padding: 12px 20px;
-            border-radius: 50px;
-            color: var(--cyan);
-            font-weight: 600;
-            font-size: 14px;
-            margin-bottom: 32px;
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { box-shadow: 0 0 20px rgba(0, 217, 255, 0.3); }
-            50% { box-shadow: 0 0 40px rgba(0, 217, 255, 0.6); }
-        }
-
-        .pricing-hero {
-            background: linear-gradient(135deg, rgba(0, 217, 255, 0.1) 0%, rgba(157, 78, 221, 0.1) 100%);
-            border: 1px solid var(--cyan);
-            border-radius: 16px;
-            padding: 32px;
-            margin-bottom: 32px;
-            backdrop-filter: blur(10px);
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 24px;
-        }
-
-        .price-column {
-            text-align: center;
-        }
-
-        .original-price {
-            font-size: 28px;
-            color: #EF4444;
-            text-decoration: line-through;
-            margin-bottom: 8px;
-            font-weight: 700;
-            font-family: 'Poppins', sans-serif;
-        }
-
-        .new-price {
-            font-family: 'Poppins', sans-serif;
-            font-size: 48px;
-            font-weight: 800;
-            color: var(--green);
-            margin-bottom: 8px;
-        }
-
-        .discount-label {
-            display: inline-block;
-            background: linear-gradient(135deg, var(--cyan) 0%, var(--violet) 100%);
-            color: var(--navy);
-            padding: 6px 14px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: 700;
-        }
-
-        .bonus-box {
-            background: linear-gradient(135deg, var(--cyan) 0%, var(--violet) 100%);
-            border-radius: 12px;
-            padding: 24px;
-            margin-bottom: 32px;
-            color: var(--navy);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 16px;
-            text-align: center;
-        }
-
-        .bonus-icon {
-            font-size: 40px;
-            flex-shrink: 0;
-        }
-
-        .bonus-content h3 {
-            font-family: 'Poppins', sans-serif;
-            font-size: 18px;
-            font-weight: 700;
-            margin-bottom: 4px;
-        }
-
-        .bonus-content p {
-            font-size: 14px;
-            opacity: 0.9;
-        }
-
-        .cta-button {
-            background: linear-gradient(135deg, var(--cyan) 0%, var(--violet) 100%);
-            color: var(--navy);
-            border: none;
-            padding: 16px 40px;
-            font-size: 16px;
-            font-weight: 700;
-            font-family: 'Poppins', sans-serif;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 10px 30px rgba(0, 217, 255, 0.3);
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            margin: 0 auto;
-        }
-
-        .cta-button:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 15px 50px rgba(0, 217, 255, 0.5);
-        }
-
-        /* === FEATURES === */
-        .features-section {
-            padding: 80px 24px;
-            background: var(--white);
-        }
-
-        .section-title {
-            font-family: 'Poppins', sans-serif;
-            font-size: 40px;
-            font-weight: 800;
-            text-align: center;
-            margin-bottom: 60px;
-            color: var(--navy);
-        }
-
-        .section-title .cyan {
-            color: var(--cyan);
-        }
-
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 24px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .feature-card {
-            background: linear-gradient(135deg, rgba(0, 217, 255, 0.08) 0%, rgba(157, 78, 221, 0.08) 100%);
-            border: 2px solid var(--cyan);
-            border-radius: 12px;
-            padding: 32px;
-            transition: all 0.3s ease;
-            text-align: center;
-        }
-
-        .feature-card:hover {
-            transform: translateY(-8px);
-            border-color: var(--cyan);
-            box-shadow: 0 20px 50px rgba(0, 217, 255, 0.2);
-            background: linear-gradient(135deg, rgba(0, 217, 255, 0.12) 0%, rgba(157, 78, 221, 0.12) 100%);
-        }
-
-        .feature-icon {
-            font-size: 40px;
-            margin-bottom: 16px;
-            display: block;
-        }
-
-        .feature-card h4 {
-            font-family: 'Poppins', sans-serif;
-            font-size: 18px;
-            font-weight: 700;
-            margin-bottom: 12px;
-        }
-
-        .feature-card p {
-            font-size: 14px;
-            color: var(--gray);
-        }
-
-        /* === COMPARISON SECTION === */
-        .comparison-container {
-            background: linear-gradient(135deg, rgba(0, 217, 255, 0.12) 0%, rgba(157, 78, 221, 0.12) 100%);
-            border: 2px solid var(--cyan);
-            border-radius: 16px;
-            padding: 40px 32px;
-            margin-bottom: 32px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 40px;
-            flex-wrap: nowrap;
-        }
-
-        .comparison-item {
-            flex: 1;
-            text-align: center;
-            min-width: 120px;
-        }
-
-        .comparison-winner {
-            background: rgba(57, 255, 20, 0.08);
-            border: 2px solid var(--green);
-            border-radius: 12px;
-            padding: 24px;
-            flex: 1.1;
-        }
-
-        .comparison-label {
-            color: rgba(255, 255, 255, 0.7);
-            font-size: 12px;
-            margin-bottom: 12px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            font-weight: 600;
-        }
-
-        .comparison-price-old {
-            font-size: 32px;
-            color: #EF4444;
-            text-decoration: line-through;
-            margin-bottom: 8px;
-            font-weight: 700;
-            font-family: 'Poppins', sans-serif;
-        }
-
-        .comparison-price-new {
-            font-size: 48px;
-            font-weight: 800;
-            color: var(--green);
-            margin-bottom: 8px;
-            font-family: 'Poppins', sans-serif;
-        }
-
-        .comparison-time {
-            color: rgba(255, 255, 255, 0.85);
-            font-size: 13px;
-            margin-bottom: 12px;
-            font-weight: 500;
-        }
-
-        .comparison-vs {
-            color: var(--cyan);
-            font-size: 56px;
-            font-weight: 800;
-            flex-shrink: 0;
-            line-height: 1;
-        }
-
-        .comparison-badge {
-            display: inline-block;
-            background: linear-gradient(135deg, var(--cyan) 0%, var(--violet) 100%);
-            color: var(--navy);
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-size: 11px;
-            font-weight: 700;
-            margin-top: 12px;
-        }
-
-        @media (max-width: 768px) {
-            .comparison-container {
-                flex-direction: column;
-                gap: 24px;
-                padding: 28px 20px;
-            }
-
-            .comparison-vs {
-                font-size: 36px;
-                margin: 8px 0;
-            }
-
-            .comparison-item {
-                width: 100%;
-            }
-
-            .comparison-winner {
-                width: 100%;
-            }
-
-            .comparison-price-old {
-                font-size: 28px;
-            }
-
-            .comparison-price-new {
-                font-size: 36px;
-            }
-
-            .comparison-label {
-                font-size: 11px;
-            }
-
-            .comparison-time {
-                font-size: 12px;
-            }
-
-            .comparison-badge {
-                font-size: 10px;
-                padding: 6px 12px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .comparison-container {
-                gap: 16px;
-                padding: 20px 16px;
-            }
-
-            .comparison-vs {
-                font-size: 28px;
-                margin: 4px 0;
-            }
-
-            .comparison-price-old {
-                font-size: 24px;
-            }
-
-            .comparison-price-new {
-                font-size: 28px;
-            }
-
-            .comparison-label {
-                font-size: 10px;
-                margin-bottom: 8px;
-            }
-
-            .comparison-time {
-                font-size: 11px;
-            }
-
-            .comparison-badge {
-                font-size: 9px;
-                padding: 5px 10px;
-            }
-
-            .comparison-winner {
-                padding: 16px;
-            }
-        }
-
-        /* === TESTIMONIALS === */
-        .testimonials-section {
-            padding: 80px 24px;
-            background: var(--white);
-        }
-
-        .testimonials-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 24px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .testimonial-card {
-            background: linear-gradient(135deg, var(--white) 0%, rgba(0, 217, 255, 0.02) 100%);
-            border: 1px solid var(--gray-light);
-            border-radius: 12px;
-            padding: 28px;
-            transition: all 0.3s ease;
-        }
-
-        .testimonial-card:hover {
-            border-color: var(--cyan);
-            box-shadow: 0 10px 40px rgba(0, 217, 255, 0.1);
-        }
-
-        .stars {
-            color: var(--cyan);
-            font-size: 16px;
-            margin-bottom: 12px;
-            letter-spacing: 2px;
-        }
-
-        .testimonial-text {
-            font-size: 14px;
-            color: var(--gray);
-            margin-bottom: 16px;
-            line-height: 1.8;
-            font-style: italic;
-        }
-
-        .testimonial-author {
-            font-family: 'Poppins', sans-serif;
-            font-weight: 600;
-            color: var(--navy);
-            font-size: 14px;
-            margin-bottom: 4px;
-        }
-
-        .testimonial-role {
-            font-size: 12px;
-            color: var(--gray);
-        }
-
-        /* === FAQ === */
-        .faq-section {
-            padding: 80px 24px;
-            background: linear-gradient(135deg, rgba(0, 217, 255, 0.02) 0%, rgba(157, 78, 221, 0.02) 100%);
-        }
-
-        .faq-container {
-            max-width: 700px;
-            margin: 0 auto;
-        }
-
-        .faq-item {
-            background: white;
-            border: 1px solid var(--gray-light);
-            border-radius: 12px;
-            margin-bottom: 16px;
-            overflow: hidden;
-            transition: all 0.3s ease;
-            cursor: pointer;
-        }
-
-        .faq-item:hover {
-            border-color: var(--cyan);
-            box-shadow: 0 5px 20px rgba(0, 217, 255, 0.1);
-        }
-
-        .faq-question {
-            padding: 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-family: 'Poppins', sans-serif;
-            font-weight: 600;
-            color: var(--navy);
-            font-size: 16px;
-        }
-
-        .faq-toggle {
-            color: var(--cyan);
-            font-size: 24px;
-            transition: transform 0.3s ease;
-        }
-
-        .faq-item.active .faq-toggle {
-            transform: rotate(180deg);
-        }
-
-        .faq-answer {
-            max-height: 0;
-            overflow: hidden;
-            padding: 0 20px;
-            color: var(--gray);
-            font-size: 14px;
-            line-height: 1.8;
-            transition: max-height 0.4s ease, padding 0.4s ease, opacity 0.4s ease;
-            opacity: 0;
-            visibility: hidden;
-        }
-
-        .faq-item.active .faq-answer {
-            max-height: 500px;
-            padding: 0 20px 20px 20px;
-            opacity: 1;
-            visibility: visible;
-        }
-
-        /* === FORM === */
-        .form-section {
-            background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 100%);
-            padding: 80px 24px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .form-container {
-            max-width: 500px;
-            margin: 0 auto;
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(0, 217, 255, 0.05) 100%);
-            border: 1px solid rgba(0, 217, 255, 0.3);
-            backdrop-filter: blur(10px);
-            padding: 48px;
-            border-radius: 16px;
-            position: relative;
-            z-index: 2;
-        }
-
-        .form-container h2 {
-            font-family: 'Poppins', sans-serif;
-            font-size: 32px;
-            font-weight: 800;
-            color: var(--white);
-            margin-bottom: 16px;
-        }
-
-        .form-container > p {
-            color: rgba(255, 255, 255, 0.8);
-            margin-bottom: 32px;
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            color: var(--white);
-            font-weight: 600;
-            font-size: 14px;
-        }
-
-        .form-group input,
-        .form-group select {
-            width: 100%;
-            padding: 12px 16px;
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(0, 217, 255, 0.3);
-            color: var(--white);
-            border-radius: 8px;
-            font-family: 'Inter', sans-serif;
-            font-size: 14px;
-            transition: all 0.3s ease;
-        }
-
-        .form-group input::placeholder {
-            color: rgba(255, 255, 255, 0.5);
-        }
-
-        .form-group input:focus,
-        .form-group select:focus {
-            outline: none;
-            border-color: var(--cyan);
-            background: rgba(0, 217, 255, 0.1);
-            box-shadow: 0 0 20px rgba(0, 217, 255, 0.3);
-        }
-
-        .form-submit {
-            width: 100%;
-            background: linear-gradient(135deg, var(--green) 0%, var(--cyan) 100%);
-            color: var(--navy);
-            border: none;
-            padding: 14px;
-            border-radius: 8px;
-            font-family: 'Poppins', sans-serif;
-            font-size: 16px;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            margin-top: 12px;
-            box-shadow: 0 10px 30px rgba(57, 255, 20, 0.3);
-        }
-
-        .form-submit:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 50px rgba(57, 255, 20, 0.5);
-        }
-
-        /* === MODAL UPSELL === */
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 1000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.7);
-            backdrop-filter: blur(4px);
-        }
-
-        .modal.show {
-            display: flex;
-            align-items: flex-start;
-            justify-content: center;
-            overflow-y: auto;
-            padding: 24px 0;
-        }
-
-        .modal-content {
-            background: var(--white);
-            padding: 48px;
-            border-radius: 16px;
-            max-width: 500px;
-            width: 90%;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-            animation: slideIn 0.3s ease-out;
-            margin: auto;
-        }
-
-        @media (max-width: 768px) {
-            .modal-content {
-                padding: 28px 20px;
-            }
-        }
-
-        @keyframes slideIn {
-            from {
-                transform: translateY(20px);
-                opacity: 0;
-            }
-            to {
-                transform: translateY(0);
-                opacity: 1;
-            }
-        }
-
-        .modal-header {
-            text-align: center;
-            margin-bottom: 24px;
-        }
-
-        .modal-icon {
-            font-size: 60px;
-            margin-bottom: 16px;
-        }
-
-        .modal h2 {
-            font-family: 'Poppins', sans-serif;
-            font-size: 28px;
-            font-weight: 800;
-            color: var(--navy);
-            margin-bottom: 8px;
-        }
-
-        .modal-subtitle {
-            color: var(--gray);
-            font-size: 14px;
-        }
-
-        .modal-body {
-            margin-bottom: 32px;
-        }
-
-        .modal-price {
-            background: linear-gradient(135deg, rgba(0, 217, 255, 0.1) 0%, rgba(157, 78, 221, 0.1) 100%);
-            border: 1px solid var(--cyan);
-            padding: 24px;
-            border-radius: 12px;
-            text-align: center;
-            margin-bottom: 20px;
-        }
-
-        .modal-price-label {
-            color: var(--gray);
-            font-size: 14px;
-            margin-bottom: 8px;
-        }
-
-        .modal-price-amount {
-            font-family: 'Poppins', sans-serif;
-            font-size: 36px;
-            font-weight: 800;
-            color: var(--cyan);
-        }
-
-        .modal-benefits {
-            list-style: none;
-            margin-bottom: 24px;
-        }
-
-        .modal-benefits li {
-            padding: 12px 0;
-            padding-left: 28px;
-            position: relative;
-            color: var(--gray);
-            font-size: 14px;
-        }
-
-        .modal-benefits li::before {
-            content: "✓";
-            position: absolute;
-            left: 0;
-            color: var(--green);
-            font-weight: 800;
-            font-size: 18px;
-        }
-
-        .modal-actions {
-            display: flex;
-            gap: 12px;
-        }
-
-        .btn-accept {
-            flex: 1;
-            background: linear-gradient(135deg, var(--cyan) 0%, var(--violet) 100%);
-            color: var(--navy);
-            padding: 14px;
-            border: none;
-            border-radius: 8px;
-            font-family: 'Poppins', sans-serif;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .btn-accept:hover {
-            transform: translateY(-2px);
-        }
-
-        .btn-skip {
-            flex: 1;
-            background: var(--gray-light);
-            color: var(--navy);
-            padding: 14px;
-            border: none;
-            border-radius: 8px;
-            font-family: 'Poppins', sans-serif;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .btn-skip:hover {
-            background: #d0d5dd;
-        }
-
-        /* === FOOTER === */
-        footer {
-            background: var(--navy);
-            color: var(--white);
-            text-align: center;
-            padding: 40px 24px;
-            border-top: 1px solid rgba(0, 217, 255, 0.1);
-        }
-
-        footer p {
-            margin-bottom: 8px;
-            font-size: 14px;
-        }
-
-        /* === COUNTER === */
-        .counter-box {
-            background: rgba(0, 217, 255, 0.1);
-            border: 1px solid var(--cyan);
-            padding: 24px;
-            border-radius: 12px;
-            text-align: center;
-            margin-bottom: 32px;
-            backdrop-filter: blur(10px);
-        }
-
-        .counter-number {
-            font-family: 'Poppins', sans-serif;
-            font-size: 48px;
-            font-weight: 800;
-            color: var(--green);
-            margin-bottom: 8px;
-        }
-
-        .counter-label {
-            color: var(--gray);
-            font-size: 14px;
-        }
-
-        /* === TIMER === */
-        .timer-container {
-            position: fixed;
-            top: 80px;
-            right: 24px;
-            background: linear-gradient(135deg, #EF4444 0%, #DC2626 100%);
-            color: white;
-            padding: 16px 24px;
-            border-radius: 12px;
-            box-shadow: 0 10px 40px rgba(239, 68, 68, 0.4);
-            z-index: 99;
-            animation: slideInRight 0.5s ease-out;
-            font-family: 'Poppins', sans-serif;
-        }
-
-        @keyframes slideInRight {
-            from {
-                opacity: 0;
-                transform: translateX(100px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-
-        .timer-label {
-            font-size: 12px;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 8px;
-            opacity: 0.9;
-        }
-
-        .timer-display {
-            font-size: 36px;
-            font-weight: 800;
-            text-align: center;
-            line-height: 1;
-            margin-bottom: 8px;
-        }
-
-        .timer-message {
-            font-size: 12px;
-            text-align: center;
-            opacity: 0.95;
-            font-weight: 500;
-        }
-
-        .timer-warning {
-            animation: pulse 1s infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% {
-                box-shadow: 0 10px 40px rgba(239, 68, 68, 0.4);
-            }
-            50% {
-                box-shadow: 0 10px 60px rgba(239, 68, 68, 0.7);
-            }
-        }
-
-        @media (max-width: 768px) {
-            .timer-container {
-                top: 70px;
-                right: 8px;
-                padding: 6px 10px;
-                min-width: unset;
-            }
-
-            .timer-display {
-                font-size: 18px;
-                margin-bottom: 2px;
-            }
-
-            .timer-label {
-                font-size: 9px;
-            }
-
-            .timer-message {
-                font-size: 9px;
-            }
-        }
-
-        /* === RESPONSIVE === */
-        @media (max-width: 768px) {
-            .hero {
-                padding: 60px 24px 50px;
-            }
-
-            .hero h1 {
-                font-size: 32px;
-            }
-
-            .nav-links {
-                gap: 16px;
-                font-size: 12px;
-            }
-
-            .pricing-hero {
-                flex-direction: column;
-                padding: 24px;
-            }
-
-            .form-container {
-                padding: 32px;
-            }
-
-            .section-title {
-                font-size: 28px;
-            }
-        }
-
-        /* === HOW IT WORKS (IA PROCESS) === */
-        .how-it-works-section {
-            padding: 80px 24px;
-            background: linear-gradient(135deg, rgba(0, 217, 255, 0.05) 0%, rgba(157, 78, 221, 0.05) 100%);
-        }
-
-        .process-timeline {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 32px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .process-step {
-            position: relative;
-            text-align: center;
-        }
-
-        .step-number {
-            width: 60px;
-            height: 60px;
-            background: linear-gradient(135deg, var(--cyan) 0%, var(--violet) 100%);
-            color: var(--navy);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-family: 'Poppins', sans-serif;
-            font-size: 28px;
-            font-weight: 800;
-            margin: 0 auto 20px;
-            box-shadow: 0 10px 30px rgba(0, 217, 255, 0.3);
-        }
-
-        .step-icon {
-            font-size: 48px;
-            margin-bottom: 16px;
-        }
-
-        .process-step h4 {
-            font-family: 'Poppins', sans-serif;
-            font-size: 18px;
-            font-weight: 700;
-            color: var(--navy);
-            margin-bottom: 12px;
-        }
-
-        .process-step p {
-            font-size: 14px;
-            color: var(--gray);
-            line-height: 1.6;
-        }
-
-        @media (max-width: 768px) {
-            .process-timeline {
-                grid-template-columns: 1fr;
-                gap: 24px;
-            }
-
-            .features-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .testimonials-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .bonus-box {
-                padding: 16px;
-            }
-
-            .bonus-icon {
-                font-size: 32px;
-            }
-
-            .bonus-content h3 {
-                font-size: 16px;
-            }
-
-            .bonus-content p {
-                font-size: 13px;
-            }
-        }
-
-        /* === MOBILE OPTIMIZATION (Small phones) === */
-        @media (max-width: 480px) {
-            .hero {
-                padding: 40px 16px 30px;
-            }
-
-            .hero-content {
-                max-width: 100%;
-            }
-
-            .hero h1 {
-                font-size: 28px;
-                margin-bottom: 16px;
-            }
-
-            .hero p {
-                font-size: 15px;
-                margin-bottom: 24px;
-            }
-
-            .hero-content > div[style*="display: flex"][style*="justify-content: center"] {
-                gap: 20px !important;
-                margin: 24px 0 !important;
-            }
-
-            .hero-content > div[style*="display: flex"][style*="justify-content: center"] > div {
-                text-align: center;
-            }
-
-            .hero-content > div[style*="display: flex"][style*="justify-content: center"] div[style*="font-size: 32px"] {
-                font-size: 24px !important;
-                margin-bottom: 6px !important;
-            }
-
-            .hero-content > div[style*="display: flex"][style*="justify-content: center"] div[style*="color: rgba"] {
-                font-size: 12px !important;
-            }
-
-            .urgency-badge {
-                padding: 10px 16px;
-                font-size: 12px;
-                margin-bottom: 16px;
-            }
-
-            .section-title {
-                font-size: 24px;
-                margin-bottom: 30px;
-            }
-
-            .step-icon {
-                font-size: 36px;
-                margin-bottom: 12px;
-            }
-
-            .process-step h4 {
-                font-size: 15px;
-                margin-bottom: 8px;
-            }
-
-            .process-step p {
-                font-size: 13px;
-            }
-
-            .feature-card {
-                padding: 16px;
-            }
-
-            .feature-icon {
-                font-size: 32px;
-                margin-bottom: 12px;
-            }
-
-            .feature-card h4 {
-                font-size: 14px;
-                margin-bottom: 8px;
-            }
-
-            .feature-card p {
-                font-size: 12px;
-                line-height: 1.5;
-            }
-
-            .testimonial-card {
-                padding: 16px;
-            }
-
-            .testimonial-text {
-                font-size: 13px;
-                margin-bottom: 12px;
-            }
-
-            .testimonial-author {
-                font-size: 13px;
-                margin-bottom: 4px;
-            }
-
-            .testimonial-role {
-                font-size: 11px;
-            }
-
-            .faq-question {
-                font-size: 14px;
-                padding: 16px;
-            }
-
-            .faq-answer {
-                font-size: 13px;
-                padding: 16px;
-            }
-
-            .form-group label {
-                font-size: 13px;
-                margin-bottom: 6px;
-            }
-
-            .form-group input,
-            .form-group select {
-                font-size: 14px;
-                padding: 10px 12px;
-            }
-
-            .form-submit {
-                font-size: 14px;
-                padding: 12px 24px;
-            }
-
-            .container {
-                padding: 0 16px;
-            }
-
-            .header-content {
-                padding: 12px 16px;
-            }
-
-            .logo {
-                font-size: 18px;
-                gap: 8px;
-            }
-
-            .logo-mark {
-                width: 24px;
-                height: 24px;
-            }
-
-            .nav-links {
-                gap: 12px;
-                font-size: 11px;
-            }
-
-            .timer-container {
-                padding: 4px 8px;
-                top: 60px;
-                right: 4px;
-            }
-
-            .timer-display {
-                font-size: 16px;
-                margin-bottom: 1px;
-            }
-
-            .timer-label {
-                font-size: 8px;
-                margin-bottom: 1px;
-            }
-
-            .timer-message {
-                font-size: 8px;
-            }
-
-            .modal-content {
-                padding: 20px 16px;
-                margin: 20px 16px;
-            }
-
-            .modal h2 {
-                font-size: 22px;
-                margin-bottom: 6px;
-            }
-
-            .modal-price-amount {
-                font-size: 28px;
-            }
-
-            .btn-accept,
-            .btn-skip {
-                font-size: 13px;
-                padding: 12px;
-            }
-        }
-
-        /* === EXTRA SMALL (Very small phones) === */
-        @media (max-width: 360px) {
-            .hero h1 {
-                font-size: 24px;
-            }
-
-            .section-title {
-                font-size: 20px;
-            }
-
-            .urgency-badge {
-                font-size: 11px;
-                padding: 8px 12px;
-            }
-
-            .nav-links {
-                gap: 8px;
-                font-size: 10px;
-            }
-
-            .form-group input,
-            .form-group select {
-                font-size: 13px;
-            }
-
-            .cta-button {
-                font-size: 14px;
-                padding: 12px 24px;
-            }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nexus Digital — Agencia de Presencia Digital</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+
+:root{
+  --navy:   #07090F;
+  --navy2:  #0C1018;
+  --navy3:  #111622;
+  --navy4:  #17202E;
+  --cyan:   #00C8F0;
+  --cyan2:  #00A8CC;
+  --cyan-a: rgba(0,200,240,.10);
+  --cyan-b: rgba(0,200,240,.18);
+  --violet: #8B6CF6;
+  --violet-a:rgba(139,108,246,.10);
+  --white:  #F0F4FF;
+  --muted:  #C2CFEE;
+  --border: rgba(255,255,255,.06);
+  --card-border: rgba(255,255,255,.08);
+}
+
+html{scroll-behavior:smooth}
+body{
+  font-family:'Inter',sans-serif;
+  background:var(--navy);
+  color:var(--white);
+  overflow-x:hidden;
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased
+}
+
+/* ─────────────────────────────────────
+   NAV
+───────────────────────────────────── */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 64px;height:72px;
+  background:rgba(7,9,15,.80);
+  backdrop-filter:blur(24px);
+  border-bottom:1px solid var(--border)
+}
+.logo{
+  display:flex;align-items:center;gap:12px;
+  font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:18px;
+  color:var(--white);text-decoration:none;letter-spacing:-.3px
+}
+.logo-hex{
+  width:30px;height:30px;flex-shrink:0;
+  animation:logoAnim 6s ease-in-out infinite
+}
+@keyframes logoAnim{
+  0%   {transform:rotate(0deg)   translateY(0px)  scale(1)}
+  25%  {transform:rotate(90deg)  translateY(-2px) scale(1.05)}
+  50%  {transform:rotate(180deg) translateY(0px)  scale(1)}
+  75%  {transform:rotate(270deg) translateY(2px)  scale(1.05)}
+  100% {transform:rotate(360deg) translateY(0px)  scale(1)}
+}
+.nav-links{display:flex;gap:40px;list-style:none}
+.nav-links a{
+  color:var(--muted);text-decoration:none;font-size:14px;font-weight:500;
+  letter-spacing:.1px;transition:color .2s
+}
+.nav-links a:hover{color:var(--white)}
+.nav-cta{
+  background:var(--cyan);color:var(--navy);
+  padding:10px 26px;border-radius:8px;
+  font-family:'Space Grotesk',sans-serif;font-size:14px;font-weight:600;
+  text-decoration:none;letter-spacing:.2px;transition:opacity .2s,transform .15s
+}
+.nav-cta:hover{opacity:.88;transform:translateY(-1px)}
+
+/* ─────────────────────────────────────
+   HERO
+───────────────────────────────────── */
+.hero{
+  min-height:100vh;
+  display:flex;align-items:center;
+  padding:140px 64px 100px;
+  position:relative;overflow:hidden
+}
+/* Grid lines */
+.hero-bg{
+  position:absolute;inset:0;pointer-events:none;
+  background-image:
+    linear-gradient(rgba(0,200,240,.025) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(0,200,240,.025) 1px,transparent 1px);
+  background-size:72px 72px;
+  mask-image:radial-gradient(ellipse 90% 90% at 60% 40%,rgba(0,0,0,.6) 0%,transparent 75%)
+}
+/* Glows */
+.hero-glow-r{
+  position:absolute;top:-160px;right:-100px;
+  width:620px;height:620px;border-radius:50%;
+  background:radial-gradient(circle,rgba(0,200,240,.09) 0%,transparent 68%);
+  pointer-events:none
+}
+.hero-glow-l{
+  position:absolute;bottom:-120px;left:-80px;
+  width:500px;height:500px;border-radius:50%;
+  background:radial-gradient(circle,rgba(139,108,246,.07) 0%,transparent 70%);
+  pointer-events:none
+}
+
+.hero-inner{max-width:1160px;margin:0 auto;width:100%;position:relative;z-index:1}
+
+.hero-eyebrow{
+  display:inline-flex;align-items:center;gap:10px;
+  border:1px solid rgba(0,200,240,.22);
+  background:var(--cyan-a);
+  color:var(--cyan);padding:7px 18px;border-radius:100px;
+  font-family:'Space Grotesk',sans-serif;font-size:12px;
+  font-weight:600;letter-spacing:1.2px;text-transform:uppercase;
+  margin-bottom:36px
+}
+.eyebrow-dot{
+  width:7px;height:7px;border-radius:50%;background:var(--cyan);
+  animation:blink 2.4s ease-in-out infinite
+}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+
+.hero h1{
+  font-family:'Space Grotesk',sans-serif;font-weight:700;
+  font-size:clamp(44px,5.5vw,78px);line-height:1.08;
+  letter-spacing:-2.5px;margin-bottom:28px;max-width:820px
+}
+.hero h1 em{
+  font-style:normal;
+  background:linear-gradient(100deg,var(--cyan) 0%,var(--violet) 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text
+}
+.hero-desc{
+  font-size:17px;color:var(--muted);max-width:500px;
+  line-height:1.75;margin-bottom:52px;font-weight:400
+}
+
+.hero-actions{display:flex;gap:14px;align-items:center;flex-wrap:wrap;margin-bottom:80px}
+.btn-primary{
+  display:inline-flex;align-items:center;gap:9px;
+  background:var(--cyan);color:var(--navy);
+  padding:15px 32px;border-radius:9px;
+  font-family:'Space Grotesk',sans-serif;font-size:15px;font-weight:600;
+  text-decoration:none;letter-spacing:.2px;
+  box-shadow:0 6px 28px rgba(0,200,240,.28);
+  transition:transform .15s,box-shadow .2s
+}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 10px 40px rgba(0,200,240,.38)}
+.btn-ghost{
+  display:inline-flex;align-items:center;gap:9px;
+  color:var(--white);padding:15px 30px;border-radius:9px;
+  border:1px solid var(--card-border);
+  font-size:15px;font-weight:500;text-decoration:none;
+  transition:border-color .2s,background .2s
+}
+.btn-ghost:hover{border-color:rgba(255,255,255,.18);background:rgba(255,255,255,.04)}
+
+/* Hero stats — metric cards */
+.hero-metrics{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:1px;
+  background:var(--border);border-radius:16px;overflow:hidden;
+  border:1px solid var(--card-border)
+}
+.metric-card{
+  background:var(--navy2);padding:32px 28px;
+  display:flex;flex-direction:column;gap:8px
+}
+.metric-label{
+  font-size:12px;font-weight:500;color:var(--muted);
+  letter-spacing:.4px;text-transform:uppercase;
+  font-family:'Space Grotesk',sans-serif
+}
+.metric-num{
+  font-family:'Space Grotesk',sans-serif;font-weight:700;
+  font-size:40px;line-height:1;color:var(--white);letter-spacing:-1.5px
+}
+.metric-num .unit{
+  font-size:22px;font-weight:600;color:var(--cyan);letter-spacing:-.5px
+}
+.metric-sub{font-size:12px;color:var(--muted);line-height:1.5;margin-top:2px}
+
+/* ─────────────────────────────────────
+   SHARED
+───────────────────────────────────── */
+.container{max-width:1160px;margin:0 auto;padding:0 64px}
+.sec{padding:110px 0;position:relative;z-index:1}
+.sec-alt{background:var(--navy2)}
+.sec-alt2{background:var(--navy3)}
+
+.tag{
+  display:inline-block;font-family:'Space Grotesk',sans-serif;
+  font-size:11px;font-weight:600;letter-spacing:1.8px;
+  text-transform:uppercase;color:var(--cyan);margin-bottom:18px
+}
+.sec-title{
+  font-family:'Space Grotesk',sans-serif;font-weight:700;
+  font-size:clamp(34px,3.8vw,54px);line-height:1.1;
+  letter-spacing:-1.8px;margin-bottom:18px
+}
+.sec-title span{
+  background:linear-gradient(100deg,var(--cyan),var(--violet));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text
+}
+.sec-lead{font-size:16px;color:var(--muted);max-width:480px;line-height:1.75}
+
+.sec-header{margin-bottom:72px}
+
+/* ─────────────────────────────────────
+   SERVICIOS
+───────────────────────────────────── */
+.servicios-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:1px;
+  background:var(--border)
+}
+.srv-card{
+  background:var(--navy2);padding:52px 44px;position:relative;overflow:hidden;
+  transition:background .25s
+}
+.srv-card:hover{background:var(--navy3)}
+
+/* Top border reveal on hover */
+.srv-card::after{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,var(--cyan),var(--violet));
+  transform:scaleX(0);transform-origin:left;transition:transform .4s ease
+}
+.srv-card:hover::after{transform:scaleX(1)}
+
+.srv-icon{
+  width:56px;height:56px;border-radius:14px;
+  display:flex;align-items:center;justify-content:center;
+  margin-bottom:32px;flex-shrink:0
+}
+.ic-cyan{background:var(--cyan-a)}
+.ic-violet{background:var(--violet-a)}
+.ic-teal{background:rgba(0,200,180,.08)}
+.ic-amber{background:rgba(240,180,0,.08)}
+.ic-rose{background:rgba(240,80,110,.08)}
+.ic-blue{background:rgba(60,140,255,.08)}
+
+.srv-card h3{
+  font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:20px;
+  letter-spacing:-.4px;margin-bottom:14px;line-height:1.3
+}
+.srv-card p{font-size:14px;color:var(--muted);line-height:1.8;margin-bottom:28px}
+
+.srv-bullets{list-style:none;display:flex;flex-direction:column;gap:6px}
+.srv-bullets li{
+  font-size:13px;color:var(--muted);
+  display:flex;align-items:center;gap:8px
+}
+.srv-bullets li::before{
+  content:'';width:4px;height:4px;border-radius:50%;
+  background:var(--cyan);flex-shrink:0
+}
+
+.rec-badge{
+  position:absolute;top:20px;right:20px;
+  background:linear-gradient(120deg,var(--cyan),var(--violet));
+  color:var(--navy);font-size:10px;font-weight:700;
+  font-family:'Space Grotesk',sans-serif;letter-spacing:.6px;
+  padding:3px 10px;border-radius:100px;text-transform:uppercase
+}
+
+/* ─────────────────────────────────────
+   PROCESO — TIMELINE
+───────────────────────────────────── */
+.timeline{display:flex;flex-direction:column;position:relative}
+
+/* Vertical line */
+.timeline::before{
+  content:'';position:absolute;
+  left:40px;top:72px;bottom:72px;width:1px;
+  background:linear-gradient(180deg,var(--cyan) 0%,var(--violet) 100%);
+  opacity:.25
+}
+
+.tl-step{
+  display:grid;grid-template-columns:80px 1fr;gap:0;
+  padding:56px 0;border-bottom:1px solid var(--border);
+  position:relative;align-items:start
+}
+.tl-step:last-child{border-bottom:none}
+
+.tl-num-wrap{
+  display:flex;justify-content:center;padding-top:4px;position:relative;z-index:1
+}
+.tl-num{
+  width:56px;height:56px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  background:var(--navy);border:1px solid var(--card-border);
+  font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:15px;
+  color:var(--cyan);letter-spacing:.5px
+}
+
+.tl-body{padding-left:40px;padding-right:64px}
+.tl-overline{
+  font-family:'Space Grotesk',sans-serif;font-size:11px;
+  font-weight:600;letter-spacing:1.8px;text-transform:uppercase;
+  color:var(--cyan);margin-bottom:12px;opacity:.7
+}
+.tl-body h3{
+  font-family:'Space Grotesk',sans-serif;font-weight:600;
+  font-size:24px;letter-spacing:-.6px;margin-bottom:16px;line-height:1.25
+}
+.tl-body p{font-size:15px;color:var(--muted);line-height:1.8;max-width:540px}
+
+.tl-pills{display:flex;flex-wrap:wrap;gap:8px;margin-top:24px}
+.tl-pill{
+  font-size:12px;font-weight:500;padding:5px 14px;border-radius:6px;
+  background:var(--cyan-a);color:var(--cyan);border:1px solid rgba(0,200,240,.15);
+  font-family:'Space Grotesk',sans-serif
+}
+
+/* ─────────────────────────────────────
+   PROYECTOS
+───────────────────────────────────── */
+.proyectos-grid{display:flex;flex-direction:column;gap:2px}
+
+.proy-card{
+  position:relative;overflow:hidden;border-radius:0;
+  min-height:420px;display:flex;align-items:flex-end;
+  border:1px solid var(--border)
+}
+.proy-card:first-child{border-radius:16px 16px 0 0}
+.proy-card:last-child{border-radius:0 0 16px 16px}
+
+.proy-bg{
+  position:absolute;inset:0;background-size:cover;background-position:center;
+  transition:transform .7s ease
+}
+.proy-card:hover .proy-bg{transform:scale(1.04)}
+
+/* Gradient overlay — readable text over photo */
+.proy-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(
+    0deg,
+    rgba(7,9,15,.95) 0%,
+    rgba(7,9,15,.60) 45%,
+    rgba(7,9,15,.15) 100%
+  )
+}
+
+.proy-content{
+  position:relative;z-index:1;padding:52px 56px;width:100%;
+  display:flex;align-items:flex-end;justify-content:space-between;gap:40px
+}
+.proy-left{flex:1}
+.proy-industry{
+  font-family:'Space Grotesk',sans-serif;font-size:11px;
+  font-weight:600;letter-spacing:2px;text-transform:uppercase;
+  color:var(--cyan);margin-bottom:12px;opacity:.85
+}
+.proy-left h3{
+  font-family:'Space Grotesk',sans-serif;font-weight:700;
+  font-size:clamp(26px,2.8vw,38px);letter-spacing:-1px;
+  line-height:1.15;margin-bottom:14px
+}
+.proy-left p{font-size:15px;color:rgba(236,240,255,.65);line-height:1.7;max-width:500px}
+
+.proy-stats{
+  display:flex;gap:32px;flex-shrink:0;
+  padding:28px 36px;border-radius:14px;
+  background:rgba(7,9,15,.55);
+  border:1px solid rgba(255,255,255,.08);
+  backdrop-filter:blur(12px)
+}
+.proy-stat .ps-num{
+  font-family:'Space Grotesk',sans-serif;font-weight:700;
+  font-size:32px;line-height:1;color:var(--white);letter-spacing:-1px;margin-bottom:5px
+}
+.proy-stat .ps-num em{
+  font-style:normal;color:var(--cyan);font-size:20px
+}
+.proy-stat .ps-label{font-size:12px;color:rgba(236,240,255,.5);font-weight:400}
+
+/* ─────────────────────────────────────
+   POR QUÉ NEXUS
+───────────────────────────────────── */
+.porque-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:1px;
+  background:var(--border)
+}
+.pq-card{
+  background:var(--navy3);padding:48px 40px;
+  transition:background .2s;
+  border-bottom:2px solid transparent;
+  transition:background .2s,border-color .3s
+}
+.pq-card:hover{background:var(--navy4);border-bottom-color:var(--cyan)}
+
+.pq-icon{
+  width:44px;height:44px;margin-bottom:28px;
+  color:var(--cyan);opacity:.9
+}
+.pq-card h3{
+  font-family:'Space Grotesk',sans-serif;font-weight:600;
+  font-size:18px;letter-spacing:-.3px;margin-bottom:12px
+}
+.pq-card p{font-size:14px;color:var(--muted);line-height:1.8}
+
+/* ─────────────────────────────────────
+   PRECIOS
+───────────────────────────────────── */
+.precios-header{
+  display:flex;align-items:flex-end;justify-content:space-between;
+  margin-bottom:56px;gap:32px;flex-wrap:wrap
+}
+.precios-note{
+  font-size:13px;color:var(--muted);
+  border-left:2px solid rgba(0,200,240,.3);
+  padding-left:14px;line-height:1.6;max-width:300px
+}
+
+.precios-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;align-items:start}
+
+.precio-card{
+  background:var(--navy2);border-radius:16px;padding:44px;
+  border:1px solid var(--card-border);position:relative;overflow:hidden
+}
+.precio-card.destacado{
+  border-color:rgba(0,200,240,.35);
+  background:linear-gradient(155deg,rgba(0,200,240,.05) 0%,var(--navy2) 55%)
+}
+.dest-badge{
+  position:absolute;top:0;right:32px;
+  background:var(--cyan);color:var(--navy);
+  font-family:'Space Grotesk',sans-serif;font-size:10px;font-weight:700;
+  padding:5px 14px;border-radius:0 0 10px 10px;letter-spacing:.8px;text-transform:uppercase
+}
+
+.pc-tier{
+  font-family:'Space Grotesk',sans-serif;font-size:11px;
+  font-weight:600;letter-spacing:2px;text-transform:uppercase;
+  color:var(--muted);margin-bottom:20px
+}
+.pc-desde{font-size:12px;color:var(--muted);margin-bottom:4px}
+.pc-monto{
+  font-family:'Space Grotesk',sans-serif;font-weight:700;
+  font-size:44px;line-height:1;letter-spacing:-2px;margin-bottom:6px
+}
+.pc-monto span{font-size:24px;font-weight:500;color:var(--muted)}
+.pc-desc{font-size:13px;color:var(--muted);line-height:1.65;margin-bottom:36px}
+
+.pc-list{list-style:none;margin-bottom:40px;display:flex;flex-direction:column;gap:2px}
+.pc-list li{
+  display:flex;align-items:flex-start;gap:10px;
+  font-size:14px;color:var(--muted);
+  padding:9px 0;border-bottom:1px solid var(--border)
+}
+.pc-list li:last-child{border-bottom:none}
+.pc-list li svg{flex-shrink:0;margin-top:2px;color:var(--cyan)}
+
+.btn-pc{
+  display:block;text-align:center;padding:14px;border-radius:9px;
+  font-family:'Space Grotesk',sans-serif;font-size:14px;font-weight:600;
+  text-decoration:none;letter-spacing:.2px;transition:all .2s
+}
+.btn-pc-primary{background:var(--cyan);color:var(--navy);box-shadow:0 4px 20px rgba(0,200,240,.2)}
+.btn-pc-primary:hover{box-shadow:0 8px 32px rgba(0,200,240,.35);transform:translateY(-1px)}
+.btn-pc-ghost{
+  border:1px solid rgba(0,200,240,.4);
+  color:var(--cyan);
+  background:rgba(0,200,240,.06)
+}
+.btn-pc-ghost:hover{
+  border-color:var(--cyan);
+  background:rgba(0,200,240,.13);
+  box-shadow:0 4px 20px rgba(0,200,240,.12)
+}
+
+/* ─────────────────────────────────────
+   CTA FINAL
+───────────────────────────────────── */
+.cta-sec{padding:110px 0;background:var(--navy)}
+.cta-box{
+  max-width:900px;margin:0 auto;text-align:center;
+  border:1px solid rgba(0,200,240,.16);border-radius:24px;
+  padding:96px 80px;position:relative;overflow:hidden;
+  background:linear-gradient(140deg,rgba(0,200,240,.04) 0%,var(--navy2) 60%)
+}
+.cta-glow-c{
+  position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  width:450px;height:450px;border-radius:50%;
+  background:radial-gradient(circle,rgba(0,200,240,.06) 0%,transparent 70%);
+  pointer-events:none
+}
+.cta-box h2{
+  font-family:'Space Grotesk',sans-serif;font-weight:700;
+  font-size:clamp(32px,3.8vw,52px);letter-spacing:-1.8px;
+  margin-bottom:20px;position:relative;line-height:1.15
+}
+.cta-box p{
+  font-size:17px;color:var(--muted);
+  margin-bottom:44px;position:relative;line-height:1.7
+}
+
+.cta-btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;position:relative}
+.btn-wa{
+  display:inline-flex;align-items:center;gap:10px;
+  background:#25D366;color:#fff;
+  padding:16px 36px;border-radius:9px;
+  font-family:'Space Grotesk',sans-serif;font-size:15px;font-weight:600;
+  text-decoration:none;letter-spacing:.2px;
+  box-shadow:0 6px 28px rgba(37,211,102,.22);
+  transition:transform .15s,box-shadow .2s
+}
+.btn-wa:hover{transform:translateY(-2px);box-shadow:0 10px 40px rgba(37,211,102,.35)}
+
+.cta-info{
+  margin-top:52px;padding-top:44px;border-top:1px solid var(--border);
+  display:flex;justify-content:center;gap:48px;flex-wrap:wrap;
+  position:relative
+}
+.ci-item{
+  display:flex;align-items:center;gap:10px;
+  font-size:14px;color:var(--muted)
+}
+.ci-item svg{flex-shrink:0;color:var(--cyan);opacity:.7}
+
+/* ─────────────────────────────────────
+   FOOTER
+───────────────────────────────────── */
+footer{
+  background:var(--navy);border-top:1px solid var(--border);
+  padding:36px 64px;
+  display:flex;align-items:center;justify-content:space-between;
+  flex-wrap:wrap;gap:16px
+}
+footer .logo{font-size:16px}
+.fc{font-size:13px;color:var(--muted)}
+.fl{display:flex;gap:24px}
+.fl a{font-size:13px;color:var(--muted);text-decoration:none;transition:color .2s}
+.fl a:hover{color:var(--white)}
+
+/* ─────────────────────────────────────
+   SCROLL ANIMATION
+───────────────────────────────────── */
+.fade{opacity:0;transform:translateY(22px);transition:opacity .65s ease,transform .65s ease}
+.fade.in{opacity:1;transform:none}
+
+/* ─────────────────────────────────────
+   DIVISOR ARCOÍRIS
+───────────────────────────────────── */
+.arc-divider{
+  width:100%;height:2px;border:none;
+  background:linear-gradient(90deg,
+    transparent 0%,
+    #00C8F0 20%,
+    #8B6CF6 40%,
+    #FF6B9D 60%,
+    #FFB347 80%,
+    transparent 100%);
+  opacity:.5;
+  position:relative;z-index:1
+}
+.arc-divider.bright{opacity:.75}
+
+/* ─────────────────────────────────────
+   TIMELINE — línea lateral arcoíris
+───────────────────────────────────── */
+.timeline::before{
+  background:linear-gradient(180deg,
+    #00C8F0 0%,
+    #8B6CF6 33%,
+    #FF6B9D 66%,
+    #FFB347 100%) !important;
+  opacity:.45 !important;
+  width:2px !important
+}
+.tl-step{border-bottom-color:rgba(255,255,255,.05)!important}
+
+/* ─────────────────────────────────────
+   PRECIOS HEADER — centrado
+───────────────────────────────────── */
+.precios-header{
+  display:flex;flex-direction:column;align-items:center;
+  text-align:center;margin-bottom:56px;gap:16px
+}
+.precios-note{
+  border-left:none;padding-left:0;
+  border-top:2px solid rgba(0,200,240,.3);
+  padding-top:16px;max-width:460px;
+  text-align:center;line-height:1.7
+}
+
+/* ─────────────────────────────────────
+   PRECIO CARD — todo centrado
+───────────────────────────────────── */
+.precio-card{text-align:center}
+.pc-list{text-align:left}
+.btn-pc{width:100%}
+
+/* ─────────────────────────────────────
+   RESPONSIVE — TABLET
+───────────────────────────────────── */
+@media(max-width:1100px){
+  nav{padding:0 32px}
+  .hero{padding:120px 32px 80px}
+  .container{padding:0 32px}
+  .servicios-grid{grid-template-columns:repeat(2,1fr)}
+  .precios-grid{grid-template-columns:1fr;gap:16px}
+  .porque-grid{grid-template-columns:repeat(2,1fr)}
+  .hero-metrics{grid-template-columns:repeat(2,1fr)}
+  .proy-content{padding:36px 36px}
+}
+
+/* ─────────────────────────────────────
+   RESPONSIVE — MOBILE
+───────────────────────────────────── */
+@media(max-width:768px){
+  /* NAV */
+  nav{padding:0 20px;height:60px}
+  .nav-links{display:none}
+  .nav-cta{padding:8px 18px;font-size:13px}
+
+  /* HERO */
+  .hero{padding:100px 20px 64px;text-align:center}
+  .hero h1{font-size:36px;letter-spacing:-1px}
+  .hero-eyebrow{margin-left:auto;margin-right:auto}
+  .hero-desc{margin-left:auto;margin-right:auto;font-size:15px}
+  .hero-actions{justify-content:center}
+  .hero-metrics{
+    grid-template-columns:repeat(2,1fr);
+    margin-top:48px
+  }
+  .metric-card{padding:24px 18px}
+  .metric-num{font-size:32px}
+
+  /* SECCIONES GENERALES */
+  .container{padding:0 20px}
+  .sec{padding:72px 0}
+  .sec-header{margin-bottom:48px;text-align:center}
+  .sec-header .sec-lead{margin-left:auto;margin-right:auto}
+  .sec-title{font-size:32px;letter-spacing:-1px}
+  .tag{display:block}
+
+  /* SERVICIOS */
+  .servicios-grid{grid-template-columns:1fr}
+  .srv-card{padding:36px 24px}
+  .rec-badge{font-size:9px}
+
+  /* PROCESO — TIMELINE */
+  .timeline::before{left:24px;top:48px;bottom:48px}
+  .tl-step{
+    grid-template-columns:52px 1fr;
+    padding:36px 0;
+    gap:0
+  }
+  .tl-num-wrap{padding-top:0}
+  .tl-num{width:44px;height:44px;font-size:13px}
+  .tl-body{
+    padding-left:20px;
+    padding-right:0
+  }
+  .tl-body h3{font-size:20px;letter-spacing:-.4px}
+  .tl-body p{font-size:14px}
+  .tl-overline{font-size:10px}
+  .tl-pills{gap:6px}
+  .tl-pill{font-size:11px;padding:4px 10px}
+
+  /* PROYECTOS */
+  .proy-card{min-height:360px}
+  .proy-content{
+    flex-direction:column;
+    align-items:flex-start;
+    padding:28px 24px;
+    gap:20px
+  }
+  .proy-left h3{font-size:24px;letter-spacing:-.5px}
+  .proy-left p{font-size:13px}
+  .proy-stats{
+    width:100%;
+    padding:18px 20px;
+    gap:20px
+  }
+  .proy-stat .ps-num{font-size:26px}
+
+  /* POR QUÉ */
+  .porque-grid{grid-template-columns:1fr}
+  .pq-card{padding:32px 24px}
+
+  /* PRECIOS */
+  .precios-grid{grid-template-columns:1fr;gap:16px}
+  .precios-header{flex-direction:column;gap:20px;text-align:center;margin-bottom:36px}
+  .precios-note{border-left:none;border-top:2px solid rgba(0,200,240,.3);padding-left:0;padding-top:14px;max-width:100%;text-align:center}
+  .precio-card{padding:32px 24px}
+  .pc-monto{font-size:36px}
+  .btn-pc{padding:15px}
+
+  /* CTA */
+  .cta-box{padding:52px 24px}
+  .cta-box h2{font-size:30px;letter-spacing:-1px}
+  .cta-box p{font-size:15px}
+  .cta-btns{flex-direction:column;align-items:center}
+  .btn-wa,.btn-ghost{width:100%;justify-content:center}
+  .cta-info{gap:20px;flex-direction:column;align-items:center}
+
+  /* FOOTER */
+  footer{
+    flex-direction:column;
+    text-align:center;
+    padding:28px 20px;
+    gap:14px
+  }
+  .fl{justify-content:center;flex-wrap:wrap;gap:16px}
+}
+
+/* ─────────────────────────────────────
+   TESTIMONIOS
+───────────────────────────────────── */
+.test-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:24px;
+  margin-top:56px
+}
+.test-card{
+  position:relative;
+  background:var(--navy3);
+  border:1px solid var(--card-border);
+  border-radius:20px;
+  padding:36px 32px 32px;
+  transition:border-color .3s,transform .3s;
+  overflow:hidden
+}
+.test-card::before{
+  content:'';
+  position:absolute;inset:0;
+  background:radial-gradient(ellipse at top left,var(--cyan-a) 0%,transparent 60%);
+  pointer-events:none;
+  opacity:0;
+  transition:opacity .3s
+}
+.test-card:hover{border-color:rgba(0,200,240,.22);transform:translateY(-4px)}
+.test-card:hover::before{opacity:1}
+.test-quote{
+  font-size:72px;line-height:.8;
+  font-family:'Space Grotesk',sans-serif;font-weight:700;
+  color:var(--cyan);opacity:.2;
+  position:absolute;top:20px;right:24px;
+  pointer-events:none;user-select:none
+}
+.test-stars{
+  display:flex;gap:3px;margin-bottom:20px
+}
+.test-stars span{color:var(--cyan);font-size:14px}
+.test-text{
+  font-size:15px;line-height:1.7;
+  color:var(--muted);
+  margin-bottom:28px;
+  position:relative;z-index:1
+}
+.test-author{
+  display:flex;align-items:center;gap:14px
+}
+.test-avatar{
+  width:44px;height:44px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:16px;
+  flex-shrink:0
+}
+.test-avatar.av-cyan{background:var(--cyan-b);color:var(--cyan);border:1px solid rgba(0,200,240,.3)}
+.test-avatar.av-violet{background:var(--violet-a);color:var(--violet);border:1px solid rgba(139,108,246,.3)}
+.test-avatar.av-white{background:rgba(240,244,255,.08);color:var(--white);border:1px solid rgba(240,244,255,.12)}
+.test-info{}
+.test-name{font-size:14px;font-weight:600;color:var(--white);letter-spacing:.1px}
+.test-role{font-size:12px;color:var(--muted);margin-top:2px}
+.test-tag{
+  display:inline-block;
+  font-size:11px;font-weight:600;letter-spacing:.4px;text-transform:uppercase;
+  color:var(--cyan);background:var(--cyan-a);
+  border:1px solid rgba(0,200,240,.15);
+  border-radius:6px;padding:3px 9px;
+  margin-bottom:6px
+}
+
+@media(max-width:900px){
+  .test-grid{grid-template-columns:1fr}
+}
+</style>
 </head>
 <body>
 
-<!-- TIMER URGENCY - DESHABILITADO -->
-<!-- <div class="timer-container" id="timerContainer">
-    <div class="timer-label">⏰ Oferta Expira En:</div>
-    <div class="timer-display" id="timerDisplay">10:00</div>
-    <div class="timer-message">Apúrate, quedan pocos lugares</div>
-</div> -->
+<!-- ═══════════════════════════════════
+     NAV
+═══════════════════════════════════ -->
+<nav>
+  <a href="#" class="logo">
+    <svg class="logo-hex" viewBox="0 0 30 30" fill="none">
+      <polygon points="15,2 27,8.5 27,21.5 15,28 3,21.5 3,8.5" stroke="#00C8F0" stroke-width="1.4" fill="none"/>
+      <polygon points="15,8 22,12 22,18 15,22 8,18 8,12" fill="rgba(0,200,240,.12)"/>
+      <circle cx="15" cy="15" r="2.5" fill="#00C8F0"/>
+    </svg>
+    Nexus Digital
+  </a>
+  <ul class="nav-links">
+    <li><a href="#servicios">Servicios</a></li>
+    <li><a href="#proceso">Proceso</a></li>
+    <li><a href="#proyectos">Proyectos</a></li>
+    <li><a href="#testimonios">Clientes</a></li>
+    <li><a href="#precios">Precios</a></li>
+  </ul>
+  <a href="https://wa.me/524431009366?text=Hola%2C+quiero+saber+m%C3%A1s+sobre+Nexus+Digital" target="_blank" class="nav-cta">Empecemos →</a>
+</nav>
 
-<!-- HEADER -->
-<header>
-    <div class="header-content">
-        <div class="logo">
-            <div class="logo-mark"></div>
-            NEXUS
-        </div>
-        <nav class="nav-links">
-            <li><a href="#features">Características</a></li>
-            <li><a href="#register">Registrarse</a></li>
-        </nav>
-    </div>
-</header>
-
-<!-- HERO SECTION -->
+<!-- ═══════════════════════════════════
+     HERO
+═══════════════════════════════════ -->
 <section class="hero">
-    <div class="container">
-        <div class="hero-content">
-            <div class="urgency-badge">
-                ⚡ OFERTA LIMITADA - Solo 30 personas
-            </div>
-
-            <div style="display: inline-flex; align-items: center; gap: 8px; background: rgba(0, 217, 255, 0.1); border: 1px solid var(--cyan); padding: 10px 18px; border-radius: 50px; color: var(--cyan); font-weight: 600; font-size: 13px; margin-bottom: 24px; margin-left: 0;">
-                🤖 Powered by AI - Revisado por Profesionales
-            </div>
-            
-            <h1>Página Web Profesional con <span class="cyan">IA</span> en 5-7 Días</h1>
-
-            <p>Tu presencia digital lista mientras tú enfocas en tu negocio. Diseñada por inteligencia artificial, revisada por humanos. Incluye web + opción de 15 posts para redes automáticos.</p>
-
-            <div style="display: flex; justify-content: center; gap: 40px; margin: 32px 0; flex-wrap: wrap;">
-                <div style="text-align: center;">
-                    <div style="font-size: 32px; font-weight: 800; color: var(--green); margin-bottom: 8px;">50+</div>
-                    <div style="color: rgba(255,255,255,0.8); font-size: 14px;">Webs Creadas</div>
-                </div>
-                <div style="text-align: center;">
-                    <div style="font-size: 32px; font-weight: 800; color: var(--green); margin-bottom: 8px;">4.9⭐</div>
-                    <div style="color: rgba(255,255,255,0.8); font-size: 14px;">Satisfacción Clientes</div>
-                </div>
-                <div style="text-align: center;">
-                    <div style="font-size: 32px; font-weight: 800; color: var(--green); margin-bottom: 8px;">5-7 días</div>
-                    <div style="color: rgba(255,255,255,0.8); font-size: 14px;">De Entrega Garantizada</div>
-                </div>
-            </div>
-
-            <div class="comparison-container">
-                <div class="comparison-item">
-                    <div class="comparison-label">Otras Agencias</div>
-                    <div class="comparison-price-old">$13,000+</div>
-                    <div class="comparison-time">Tardan 30-60 días</div>
-                </div>
-
-                <div class="comparison-vs">VS</div>
-
-                <div class="comparison-item comparison-winner">
-                    <div class="comparison-label">NEXUS DIGITAL</div>
-                    <div class="comparison-price-new">$4,399</div>
-                    <div class="comparison-time">5-7 días entrega</div>
-                    <div class="comparison-badge">70% MÁS BARATO</div>
-                </div>
-            </div>
-
-            <div class="bonus-box">
-                <div class="bonus-icon">🤖</div>
-                <div class="bonus-content">
-                    <h3>DISEÑADA POR IA AVANZADA</h3>
-                    <p>Análisis de tu industria + diseño optimizado automáticamente + SEO integrado desde el inicio</p>
-                </div>
-            </div>
-
-            <div style="background: rgba(57, 255, 20, 0.1); border: 2px solid var(--green); border-radius: 12px; padding: 20px; margin-bottom: 32px; text-align: center;">
-                <div style="color: var(--green); font-weight: 700; font-size: 16px; margin-bottom: 8px;">✅ GARANTÍA DE SATISFACCIÓN 100%</div>
-                <p style="color: rgba(255,255,255,0.9); font-size: 14px; margin: 0; line-height: 1.6;">
-                    Si no te encanta cómo queda tu página, <strong>nuestro equipo de Nexus la modificará gratuitamente hasta que estés 100% satisfecho</strong>. Si aún así no es lo que buscas, <strong>te devolvemos tu dinero sin preguntas</strong>.
-                </p>
-            </div>
-
-            <p style="text-align: center; color: rgba(255,255,255,0.8); font-size: 13px; margin-top: 20px; margin-bottom: 24px;">
-                <strong>+ Opción: 15 posts automáticos con IA para LinkedIn, Instagram, Facebook (+$1,745)</strong>
-            </p>
-
-            <button class="cta-button" onclick="document.querySelector('.form-section').scrollIntoView({behavior: 'smooth'})">
-                🚀 Comienza Ahora
-            </button>
-        </div>
+  <div class="hero-bg"></div>
+  <div class="hero-glow-r"></div>
+  <div class="hero-glow-l"></div>
+  <div class="hero-inner">
+    <div class="hero-eyebrow">
+      <span class="eyebrow-dot"></span>
+      Agencia Digital — México
     </div>
+
+    <h1>Construimos presencia<br>digital que <em>genera resultados.</em></h1>
+    <p class="hero-desc">Diseño web, e-commerce, contenido y automatización. Todo lo que un negocio necesita para crecer online — en un solo lugar, con un solo equipo.</p>
+
+    <div class="hero-actions">
+      <a href="https://wa.me/524431009366?text=Hola%2C+quiero+hablar+sobre+mi+proyecto" target="_blank" class="btn-primary">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Agendar una llamada
+      </a>
+      <a href="#servicios" class="btn-ghost">
+        Ver servicios
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+
+    <!-- Metric Cards -->
+    <div class="hero-metrics fade">
+      <div class="metric-card">
+        <div class="metric-label">Proyectos entregados</div>
+        <div class="metric-num">4<span class="unit">+</span></div>
+        <div class="metric-sub">Cada uno con entregable 100% funcional</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-label">Tiempo de entrega</div>
+        <div class="metric-num">6<span class="unit"> días</span></div>
+        <div class="metric-sub">En promedio, para una web completa</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-label">Conversión e-commerce</div>
+        <div class="metric-num">3<span class="unit">×</span></div>
+        <div class="metric-sub">Más ventas con un checkout bien diseñado</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-label">Código custom</div>
+        <div class="metric-num">100<span class="unit">%</span></div>
+        <div class="metric-sub">Sin plantillas. Sin atajos. Todo a la medida.</div>
+      </div>
+    </div>
+  </div>
 </section>
 
-<!-- HOW IT WORKS - IA PROCESS -->
-<section class="how-it-works-section">
-    <div class="container">
-        <h2 class="section-title">¿Cómo Funciona <span class="cyan">Nuestra IA</span>?</h2>
+<hr class="arc-divider bright">
 
-        <div class="process-timeline">
-            <div class="process-step">
-                <div class="step-number">1</div>
-                <div class="step-icon">📋</div>
-                <h4>Completas Formulario</h4>
-                <p>Nos cuentas tu profesión, servicios y objetivos en 5 minutos.</p>
-            </div>
-
-            <div class="process-step">
-                <div class="step-number">2</div>
-                <div class="step-icon">🤖</div>
-                <h4>IA Analiza & Diseña</h4>
-                <p>Nuestros algoritmos crean un diseño profesional optimizado para tu industria.</p>
-            </div>
-
-            <div class="process-step">
-                <div class="step-number">3</div>
-                <div class="step-icon">👥</div>
-                <h4>Revisor Humano</h4>
-                <p>Un especialista revisa, ajusta y perfecciona antes de entregarla.</p>
-            </div>
-
-            <div class="process-step">
-                <div class="step-number">4</div>
-                <div class="step-icon">🚀</div>
-                <h4>¡Lanzada!</h4>
-                <p>Tu web sube en vivo en 5-7 días, lista para generar leads.</p>
-            </div>
-        </div>
+<!-- ═══════════════════════════════════
+     SERVICIOS
+═══════════════════════════════════ -->
+<section id="servicios" class="sec sec-alt">
+  <div class="container">
+    <div class="sec-header fade">
+      <div class="tag">Servicios</div>
+      <h2 class="sec-title">Lo que construimos<br><span>para ti.</span></h2>
+      <p class="sec-lead">No vendemos plantillas. Construimos soluciones digitales a la medida de cada negocio — pensadas para convertir visitas en clientes y clics en ventas.</p>
     </div>
+  </div>
+
+  <div class="servicios-grid fade">
+
+    <!-- Web -->
+    <div class="srv-card">
+      <div class="srv-icon ic-cyan">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#00C8F0" stroke-width="1.6" stroke-linecap="round">
+          <rect x="2" y="3" width="20" height="14" rx="2"/>
+          <path d="M8 21h8M12 17v4"/>
+          <path d="M2 8h20"/>
+        </svg>
+      </div>
+      <h3>Página Web Profesional</h3>
+      <p>Tu carta de presentación digital. Diseñamos sitios rápidos, atractivos y optimizados para que los visitantes se conviertan en clientes desde el primer clic.</p>
+      <ul class="srv-bullets">
+        <li>Diseño custom — nunca una plantilla genérica</li>
+        <li>Responsive: móvil, tablet y escritorio</li>
+        <li>Carga ultrarrápida + SEO técnico base</li>
+        <li>Formulario de contacto integrado</li>
+        <li>Hosting incluido el primer año</li>
+        <li>Entrega en 5 a 7 días hábiles</li>
+      </ul>
+    </div>
+
+    <!-- E-commerce -->
+    <div class="srv-card">
+      <div class="srv-icon ic-violet">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#A888FF" stroke-width="1.6" stroke-linecap="round">
+          <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/>
+          <path d="M3 6h18"/>
+          <path d="M16 10a4 4 0 01-8 0"/>
+        </svg>
+      </div>
+      <h3>E-Commerce</h3>
+      <p>Una tienda en línea diseñada para vender. Cada elemento — desde la foto del producto hasta el botón de pago — está optimizado para eliminar fricciones y aumentar conversión.</p>
+      <ul class="srv-bullets">
+        <li>Catálogo de productos con filtros y búsqueda</li>
+        <li>Carrito y checkout simplificado</li>
+        <li>Pagos seguros: tarjeta, transferencia, OXXO</li>
+        <li>Panel de administración intuitivo</li>
+        <li>Recuperación de carritos abandonados</li>
+        <li>Análisis de ventas integrado</li>
+      </ul>
+    </div>
+
+    <!-- Redes -->
+    <div class="srv-card">
+      <div class="srv-icon ic-teal">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#00C8B4" stroke-width="1.6" stroke-linecap="round">
+          <rect x="3" y="3" width="7" height="7" rx="1"/>
+          <rect x="14" y="3" width="7" height="7" rx="1"/>
+          <rect x="3" y="14" width="7" height="7" rx="1"/>
+          <rect x="14" y="14" width="7" height="7" rx="1"/>
+        </svg>
+      </div>
+      <h3>Contenido para Redes Sociales</h3>
+      <p>Piezas diseñadas para impactar: posts, carruseles, stories y reels. Estrategia editorial + diseño visual coherente con tu marca — listos para publicar.</p>
+      <ul class="srv-bullets">
+        <li>Posts y carruseles para Instagram y Facebook</li>
+        <li>Stories y highlights con identidad de marca</li>
+        <li>Contenido para LinkedIn</li>
+        <li>Calendario editorial mensual</li>
+        <li>Copywriting incluido por pieza</li>
+        <li>Formatos exportados en alta resolución</li>
+      </ul>
+    </div>
+
+    <!-- WhatsApp -->
+    <div class="srv-card">
+      <div class="srv-icon ic-amber">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#F0B400" stroke-width="1.6" stroke-linecap="round">
+          <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/>
+          <path d="M8 10h.01M12 10h.01M16 10h.01"/>
+        </svg>
+      </div>
+      <h3>Automatización por WhatsApp</h3>
+      <p>Chatbot inteligente conectado a WhatsApp Business API que atiende, califica y convierte leads automáticamente — sin que tengas que estar pegado al teléfono las 24 horas.</p>
+      <ul class="srv-bullets">
+        <li>Chatbot con flujos a medida (hasta 25 nodos)</li>
+        <li>Verificación de disponibilidad en tiempo real</li>
+        <li>Captura y registro de datos en Google Sheets</li>
+        <li>Notificación instantánea al equipo de ventas</li>
+        <li>Atención automática 24 / 7 / 365</li>
+        <li>Stack probado: WATI + Apps Script + Sheets</li>
+      </ul>
+    </div>
+
+    <!-- Branding (recomendado) -->
+    <div class="srv-card">
+      <div class="rec-badge">★ Recomendado</div>
+      <div class="srv-icon ic-rose">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#F0507A" stroke-width="1.6" stroke-linecap="round">
+          <circle cx="12" cy="12" r="10"/>
+          <circle cx="12" cy="12" r="4"/>
+          <line x1="4.93" y1="4.93" x2="9.17" y2="9.17"/>
+          <line x1="14.83" y1="14.83" x2="19.07" y2="19.07"/>
+          <line x1="14.83" y1="9.17" x2="19.07" y2="4.93"/>
+          <line x1="4.93" y1="19.07" x2="9.17" y2="14.83"/>
+        </svg>
+      </div>
+      <h3>Branding e Identidad Visual</h3>
+      <p>La marca antes de la web. Logo, paleta, tipografías y guía de estilo. Una identidad visual sólida hace que todo lo demás funcione mejor — y genere confianza desde el primer vistazo.</p>
+      <ul class="srv-bullets">
+        <li>Logo primario + variantes y versiones de uso</li>
+        <li>Paleta de colores principal y secundaria</li>
+        <li>Tipografías y reglas de uso</li>
+        <li>Guía de marca completa en PDF</li>
+        <li>Aplicaciones: web, redes, impresión</li>
+        <li>Archivos fuente editables entregados</li>
+      </ul>
+    </div>
+
+    <!-- Automatización procesos -->
+    <div class="srv-card">
+      <div class="srv-icon ic-blue">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#3C8CFF" stroke-width="1.6" stroke-linecap="round">
+          <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/>
+        </svg>
+      </div>
+      <h3>Automatización de Procesos</h3>
+      <p>Conectamos tus herramientas para que trabajen juntas: formularios, CRM, pagos, emails y notificaciones en automático. Menos trabajo manual, más tiempo para crecer.</p>
+      <ul class="srv-bullets">
+        <li>Flujos automatizados con WATI + Apps Script</li>
+        <li>Integración con Stripe para pagos recurrentes</li>
+        <li>Email marketing automatizado por segmento</li>
+        <li>CRM básico en Google Sheets + Apps Script</li>
+        <li>Notificaciones y alertas en tiempo real</li>
+        <li>Reportes automáticos semanales o mensuales</li>
+      </ul>
+    </div>
+
+  </div>
 </section>
 
-<!-- FEATURES SECTION -->
-<section class="features-section" id="features">
-    <div class="container">
-        <h2 class="section-title">Tu Página Web <span class="cyan">Optimizada por IA</span></h2>
-        
-        <div class="features-grid">
-            <div class="feature-card">
-                <div class="feature-icon">🤖</div>
-                <h4>Diseño Generado por IA</h4>
-                <p>Nuestra IA crea un diseño moderno, responsive y profesional en minutos. Responsive, rápido en móvil, tablet y desktop.</p>
-            </div>
+<hr class="arc-divider">
 
-            <div class="feature-card">
-                <div class="feature-icon">🎯</div>
-                <h4>Adaptado a Tu Profesión (IA)</h4>
-                <p>La IA analiza tu industria y crea plantillas específicamente para abogados, psicólogos, médicos, coaches y más.</p>
-            </div>
-
-            <div class="feature-card">
-                <div class="feature-icon">⚡</div>
-                <h4>SEO Auto-Optimizado</h4>
-                <p>Nuestros algoritmos optimizan automáticamente cada página para Google. Aparece en búsquedas donde tus clientes te buscan.</p>
-            </div>
-
-            <div class="feature-card">
-                <div class="feature-icon">⚙️</div>
-                <h4>Funcionalidades Completas</h4>
-                <p>Formulario de contacto inteligente, galería, portafolio y CRM integrado. Todo configurado automáticamente por IA.</p>
-            </div>
-
-            <div class="feature-card">
-                <div class="feature-icon">🔒</div>
-                <h4>Seguridad Integrada</h4>
-                <p>Certificado SSL + dominio propio + hosting año 1 gratis. Protección automática contra amenazas.</p>
-            </div>
-
-            <div class="feature-card">
-                <div class="feature-icon">🚀</div>
-                <h4>Velocidad Máxima</h4>
-                <p>Optimización de velocidad impulsada por IA. Carga rápida = mejor experiencia + más conversiones.</p>
-            </div>
-        </div>
+<!-- ═══════════════════════════════════
+     PROCESO — TIMELINE
+═══════════════════════════════════ -->
+<section id="proceso" class="sec">
+  <div class="container">
+    <div class="sec-header fade">
+      <div class="tag">Proceso</div>
+      <h2 class="sec-title">Cómo <span>trabajamos.</span></h2>
+      <p class="sec-lead">Un método probado que elimina las sorpresas, los retrasos y los malentendidos que arruinan los proyectos digitales.</p>
     </div>
+
+    <div class="timeline fade">
+
+      <div class="tl-step">
+        <div class="tl-num-wrap">
+          <div class="tl-num">01</div>
+        </div>
+        <div class="tl-body">
+          <div class="tl-overline">Semana 0</div>
+          <h3>Descubrimiento y estrategia</h3>
+          <p>Antes de abrir Figma o escribir una línea de código, entendemos tu negocio, tu cliente ideal y tus objetivos reales. Hacemos las preguntas que la mayoría de agencias no hace — para construir lo que realmente necesitas, no lo que crees necesitar.</p>
+          <div class="tl-pills">
+            <span class="tl-pill">Llamada de 30 min</span>
+            <span class="tl-pill">Brief de marca</span>
+            <span class="tl-pill">Definición de objetivos</span>
+            <span class="tl-pill">Alcance y plazos confirmados</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="tl-step">
+        <div class="tl-num-wrap">
+          <div class="tl-num">02</div>
+        </div>
+        <div class="tl-body">
+          <div class="tl-overline">Semana 1</div>
+          <h3>Diseño con criterio</h3>
+          <p>Diseñamos pensando en el usuario y en la conversión — no en lo que "se ve bonito" en el portafolio. Cada decisión visual tiene un porqué estratégico detrás. Antes de construir, te mostramos cómo va a quedar y recibimos tu feedback.</p>
+          <div class="tl-pills">
+            <span class="tl-pill">Diseño custom</span>
+            <span class="tl-pill">Revisión contigo antes de construir</span>
+            <span class="tl-pill">Mobile-first siempre</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="tl-step">
+        <div class="tl-num-wrap">
+          <div class="tl-num">03</div>
+        </div>
+        <div class="tl-body">
+          <div class="tl-overline">Semana 1–2</div>
+          <h3>Desarrollo y entrega rápida</h3>
+          <p>Construimos rápido sin sacrificar calidad. Lo que otras agencias tardan un mes, nosotros lo entregamos en 5–7 días. Cada entregable es funcional, probado en múltiples dispositivos y listo para usar desde el día uno.</p>
+          <div class="tl-pills">
+            <span class="tl-pill">5–7 días para web</span>
+            <span class="tl-pill">Testing completo</span>
+            <span class="tl-pill">Entregable 100% funcional</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="tl-step">
+        <div class="tl-num-wrap">
+          <div class="tl-num">04</div>
+        </div>
+        <div class="tl-body">
+          <div class="tl-overline">Post-lanzamiento</div>
+          <h3>Lanzamiento y soporte continuo</h3>
+          <p>No desaparecemos después de entregar. Te acompañamos en el lanzamiento, resolvemos dudas y ofrecemos soporte y estrategia continua para que tu inversión siga creciendo. Somos tu equipo digital de confianza para lo que venga después.</p>
+          <div class="tl-pills">
+            <span class="tl-pill">Soporte post-entrega</span>
+            <span class="tl-pill">Ajustes y mejoras</span>
+            <span class="tl-pill">Estrategia mensual disponible</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
 </section>
 
-<!-- TESTIMONIALS -->
-<section class="testimonials-section">
-    <div class="container">
-        <h2 class="section-title">Testimonios de <span class="cyan">Clientes Reales</span> que Confían en Nuestra IA</h2>
+<hr class="arc-divider bright">
 
-        <div class="testimonials-grid">
-            <div class="testimonial-card">
-                <div class="stars">⭐⭐⭐⭐⭐</div>
-                <div class="testimonial-text">"Mi página web cambió completamente mi negocio. Ahora recibo consultas de personas que me encuentran en Google. ¡La mejor inversión que he hecho!"</div>
-                <div class="testimonial-author">Dra. María González</div>
-                <div class="testimonial-role">Psicóloga Clínica - CDMX</div>
-            </div>
-
-            <div class="testimonial-card">
-                <div class="stars">⭐⭐⭐⭐⭐</div>
-                <div class="testimonial-text">"Profesional, moderno y los posts me ahorraron muchas horas de trabajo. Muy recomendado para emprendedores que no tienen tiempo para diseño."</div>
-                <div class="testimonial-author">Lic. Carlos Méndez</div>
-                <div class="testimonial-role">Abogado Tributarista - Monterrey</div>
-            </div>
-
-            <div class="testimonial-card">
-                <div class="stars">⭐⭐⭐⭐⭐</div>
-                <div class="testimonial-text">"El formulario de contacto integrado hace muy fácil que mis clientes potenciales se comuniquen. Excelente relación precio-calidad."</div>
-                <div class="testimonial-author">Ing. Laura Rodríguez</div>
-                <div class="testimonial-role">Coach de Negocios - Guadalajara</div>
-            </div>
-        </div>
+<!-- ═══════════════════════════════════
+     PROYECTOS
+═══════════════════════════════════ -->
+<section id="proyectos" class="sec sec-alt2">
+  <div class="container">
+    <div class="sec-header fade">
+      <div class="tag">Proyectos</div>
+      <h2 class="sec-title">Trabajo real,<br><span>resultados reales.</span></h2>
+      <p class="sec-lead">Algunos de los proyectos en los que hemos trabajado recientemente.</p>
     </div>
+  </div>
+
+  <div style="max-width:1160px;margin:0 auto;padding:0 64px">
+    <div class="proyectos-grid fade">
+
+      <!-- Hotel La Parroquia -->
+      <div class="proy-card">
+        <div class="proy-bg" style="background-image:url('hotel.jpg');background-position:center top"></div>
+        <div class="proy-overlay"></div>
+        <div class="proy-content">
+          <div class="proy-left">
+            <div class="proy-industry">Hospitalidad · Turismo</div>
+            <h3>Hotel La Parroquia</h3>
+            <p>Rediseño web completo con estética colonial + chatbot de reservas en WhatsApp: 21 nodos de flujo, consulta de disponibilidad en tiempo real, registro automático en Google Sheets y notificación instantánea al staff.</p>
+          </div>
+          <div class="proy-stats">
+            <div class="proy-stat">
+              <div class="ps-num">21</div>
+              <div class="ps-label">Nodos en el chatbot</div>
+            </div>
+            <div class="proy-stat">
+              <div class="ps-num">24<em>/7</em></div>
+              <div class="ps-label">Atención automática</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Northpoint -->
+      <div class="proy-card">
+        <div class="proy-bg" style="background-image:url('https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?q=80&w=1600&auto=format&fit=crop')"></div>
+        <div class="proy-overlay"></div>
+        <div class="proy-content">
+          <div class="proy-left">
+            <div class="proy-industry">Finanzas · Capital</div>
+            <h3>Northpoint Capital</h3>
+            <p>Landing page premium + campaña Instagram completa: 6 posts de parrilla, 12 posts de torneo, 21 stories, 7 highlights covers y 12 carruseles. Más 6 documentos estratégicos: reporte LATAM, modelo financiero y arquitectura legal.</p>
+          </div>
+          <div class="proy-stats">
+            <div class="proy-stat">
+              <div class="ps-num">58<em>+</em></div>
+              <div class="ps-label">Piezas de contenido</div>
+            </div>
+            <div class="proy-stat">
+              <div class="ps-num">6</div>
+              <div class="ps-label">Docs estratégicos</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Buper -->
+      <div class="proy-card">
+        <div class="proy-bg" style="background-image:url('https://images.unsplash.com/photo-1586023492125-27b2c045efd7?q=80&w=1600&auto=format&fit=crop')"></div>
+        <div class="proy-overlay"></div>
+        <div class="proy-content">
+          <div class="proy-left">
+            <div class="proy-industry">Decoración · Retail</div>
+            <h3>Buper</h3>
+            <p>Branding e identidad visual completa desde cero: logo, paleta, guía de marca y sistema de diseño. Campaña Instagram con posts dark-moody estilo blackout y estrategia editorial mensual alineada a la marca.</p>
+          </div>
+          <div class="proy-stats">
+            <div class="proy-stat">
+              <div class="ps-num">1</div>
+              <div class="ps-label">Identidad de marca completa</div>
+            </div>
+            <div class="proy-stat">
+              <div class="ps-num">12<em>+</em></div>
+              <div class="ps-label">Posts diseñados</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- BalanzByCris -->
+      <div class="proy-card">
+        <div class="proy-bg" style="background-image:url('cris.jpg');background-position:center 20%"></div>
+        <div class="proy-overlay"></div>
+        <div class="proy-content">
+          <div class="proy-left">
+            <div class="proy-industry">Fitness · Wellness · Desarrollo Personal</div>
+            <h3>BalanzByCris</h3>
+            <p>Hub digital completo para influencer de wellness: 6 versiones de landing page hasta dar con el diseño ganador, media kit ejecutivo para colaboraciones B2B y B2C, investigación de customer personas, journey map y estrategia de pricing.</p>
+          </div>
+          <div class="proy-stats">
+            <div class="proy-stat">
+              <div class="ps-num">6</div>
+              <div class="ps-label">Versiones de landing</div>
+            </div>
+            <div class="proy-stat">
+              <div class="ps-num">1</div>
+              <div class="ps-label">Media kit ejecutivo</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bywell -->
+      <div class="proy-card">
+        <div class="proy-bg" style="background:linear-gradient(135deg,#0a1628 0%,#1a0a2e 50%,#0d1f3c 100%);background-image:url('https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?q=80&w=1600&auto=format&fit=crop');background-blend-mode:multiply"></div>
+        <div class="proy-overlay"></div>
+        <div class="proy-content">
+          <div class="proy-left">
+            <div class="proy-industry">Fitness · E-commerce · Meta Ads</div>
+            <h3>Bywell</h3>
+            <p>Auditoría completa (68% abandono de carrito, conversión 3/10) → e-commerce rediseñado desde cero + bot de ventas WhatsApp + campaña Meta Ads activa. Del diagnóstico a la tienda en funcionamiento, todo en un solo proyecto integrado.</p>
+          </div>
+          <div class="proy-stats">
+            <div class="proy-stat">
+              <div class="ps-num">68<em>%</em></div>
+              <div class="ps-label">Abandono corregido</div>
+            </div>
+            <div class="proy-stat">
+              <div class="ps-num">3<em>en1</em></div>
+              <div class="ps-label">Web + Bot + Ads</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
 </section>
 
-<!-- FAQ SECTION -->
-<section class="faq-section" id="faq">
-    <div class="container">
-        <h2 class="section-title">Preguntas <span class="cyan">Frecuentes</span></h2>
+<hr class="arc-divider">
 
-        <div class="faq-container">
-            <div class="faq-item" onclick="toggleFAQ(this)">
-                <div class="faq-question">
-                    🤖 ¿Cómo funciona exactamente la IA en el diseño?
-                    <span class="faq-toggle">+</span>
-                </div>
-                <div class="faq-answer">
-                    Nuestra IA analiza tu profesión, servicios, competencia local y tendencias de diseño para crear un layout único y optimizado. Luego un profesional humano revisa cada detalle para asegurar que refleje tu marca perfectamente.
-                </div>
-            </div>
-
-            <div class="faq-item" onclick="toggleFAQ(this)">
-                <div class="faq-question">
-                    🔒 ¿Es seguro usar IA para diseñar mi web?
-                    <span class="faq-toggle">+</span>
-                </div>
-                <div class="faq-answer">
-                    100% seguro. La IA es solo una herramienta para generar el diseño inicial rápidamente. Un especialista humano revisa, ajusta y perfecciona antes de lanzar. Tu información nunca se comparte con terceros.
-                </div>
-            </div>
-
-            <div class="faq-item" onclick="toggleFAQ(this)">
-                <div class="faq-question">
-                    ⏱️ ¿Realmente se entrega en 5-7 días?
-                    <span class="faq-toggle">+</span>
-                </div>
-                <div class="faq-answer">
-                    Sí. La IA genera el diseño en horas (no días). Luego nuestro equipo hace revisión humana en 24-48h, y está lista. El onboarding es una llamada de 20 minutos para darle toda la información a la IA.
-                </div>
-            </div>
-
-            <div class="faq-item" onclick="toggleFAQ(this)">
-                <div class="faq-question">
-                    ✏️ ¿Puedo hacer cambios después si la IA no me gustó?
-                    <span class="faq-toggle">+</span>
-                </div>
-                <div class="faq-answer">
-                    Sí. Incluye revisiones ilimitadas durante el desarrollo. Si hay algo que cambiar, nos lo dices y ya sea la IA o nosotros lo ajustamos. Queremos que quedes 100% satisfecho.
-                </div>
-            </div>
-
-            <div class="faq-item" onclick="toggleFAQ(this)">
-                <div class="faq-question">
-                    📱 ¿Los posts generados por IA se ven profesionales?
-                    <span class="faq-toggle">+</span>
-                </div>
-                <div class="faq-answer">
-                    Muy profesionales. La IA crea 15 posts (imágenes + textos) diseñados para LinkedIn, Instagram y Facebook con tu identidad visual. Salen listos para publicar, pero los puedes adaptar a tu estilo personal si quieres.
-                </div>
-            </div>
-
-            <div class="faq-item" onclick="toggleFAQ(this)">
-                <div class="faq-question">
-                    🔍 ¿La IA genera el SEO automáticamente?
-                    <span class="faq-toggle">+</span>
-                </div>
-                <div class="faq-answer">
-                    Sí. Nuestros algoritmos optimizan automáticamente el SEO mientras diseñan. Esto significa que tu página aparece en Google desde el día uno, sin trabajo adicional de tu parte.
-                </div>
-            </div>
-
-            <div class="faq-item" onclick="toggleFAQ(this)">
-                <div class="faq-question">
-                    ✅ ¿Qué profesiones trabajan con Nexus?
-                    <span class="faq-toggle">+</span>
-                </div>
-                <div class="faq-answer">
-                    Abogados, psicólogos, médicos, coaches, consultores, emprendedores, freelancers y marcas personales. Si ofrecés servicios profesionales, la IA está entrenada para tu industria.
-                </div>
-            </div>
-        </div>
+<!-- ═══════════════════════════════════
+     TESTIMONIOS
+═══════════════════════════════════ -->
+<section id="testimonios" class="sec sec-alt2">
+  <div class="container">
+    <div class="sec-header fade">
+      <div class="tag">Clientes</div>
+      <h2 class="sec-title">Lo que dicen<br><span>quienes ya confiaron.</span></h2>
+      <p class="sec-lead">Resultados reales. Relaciones reales.</p>
     </div>
+    <div class="test-grid fade">
+
+      <div class="test-card">
+        <div class="test-quote">"</div>
+        <div class="test-tag">E-commerce · Bywell</div>
+        <div class="test-stars">
+          <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+        </div>
+        <p class="test-text">Teníamos una tienda que nadie terminaba de comprar. Gregorio auditó todo, nos dijo exactamente qué estaba mal y lo corrigió. Ahora tenemos un e-commerce que se ve profesional, el bot de WhatsApp responde solo y los anuncios de Meta ya están corriendo. Todo en un solo proyecto.</p>
+        <div class="test-author">
+          <div class="test-avatar av-cyan">A</div>
+          <div class="test-info">
+            <div class="test-name">Alejandra Medina</div>
+            <div class="test-role">Fundadora · Bywell Fitness</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="test-card">
+        <div class="test-quote">"</div>
+        <div class="test-tag">Web + Automatización · Hotel La Parroquia</div>
+        <div class="test-stars">
+          <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+        </div>
+        <p class="test-text">El chatbot de reservas fue un antes y un después. Antes contestábamos WhatsApp a las 2 de la mañana; ahora el sistema registra la reserva, bloquea la disponibilidad y nos avisa al instante. La página nueva también se ve mucho mejor y refleja bien lo que somos.</p>
+        <div class="test-author">
+          <div class="test-avatar av-violet">R</div>
+          <div class="test-info">
+            <div class="test-name">Roberto Sánchez</div>
+            <div class="test-role">Gerente General · Hotel La Parroquia</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="test-card">
+        <div class="test-quote">"</div>
+        <div class="test-tag">Landing · Media Kit · BalanzByCris</div>
+        <div class="test-stars">
+          <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+        </div>
+        <p class="test-text">Tenía claro quién soy, pero no sabía cómo comunicarlo visualmente. Nexus me ayudó a entender a mi audiencia, a estructurar mi propuesta de valor y a tener una landing y un media kit que por fin representen bien mi marca. Ya tengo conversaciones con marcas que antes no me respondían.</p>
+        <div class="test-author">
+          <div class="test-avatar av-white">C</div>
+          <div class="test-info">
+            <div class="test-name">Cris Vargas</div>
+            <div class="test-role">@balanzbycris · Wellness Coach</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
 </section>
 
-<!-- FORM SECTION -->
-<section class="form-section" id="register">
-    <div class="form-container">
-        <h2>Comienza Tu Transformación</h2>
-        <p>Completa el formulario. Agendaremos tu onboarding (menos de 20 min) y al día siguiente tendrás tu página lista.</p>
+<hr class="arc-divider">
 
-        <form onsubmit="handleSubmit(event)">
-            <div class="form-group">
-                <label for="name">Nombre Completo *</label>
-                <input type="text" id="name" name="name" required>
-            </div>
-
-            <div class="form-group">
-                <label for="email">Email *</label>
-                <input type="email" id="email" name="email" required>
-            </div>
-
-            <div class="form-group">
-                <label for="phone">WhatsApp/Teléfono *</label>
-                <input type="tel" id="phone" name="phone" required>
-            </div>
-
-            <div class="form-group">
-                <label for="profession">¿Cuál es tu profesión? *</label>
-                <select id="profession" name="profession" required>
-                    <option value="">Selecciona una opción</option>
-                    <option value="Abogado/a">Abogado/a</option>
-                    <option value="Psicólogo/a">Psicólogo/a</option>
-                    <option value="Doctor/a">Doctor/a</option>
-                    <option value="Coach">Coach o Consultor</option>
-                    <option value="Emprendedor">Emprendedor</option>
-                    <option value="Freelancer">Freelancer</option>
-                    <option value="Otro">Otro</option>
-                </select>
-            </div>
-
-            <button type="submit" class="form-submit">
-                🛒 Comprar Ahora - $4,399
-            </button>
-            <p style="text-align: center; font-size: 12px; color: rgba(255,255,255,0.7); margin-top: 16px;">
-                (Opciones de pago al confirmar)
-            </p>
-        </form>
+<!-- ═══════════════════════════════════
+     POR QUÉ NEXUS
+═══════════════════════════════════ -->
+<section id="porque" class="sec sec-alt">
+  <div class="container">
+    <div class="sec-header fade">
+      <div class="tag">Por qué Nexus</div>
+      <h2 class="sec-title">La diferencia está<br><span>en los detalles.</span></h2>
     </div>
+    <div class="porque-grid fade">
+
+      <div class="pq-card">
+        <svg class="pq-icon" viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+          <circle cx="22" cy="22" r="18"/>
+          <polyline points="12,22 19,29 33,15"/>
+        </svg>
+        <h3>Entrega en 5–7 días</h3>
+        <p>Lo que otras agencias tardan un mes, nosotros lo entregamos en días. Sin esperas innecesarias. Sin excusas. Tu tiempo es dinero.</p>
+      </div>
+
+      <div class="pq-card">
+        <svg class="pq-icon" viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+          <path d="M22 4l4 14h14l-11 8 4 14-11-8-11 8 4-14-11-8h14z"/>
+        </svg>
+        <h3>Diseñado para convertir</h3>
+        <p>Cada decisión de diseño tiene un objetivo: que los visitantes se conviertan en clientes. No diseñamos para portafolios.</p>
+      </div>
+
+      <div class="pq-card">
+        <svg class="pq-icon" viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+          <rect x="6" y="6" width="14" height="14" rx="2"/>
+          <rect x="24" y="6" width="14" height="14" rx="2"/>
+          <rect x="6" y="24" width="14" height="14" rx="2"/>
+          <rect x="24" y="24" width="14" height="14" rx="2"/>
+        </svg>
+        <h3>Todo en un solo lugar</h3>
+        <p>Web, contenido, automatización, branding — un solo equipo, una sola visión. Sin coordinar cinco proveedores diferentes.</p>
+      </div>
+
+      <div class="pq-card">
+        <svg class="pq-icon" viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+          <path d="M8 36V20l14-12 14 12v16"/>
+          <rect x="17" y="26" width="10" height="10"/>
+          <line x1="22" y1="8" x2="22" y2="14"/>
+        </svg>
+        <h3>Estrategia, no solo ejecución</h3>
+        <p>Antes de construir, pensamos. Te decimos qué necesitas y por qué — no solo lo que nos pides, sino lo que va a funcionar para tu negocio.</p>
+      </div>
+
+      <div class="pq-card">
+        <svg class="pq-icon" viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+          <path d="M21 15a2 2 0 012-2h14a2 2 0 012 2v14a2 2 0 01-2 2H23a2 2 0 01-2-2V15z"/>
+          <path d="M5 29a2 2 0 012-2h8M5 21h8M5 13h8"/>
+          <circle cx="9" cy="35" r="2"/>
+        </svg>
+        <h3>Comunicación directa</h3>
+        <p>Sin intermediarios. Sin tickets. Hablas directamente con quien hace el trabajo. Respuesta garantizada en menos de 2 horas.</p>
+      </div>
+
+      <div class="pq-card">
+        <svg class="pq-icon" viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+          <path d="M22 8c-7.7 0-14 6.3-14 14s6.3 14 14 14 14-6.3 14-14"/>
+          <path d="M30 8v8h8"/>
+          <path d="M22 16v6l4 4"/>
+        </svg>
+        <h3>Relación de largo plazo</h3>
+        <p>No desaparecemos después de entregar. Somos tu equipo digital de confianza para todo lo que venga después del lanzamiento.</p>
+      </div>
+
+    </div>
+  </div>
 </section>
 
-<!-- UPSELL MODAL -->
-<div id="upsellModal" class="modal">
-    <div class="modal-content">
-        <div class="modal-header">
-            <div class="modal-icon">📱</div>
-            <h2>¿Quieres Maximizar tu Presencia?</h2>
-            <p class="modal-subtitle">Agrega 15 posts profesionales para tus redes</p>
-        </div>
+<hr class="arc-divider bright">
 
-        <div class="modal-body">
-            <div class="modal-price">
-                <div class="modal-price-label">15 Posts Diseñados + Copywriting</div>
-                <div class="modal-price-amount">+$1,745</div>
-            </div>
-
-            <ul class="modal-benefits">
-                <li>15 posts diseñados profesionalmente</li>
-                <li>Copywriting optimizado para cada red</li>
-                <li>LinkedIn, Instagram y Facebook</li>
-                <li>Listos para publicar inmediatamente</li>
-                <li>Estilo consistente con tu marca</li>
-            </ul>
-
-            <p style="font-size: 13px; color: var(--gray); text-align: center;">
-                <strong>Total con upsell: $6,144</strong> (vs $8,000+ en agencias)
-            </p>
-        </div>
-
-        <div class="modal-actions">
-            <button class="btn-accept" onclick="confirmUpsell()">
-                ✅ Sí, Agregar Posts
-            </button>
-            <button class="btn-skip" onclick="skipUpsell()">
-                Continuar sin Posts
-            </button>
-        </div>
+<!-- ═══════════════════════════════════
+     PRECIOS
+═══════════════════════════════════ -->
+<section id="precios" class="sec">
+  <div class="container">
+    <div class="precios-header fade">
+      <div>
+        <div class="tag">Inversión</div>
+        <h2 class="sec-title">Precios claros,<br><span>sin sorpresas.</span></h2>
+      </div>
+      <div class="precios-note">
+        Precios en MXN + IVA.<br>
+        Proyectos a medida disponibles —<br>
+        contáctanos para una propuesta personalizada.
+      </div>
     </div>
-</div>
 
-<!-- FOOTER -->
+    <div class="precios-grid fade">
+
+      <!-- Esencial -->
+      <div class="precio-card">
+        <div class="pc-tier">Esencial</div>
+        <div class="pc-desde">Desde</div>
+        <div class="pc-monto"><span>$</span>4,399</div>
+        <div class="pc-desc">Para profesionales y negocios que necesitan presencia digital sólida desde el primer día.</div>
+        <ul class="pc-list">
+          <li>
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="20 6 9 17 4 12"/></svg>
+            Página web profesional (hasta 5 secciones)
+          </li>
+          <li>
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="20 6 9 17 4 12"/></svg>
+            Diseño responsive mobile-first
+          </li>
+          <li>
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="20 6 9 17 4 12"/></svg>
+            Hosting primer año incluido
+          </li>
+          <li>
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="20 6 9 17 4 12"/></svg>
+            Formulario de contacto funcional
+          </li>
+          <li>
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="20 6 9 17 4 12"/></svg>
+            SEO base (metatags + velocidad)
+          </li>
+          <li>
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="20 6 9 17 4 12"/></svg>
+            Entrega en 5–7 días hábiles
+          </li>
+          <li>
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="20 6 9 17 4 12"/></svg>
+            Soporte 30 días post-lanzamiento
+          </li>
+        </ul>
+        <button onclick="abrirUpsell()" class="btn-pc btn-pc-ghost">Quiero este →</button>
+      </div>
+
+      <!-- Crecimiento (destacado) -->
+      <div class="precio-card destacado">
+        <div class="dest-badge">Más popular</div>
+        <div class="pc-tier">Crecimiento</div>
+        <div class="pc-desde">Desde</div>
+        <div class="pc-monto"><span>$</span>18,000</div>
+        <div class="pc-desc">Web completa + e-commerce + contenido para redes. Todo lo que necesitas para crecer online en un paquete integrado.</div>
+        <ul class="pc-list">
+          <li>
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="20 6 9 17 4 12"/></svg>
+            Todo del paquete Esencial
+          </li>
+          <li>
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="20 6 9 17 4 12"/></svg>
+            E-commerce completo (catálogo + pagos)
+          </li>
+          <li>
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="20 6 9 17 4 12"/></svg>
+            15 posts diseñados para redes sociales
+          </li>
+          <li>
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="20 6 9 17 4 12"/></svg>
+            Estrategia editorial del primer mes
+          </li>
+          <li>
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="20 6 9 17 4 12"/></svg>
+            Integración WhatsApp Business
+          </li>
+          <li>
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="20 6 9 17 4 12"/></svg>
+            Panel de administración de tienda
+          </li>
+          <li>
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="20 6 9 17 4 12"/></svg>
+            Soporte 60 días post-lanzamiento
+          </li>
+        </ul>
+        <button onclick="irAStripe('crecimiento')" class="btn-pc btn-pc-primary">Comprar ahora →</button>
+      </div>
+
+      <!-- Ecosistema -->
+      <div class="precio-card">
+        <div class="pc-tier">Ecosistema</div>
+        <div class="pc-desde">Desde</div>
+        <div class="pc-monto"><span>$</span>35,000</div>
+        <div class="pc-desc">Para negocios que quieren automatizar, escalar y delegar su ecosistema digital completo a un equipo especializado.</div>
+        <ul class="pc-list">
+          <li>
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="20 6 9 17 4 12"/></svg>
+            Todo del paquete Crecimiento
+          </li>
+          <li>
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="20 6 9 17 4 12"/></svg>
+            Branding e identidad visual completa
+          </li>
+          <li>
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="20 6 9 17 4 12"/></svg>
+            Chatbot WhatsApp (hasta 25 nodos)
+          </li>
+          <li>
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="20 6 9 17 4 12"/></svg>
+            Chatbot de atención / reservas WhatsApp (WATI + Apps Script + Sheets)
+          </li>
+          <li>
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="20 6 9 17 4 12"/></svg>
+            CRM básico + reportes automáticos
+          </li>
+          <li>
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="20 6 9 17 4 12"/></svg>
+            30 posts mensuales (diseño + copy)
+          </li>
+          <li>
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="20 6 9 17 4 12"/></svg>
+            Soporte mensual continuo incluido
+          </li>
+        </ul>
+        <button onclick="irAStripe('ecosistema')" class="btn-pc btn-pc-ghost">Comprar ahora →</button>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<hr class="arc-divider">
+
+<!-- ═══════════════════════════════════
+     CTA FINAL
+═══════════════════════════════════ -->
+<section class="cta-sec">
+  <div class="container">
+    <div class="cta-box fade">
+      <div class="cta-glow-c"></div>
+      <h2>¿Listo para construir<br>algo que funcione?</h2>
+      <p>Cuéntanos sobre tu negocio. En 30 minutos te decimos exactamente qué necesitas y cómo podemos ayudarte.</p>
+      <div class="cta-btns">
+        <a href="https://wa.me/524431009366?text=Hola%2C+quiero+hablar+sobre+mi+proyecto+digital+con+Nexus+Digital" target="_blank" class="btn-wa">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          Escribirnos por WhatsApp
+        </a>
+        <a href="mailto:hola@nexusdigital.mx" class="btn-ghost">
+          O manda un email
+        </a>
+      </div>
+      <div class="cta-info">
+        <div class="ci-item">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          México
+        </div>
+        <div class="ci-item">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6A19.79 19.79 0 012.12 4.18 2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+          +52 443 100 9366
+        </div>
+        <div class="ci-item">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          Respuesta en menos de 2 horas
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════
+     FOOTER
+═══════════════════════════════════ -->
 <footer>
-    <p>&copy; 2026 <strong>NEXUS DIGITAL</strong> - Diseño Web Profesional con IA</p>
-    <p style="font-size: 12px; margin-top: 12px;">Soluciones de presencia digital para profesionales, emprendedores y negocios en toda México</p>
+  <a href="#" class="logo">
+    <svg class="logo-hex" viewBox="0 0 30 30" fill="none">
+      <polygon points="15,2 27,8.5 27,21.5 15,28 3,21.5 3,8.5" stroke="#00C8F0" stroke-width="1.4" fill="none"/>
+      <circle cx="15" cy="15" r="2.5" fill="#00C8F0"/>
+    </svg>
+    Nexus Digital
+  </a>
+  <div class="fc">© 2026 Nexus Digital · Todos los derechos reservados</div>
+  <div class="fl">
+    <a href="#servicios">Servicios</a>
+    <a href="#proceso">Proceso</a>
+    <a href="#proyectos">Proyectos</a>
+    <a href="https://wa.me/524431009366" target="_blank">WhatsApp</a>
+  </div>
 </footer>
 
+<!-- ═══════════════════════════════════
+     MODAL UPSELL (ESENCIAL)
+═══════════════════════════════════ -->
+<div id="upsell-overlay" style="display:none;position:fixed;inset:0;z-index:200;background:rgba(7,9,15,.85);backdrop-filter:blur(8px);align-items:center;justify-content:center;padding:24px">
+  <div style="background:#0C1018;border:1px solid rgba(0,200,240,.2);border-radius:20px;padding:52px;max-width:520px;width:100%;position:relative">
+    <button onclick="cerrarUpsell()" style="position:absolute;top:20px;right:20px;background:none;border:none;color:#9AAACF;font-size:22px;cursor:pointer;line-height:1">✕</button>
+
+    <div style="font-family:'Space Grotesk',sans-serif;font-size:11px;font-weight:600;letter-spacing:1.8px;text-transform:uppercase;color:#00C8F0;margin-bottom:16px">Paquete Esencial · $4,399 MXN</div>
+    <h3 style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:26px;letter-spacing:-.6px;margin-bottom:12px;line-height:1.2;color:#ECF0FF">¿Le sumamos contenido para Instagram?</h3>
+    <p style="font-size:14px;color:#9AAACF;margin-bottom:32px;line-height:1.7">En el siguiente paso puedes agregar <strong style="color:#ECF0FF">15 posts diseñados con copy incluido</strong> — listos para publicar en Instagram. Lo verás como opción recomendada directamente en el checkout.</p>
+
+    <!-- CTA único -->
+    <div onclick="seleccionarUpsell('esencial')"
+      style="border:2px solid #00C8F0;border-radius:12px;padding:22px 28px;margin-bottom:20px;cursor:pointer;background:rgba(0,200,240,.06);display:flex;justify-content:space-between;align-items:center;gap:16px;transition:background .2s"
+      onmouseover="this.style.background='rgba(0,200,240,.12)'" onmouseout="this.style.background='rgba(0,200,240,.06)'">
+      <div>
+        <div style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:17px;color:#ECF0FF;margin-bottom:4px">Ir al checkout →</div>
+        <div style="font-size:13px;color:#9AAACF">Podrás agregar los posts de Instagram ahí</div>
+      </div>
+      <div style="background:#00C8F0;color:#07090F;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:14px;padding:10px 20px;border-radius:8px;white-space:nowrap">Pagar con Stripe</div>
+    </div>
+
+    <p style="font-size:12px;color:#687094;text-align:center">Pago 100% seguro · Tarjeta o OXXO</p>
+  </div>
+</div>
+
+<style>
+#upsell-overlay.visible{display:flex!important}
+#opcion-a:hover{border-color:rgba(255,255,255,.25)!important}
+#opcion-b:hover{background:rgba(0,200,240,.1)!important}
+</style>
+
 <script>
-    let stripeInstance;
-    let checkoutInProgress = false;
+const io = new IntersectionObserver(
+  entries => entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } }),
+  {threshold:0.08, rootMargin:'0px 0px -32px 0px'}
+);
+document.querySelectorAll('.fade').forEach(el => io.observe(el));
 
-    // === TIMER FUNCTION ===
-    function startTimer() {
-        let timeLeft = 600; // 10 minutos en segundos
-        const timerDisplay = document.getElementById('timerDisplay');
-        const timerContainer = document.getElementById('timerContainer');
+// Nav active link
+const secs = [...document.querySelectorAll('section[id]')];
+const links = [...document.querySelectorAll('.nav-links a')];
+window.addEventListener('scroll', () => {
+  let cur = '';
+  secs.forEach(s => { if(scrollY >= s.offsetTop - 100) cur = s.id; });
+  links.forEach(a => { a.style.color = a.getAttribute('href')==='#'+cur ? 'var(--white)' : ''; });
+}, {passive:true});
 
-        const timerInterval = setInterval(() => {
-            const minutes = Math.floor(timeLeft / 60);
-            const seconds = timeLeft % 60;
-            
-            // Formato MM:SS
-            timerDisplay.textContent = 
-                String(minutes).padStart(2, '0') + ':' + 
-                String(seconds).padStart(2, '0');
+// ── STRIPE PAYMENT LINKS ─────────────────────────────────────────────────────
+// ⚠️  Reemplaza estas URLs con tus Payment Links de Stripe Dashboard
+// Ve a dashboard.stripe.com → Payment Links → + Crear → copia la URL
+const STRIPE_LINKS = {
+  'esencial':      'https://buy.stripe.com/eVqdRb0lk5l5dtV0w0eEo04',
+  'esencial-plus': 'https://buy.stripe.com/eVqdRb0lk5l5dtV0w0eEo04',
+  'crecimiento':   'https://buy.stripe.com/5kQdRb3xw4h161t2E8eEo01',
+  'ecosistema':    'https://buy.stripe.com/dRm28tgki8xh9dF7YseEo02',
+};
 
-            // Cambiar color si faltan menos de 2 minutos
-            if (timeLeft < 120) {
-                timerContainer.classList.add('timer-warning');
-            }
+function irAStripe(plan) {
+  const url = STRIPE_LINKS[plan];
+  if (!url || url.includes('REEMPLAZA')) {
+    // Mientras no haya links configurados → WhatsApp como fallback
+    const msgs = {
+      crecimiento: 'Me+interesa+el+paquete+Crecimiento',
+      ecosistema:  'Me+interesa+el+paquete+Ecosistema',
+    };
+    window.open('https://wa.me/524431009366?text=' + (msgs[plan] || 'Hola'), '_blank');
+    return;
+  }
+  window.location.href = url;
+}
 
-            // Si llega a 0, reiniciar
-            if (timeLeft <= 0) {
-                timeLeft = 600;
-                timerContainer.classList.remove('timer-warning');
-            }
-
-            timeLeft--;
-        }, 1000);
-    }
-
-    // Iniciar timer cuando carga la página
-    window.addEventListener('load', startTimer);
-
-    function toggleFAQ(element) {
-        element.classList.toggle('active');
-        
-        // Cerrar otros items
-        document.querySelectorAll('.faq-item').forEach(item => {
-            if (item !== element && item.classList.contains('active')) {
-                item.classList.remove('active');
-            }
-        });
-    }
-
-    async function getStripeInstance() {
-        if (stripeInstance) {
-            return stripeInstance;
-        }
-
-        const response = await fetch('/api/config');
-        if (!response.ok) {
-            throw new Error('No se pudo cargar la configuración pública.');
-        }
-        const config = await response.json();
-
-        if (!config.stripePublicKey) {
-            throw new Error('Falta STRIPE_PUBLIC_KEY en el servidor.');
-        }
-
-        stripeInstance = Stripe(config.stripePublicKey);
-        return stripeInstance;
-    }
-
-    async function redirectToCheckout(hasUpsell) {
-        if (checkoutInProgress) {
-            return;
-        }
-
-        const data = window.customerData;
-        try {
-            checkoutInProgress = true;
-            const response = await fetch('/api/create-checkout-session', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ ...data, hasUpsell })
-            });
-            if (!response.ok) {
-                const failure = await response.json();
-                throw new Error(failure.error || 'No se pudo iniciar el checkout.');
-            }
-            const { sessionId, error } = await response.json();
-            if (error) { alert('Error: ' + error); return; }
-            const stripe = await getStripeInstance();
-            await stripe.redirectToCheckout({ sessionId });
-        } catch (err) {
-            alert('Error al conectar con el servidor: ' + err.message);
-        } finally {
-            checkoutInProgress = false;
-        }
-    }
-
-    function handleSubmit(event) {
-        event.preventDefault();
-
-        const name = document.getElementById('name').value;
-        const email = document.getElementById('email').value;
-        const phone = document.getElementById('phone').value;
-
-        const profession = document.getElementById('profession').value;
-
-        // Guardar datos del cliente
-        window.customerData = { name, email, phone, profession };
-
-        // Mostrar modal de upsell
-        document.getElementById('upsellModal').classList.add('show');
-        document.body.style.overflow = 'hidden';
-
-        // Actualizar counter
-        const counter = document.getElementById('counter');
-        const currentValue = parseInt(counter.textContent);
-        if (currentValue > 1) {
-            counter.textContent = currentValue - 1;
-        }
-
-        // No enviar formulario aún
-        event.target.reset();
-    }
-
-    function confirmUpsell() {
-        document.getElementById('upsellModal').classList.remove('show');
-        document.body.style.overflow = '';
-        redirectToCheckout(true);
-    }
-
-    function skipUpsell() {
-        document.getElementById('upsellModal').classList.remove('show');
-        document.body.style.overflow = '';
-        redirectToCheckout(false);
-    }
-
-    // Simular counter inicial
-    window.addEventListener('load', () => {
-        const counter = document.getElementById('counter');
-        const randomSpots = Math.floor(Math.random() * 5) + 26;
-        counter.textContent = randomSpots;
-    });
+// ── UPSELL MODAL ──────────────────────────────────────────────────────────────
+function abrirUpsell() {
+  document.getElementById('upsell-overlay').classList.add('visible');
+  document.body.style.overflow = 'hidden';
+}
+function cerrarUpsell() {
+  document.getElementById('upsell-overlay').classList.remove('visible');
+  document.body.style.overflow = '';
+}
+function seleccionarUpsell(plan) {
+  cerrarUpsell();
+  irAStripe(plan);
+}
+// Cerrar con click fuera del modal
+document.getElementById('upsell-overlay').addEventListener('click', function(e) {
+  if (e.target === this) cerrarUpsell();
+});
+document.addEventListener('keydown', e => { if (e.key === 'Escape') cerrarUpsell(); });
 </script>
-
 </body>
 </html>
