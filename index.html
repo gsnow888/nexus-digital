@@ -952,6 +952,51 @@ footer .logo{font-size:16px}
   50%{transform:translateY(-6px)}
 }
 .float-idle{animation:float-idle 5s ease-in-out infinite}
+
+/* ── rec-badge: inline, no obstruye ── */
+.rec-badge{
+  position:relative!important;top:auto!important;right:auto!important;
+  display:inline-flex;align-items:center;gap:5px;
+  margin-bottom:16px;align-self:flex-start
+}
+
+/* ── Proceso: hover image reveal ── */
+.tl-step{transition:background .3s,box-shadow .3s;border-radius:16px}
+.tl-step:hover{background:rgba(0,200,240,.03);box-shadow:0 0 0 1px rgba(0,200,240,.08)}
+.tl-img{
+  width:220px;min-width:220px;height:155px;
+  border-radius:12px;overflow:hidden;
+  opacity:0;transform:translateX(18px);
+  transition:opacity .45s ease,transform .45s ease;
+  align-self:center;flex-shrink:0
+}
+.tl-step:hover .tl-img{opacity:1;transform:translateX(0)}
+.tl-img img{width:100%;height:100%;object-fit:cover;display:block}
+@media(max-width:900px){.tl-img{display:none}}
+
+/* ── Proyectos: centrar header ── */
+#proyectos .sec-header{text-align:center}
+#proyectos .sec-header .sec-lead{margin:0 auto}
+
+/* ── Testimonios: centrar ── */
+#testimonios .sec-header{text-align:center}
+#testimonios .sec-header .sec-lead{margin:0 auto}
+.test-text{text-align:center}
+.test-author{justify-content:center}
+
+/* ── Por qué Nexus: centrar + hover expand ── */
+#porque .sec-header{text-align:center}
+.pq-extra{
+  overflow:hidden;max-height:0;opacity:0;
+  transition:max-height .5s ease,opacity .4s ease;
+  margin-top:0
+}
+.pq-card:hover .pq-extra{max-height:220px;opacity:1;margin-top:14px}
+.pq-extra img{
+  width:100%;height:105px;object-fit:cover;
+  border-radius:8px;margin-bottom:8px;display:block
+}
+.pq-extra-detail{font-size:12px;color:var(--muted);line-height:1.65;font-style:italic}
 </style>
 </head>
 <body>
@@ -1152,7 +1197,6 @@ footer .logo{font-size:16px}
     <!-- Branding (recomendado) -->
     <div class="srv-card">
       <div class="srv-video-wrap"><video autoplay muted loop playsinline data-job="1535b2d3-ae18-453a-a7f9-7a235d289c3f" src="https://d8j0ntlcm91z4.cloudfront.net/user_3D23yzFtlb1xro9OnHvN4Qfo7fR/hf_20260702_183110_1535b2d3-ae18-453a-a7f9-7a235d289c3f.mp4"></video></div>
-      <div class="rec-badge">★ Recomendado</div>
       <div class="srv-icon ic-rose" style="position:relative;z-index:1">
         <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#F0507A" stroke-width="1.6" stroke-linecap="round">
           <circle cx="12" cy="12" r="10"/>
@@ -1163,6 +1207,7 @@ footer .logo{font-size:16px}
           <line x1="4.93" y1="19.07" x2="9.17" y2="14.83"/>
         </svg>
       </div>
+      <div class="rec-badge" style="position:relative;z-index:1">★ Recomendado</div>
       <h3>Branding e Identidad Visual</h3>
       <p>La marca antes de la web. Logo, paleta, tipografías y guía de estilo. Una identidad visual sólida hace que todo lo demás funcione mejor — y genere confianza desde el primer vistazo.</p>
       <ul class="srv-bullets">
@@ -1228,6 +1273,7 @@ footer .logo{font-size:16px}
             <span class="tl-pill">Alcance y plazos confirmados</span>
           </div>
         </div>
+        <div class="tl-img"><img src="https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=600&auto=format&fit=crop" alt="Estrategia y descubrimiento"></div>
       </div>
 
       <div class="tl-step">
@@ -1244,6 +1290,7 @@ footer .logo{font-size:16px}
             <span class="tl-pill">Mobile-first siempre</span>
           </div>
         </div>
+        <div class="tl-img"><img src="https://images.unsplash.com/photo-1558655146-9f40138edfeb?q=80&w=600&auto=format&fit=crop" alt="Diseño UI/UX"></div>
       </div>
 
       <div class="tl-step">
@@ -1260,6 +1307,7 @@ footer .logo{font-size:16px}
             <span class="tl-pill">Entregable 100% funcional</span>
           </div>
         </div>
+        <div class="tl-img"><img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=600&auto=format&fit=crop" alt="Desarrollo web"></div>
       </div>
 
       <div class="tl-step">
@@ -1276,6 +1324,7 @@ footer .logo{font-size:16px}
             <span class="tl-pill">Estrategia mensual disponible</span>
           </div>
         </div>
+        <div class="tl-img"><img src="https://images.unsplash.com/photo-1551434678-e076c223a692?q=80&w=600&auto=format&fit=crop" alt="Lanzamiento"></div>
       </div>
 
     </div>
@@ -1301,7 +1350,7 @@ footer .logo{font-size:16px}
 
       <!-- Hotel La Parroquia -->
       <div class="proy-card">
-        <div class="proy-bg" style="background-image:url('hotel.jpg');background-position:center top"></div>
+        <div class="proy-bg" style="background-image:url('https://images.unsplash.com/photo-1566073771259-6a8506099945?q=80&w=1600&auto=format&fit=crop');background-position:center center"></div>
         <div class="proy-overlay"></div>
         <div class="proy-content">
           <div class="proy-left">
@@ -1370,7 +1419,7 @@ footer .logo{font-size:16px}
 
       <!-- BalanzByCris -->
       <div class="proy-card">
-        <div class="proy-bg" style="background-image:url('cris.jpg');background-position:center 20%"></div>
+        <div class="proy-bg" style="background-image:url('https://images.unsplash.com/photo-1571731956672-f2b94d7dd0cb?q=80&w=1600&auto=format&fit=crop');background-position:center 20%"></div>
         <div class="proy-overlay"></div>
         <div class="proy-content">
           <div class="proy-left">
@@ -1393,7 +1442,7 @@ footer .logo{font-size:16px}
 
       <!-- Bywell -->
       <div class="proy-card">
-        <div class="proy-bg" style="background:linear-gradient(135deg,#0a1628 0%,#1a0a2e 50%,#0d1f3c 100%);background-image:url('https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?q=80&w=1600&auto=format&fit=crop');background-blend-mode:multiply"></div>
+        <div class="proy-bg" style="background-image:url('https://d8j0ntlcm91z4.cloudfront.net/user_3D23yzFtlb1xro9OnHvN4Qfo7fR/hf_20260702_190135_fcd5b035-c8f4-4944-b16f-912866e2318b.png');background-position:center center;background-size:cover"></div>
         <div class="proy-overlay"></div>
         <div class="proy-content">
           <div class="proy-left">
@@ -1504,6 +1553,10 @@ footer .logo{font-size:16px}
         </svg>
         <h3>Tu negocio deja de perder clientes por mala presencia digital</h3>
         <p>Un sitio lento, genérico o desactualizado aleja clientes antes de que te conozcan. Lo corregimos en menos de una semana — con diseño que transmite confianza desde el primer segundo.</p>
+        <div class="pq-extra">
+          <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=500&auto=format&fit=crop" alt="Presencia digital">
+          <p class="pq-extra-detail">El 75% de los usuarios juzga la credibilidad de un negocio por su sitio web en menos de 5 segundos.</p>
+        </div>
       </div>
 
       <div class="pq-card">
@@ -1512,6 +1565,10 @@ footer .logo{font-size:16px}
         </svg>
         <h3>Dejamos de robarte horas respondiendo WhatsApp a las 2 AM</h3>
         <p>Con un chatbot bien configurado, tu negocio atiende, califica y registra leads automáticamente — sin que tú tengas que estar pegado al teléfono. Tú duermes; el bot trabaja.</p>
+        <div class="pq-extra">
+          <img src="https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?q=80&w=500&auto=format&fit=crop" alt="Chatbot WhatsApp">
+          <p class="pq-extra-detail">El 64% de los consumidores prefiere enviar un mensaje antes que llamar. Tu bot responde en segundos, a cualquier hora.</p>
+        </div>
       </div>
 
       <div class="pq-card">
@@ -1523,6 +1580,10 @@ footer .logo{font-size:16px}
         </svg>
         <h3>Sin coordinar cinco proveedores que nunca se entienden</h3>
         <p>Web, contenido, automatización, branding y anuncios — en un solo equipo con una sola visión. Menos fricción, más velocidad, resultados que se ven en el mismo mes.</p>
+        <div class="pq-extra">
+          <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=500&auto=format&fit=crop" alt="Equipo integrado">
+          <p class="pq-extra-detail">Un solo briefing, un solo interlocutor, una sola visión. Todo alineado desde el día uno, sin reuniones de coordinación infinitas.</p>
+        </div>
       </div>
 
       <div class="pq-card">
@@ -1531,8 +1592,12 @@ footer .logo{font-size:16px}
           <rect x="17" y="26" width="10" height="10"/>
           <line x1="22" y1="8" x2="22" y2="14"/>
         </svg>
-        <h3>Tu tienda online de vende 24/7, no solo cuando tú estás disponible</h3>
-        <p>Un e-commerce optimizado elimina la fricción en el carrito, acepta pagos automáticos y sigue vendiendo mientras tú duermes, vacacioans o te enfocar en crecer.</p>
+        <h3>Tu tienda online vende 24/7, no solo cuando tú estás disponible</h3>
+        <p>Un e-commerce optimizado elimina la fricción en el carrito, acepta pagos automáticos y sigue vendiendo mientras tú duermes, vacacionas o te enfocas en crecer.</p>
+        <div class="pq-extra">
+          <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?q=80&w=500&auto=format&fit=crop" alt="E-commerce 24/7">
+          <p class="pq-extra-detail">El 80% de las compras online ocurren fuera del horario de atención tradicional. Tu tienda nunca cierra.</p>
+        </div>
       </div>
 
       <div class="pq-card">
@@ -1543,6 +1608,10 @@ footer .logo{font-size:16px}
         </svg>
         <h3>Sin esperar semanas para una respuesta de tu agencia</h3>
         <p>Hablas directo con quien construye tu proyecto. Respuesta en menos de 2 horas. Sin tickets, sin intermediarios, sin "el diseñador está en otra reunión".</p>
+        <div class="pq-extra">
+          <img src="https://images.unsplash.com/photo-1516387938699-a93567ec168e?q=80&w=500&auto=format&fit=crop" alt="Respuesta rápida">
+          <p class="pq-extra-detail">Tiempo de respuesta promedio: menos de 2 horas. Sin tickets, sin escalaciones, sin esperas de 3 días para una respuesta.</p>
+        </div>
       </div>
 
       <div class="pq-card">
@@ -1553,6 +1622,10 @@ footer .logo{font-size:16px}
         </svg>
         <h3>No te dejamos solo después del lanzamiento</h3>
         <p>La mayoría de agencias desaparecen al entregar. Nosotros nos quedamos: soporte, mejoras, estrategia y escalabilidad. Tu inversión sigue creciendo con el tiempo.</p>
+        <div class="pq-extra">
+          <img src="https://images.unsplash.com/photo-1521791136064-7986c2920216?q=80&w=500&auto=format&fit=crop" alt="Soporte continuo">
+          <p class="pq-extra-detail">Revisiones mensuales, ajustes de rendimiento y estrategia continua. No entregamos y desaparecemos — nos quedamos como tu equipo.</p>
+        </div>
       </div>
 
     </div>
