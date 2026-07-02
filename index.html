@@ -1195,6 +1195,290 @@ footer .logo{font-size:16px}
   background-size:300% 300%;
   animation:heroGradDrift 14s ease infinite
 }
+
+/* ══════════════════════════════════════════════════════════════
+   PREMIUM MOBILE-FIRST REDESIGN
+   Auditoría completa — 17 puntos
+   Aplica sobre breakpoint 768px (sobrescribe reglas anteriores)
+══════════════════════════════════════════════════════════════ */
+@media(max-width:768px){
+
+  /* ── TOKENS MOBILE ─────────────────────────────────────── */
+  /* Ritmo horizontal consistente: 24px en toda la página */
+  :root{--mx:24px}
+
+  /* ── NAV ───────────────────────────────────────────────── */
+  nav{padding:0 var(--mx);height:62px}
+  .nav-links,.nav-cta{display:none!important}
+  .nav-hamburger{display:flex!important}
+
+  /* ── HERO ──────────────────────────────────────────────── */
+  .hero{padding:108px var(--mx) 72px;text-align:center}
+  .hero-inner{text-align:center}
+  .hero h1{
+    font-size:clamp(30px,8.8vw,40px);
+    line-height:1.17;letter-spacing:-1.2px;
+    margin-bottom:18px;max-width:100%
+  }
+  .hero-eyebrow{margin:0 auto 22px;font-size:11px}
+  .hero-desc{
+    font-size:15px;line-height:1.78;
+    margin:0 auto 36px;max-width:340px
+  }
+
+  /* Hero CTA — stacked, full-width, thumb-friendly */
+  .hero-actions{
+    flex-direction:column;align-items:stretch;
+    gap:12px;width:100%;
+    max-width:340px;margin:0 auto 52px
+  }
+  .btn-primary{
+    width:100%;justify-content:center;
+    padding:17px 24px;font-size:15px;
+    border-radius:12px;gap:10px
+  }
+  .btn-ghost{
+    width:100%;justify-content:center;
+    padding:15px 24px;font-size:14px;
+    border-radius:12px
+  }
+
+  /* ── METRIC CARDS — horizontal scroll elegante ─────────── */
+  .hero-metrics{
+    display:flex!important;
+    grid-template-columns:unset!important;
+    gap:12px;
+    overflow-x:auto;-webkit-overflow-scrolling:touch;
+    scrollbar-width:none;
+    margin:0 calc(-1 * var(--mx));
+    padding:0 var(--mx) 8px;
+    margin-top:0
+  }
+  .hero-metrics::-webkit-scrollbar{display:none}
+  .metric-card{min-width:164px;flex-shrink:0}
+  .metric-card-inner{padding:22px 18px;gap:6px}
+  .metric-num{font-size:30px}
+  .metric-label{font-size:10px;letter-spacing:1.1px}
+  .metric-sub{font-size:11px;line-height:1.6}
+
+  /* ── SECCIONES GENERALES ───────────────────────────────── */
+  .sec{padding:80px 0}
+  .container{padding:0 var(--mx)}
+
+  /* Headers de sección: más aire, centrado uniforme */
+  .sec-header{
+    margin-bottom:52px;text-align:center
+  }
+  .sec-header .sec-lead{
+    margin-left:auto;margin-right:auto;max-width:320px
+  }
+  .sec-title{
+    font-size:clamp(25px,7.2vw,32px);
+    letter-spacing:-0.8px;line-height:1.18
+  }
+  .sec-lead{font-size:15px;line-height:1.78}
+  .tag{display:inline-flex;margin-bottom:16px}
+
+  /* Separadores */
+  .arc-divider{margin:0}
+
+  /* ── SERVICIOS ─────────────────────────────────────────── */
+  .servicios-grid{
+    grid-template-columns:1fr;gap:16px
+  }
+  .srv-card{
+    padding:36px var(--mx);
+    border-radius:20px
+  }
+  .srv-icon{
+    width:58px;height:58px;border-radius:17px;
+    font-size:24px;margin-bottom:22px
+  }
+  .srv-card h3{
+    font-size:20px;letter-spacing:-0.4px;
+    margin-bottom:12px;line-height:1.25
+  }
+  .srv-card p{
+    font-size:14px;line-height:1.82;
+    margin-bottom:22px
+  }
+
+  /* Bullet points — el gran problema ─── */
+  .srv-bullets{gap:11px}
+  .srv-bullets li{
+    font-size:13.5px;line-height:1.72;
+    gap:10px;padding:1px 0;
+    align-items:flex-start
+  }
+  .srv-bullets li::before{
+    width:5px;height:5px;
+    margin-top:7px;flex-shrink:0
+  }
+
+  /* Videos de servicios — hint táctil si no hay autoplay */
+  .srv-video-hint{
+    display:block;
+    font-size:12px;color:var(--cyan);
+    margin-top:12px;letter-spacing:.3px;
+    opacity:.75
+  }
+
+  /* ── PROCESO / TIMELINE ────────────────────────────────── */
+  .timeline::before{left:22px;top:52px;bottom:52px}
+  .tl-step{
+    grid-template-columns:48px 1fr;
+    padding:40px 0;gap:0
+  }
+  .tl-num-wrap{padding-top:2px}
+  .tl-num{width:44px;height:44px;font-size:13px}
+  .tl-body{padding-left:18px;padding-right:0}
+  .tl-overline{
+    font-size:10px;letter-spacing:1.1px;
+    margin-bottom:9px
+  }
+  .tl-body h3{
+    font-size:19px;letter-spacing:-0.4px;
+    margin-bottom:11px;line-height:1.25
+  }
+  .tl-body p{
+    font-size:14px;line-height:1.82;
+    max-width:100%
+  }
+  .tl-pills{gap:7px;flex-wrap:wrap;margin-top:18px}
+  .tl-pill{font-size:11px;padding:5px 12px}
+
+  /* ── PROYECTOS ─────────────────────────────────────────── */
+  .proyectos-grid{gap:16px}
+  .proy-card{min-height:340px;border-radius:20px}
+  .proy-content{
+    flex-direction:column;align-items:flex-start;
+    padding:26px var(--mx);gap:18px
+  }
+  .proy-left{width:100%}
+  .proy-left h3{font-size:22px;letter-spacing:-0.5px;line-height:1.2}
+  .proy-left p{font-size:13px;line-height:1.75;margin-top:8px}
+  .proy-stats{
+    width:100%;padding:18px 20px;gap:18px
+  }
+  .proy-stat .ps-num{font-size:24px}
+  .proy-stat .ps-label{font-size:11px;line-height:1.4}
+
+  /* ── POR QUÉ NEXUS ─────────────────────────────────────── */
+  .porque-grid{
+    grid-template-columns:1fr;gap:14px
+  }
+  .pq-card{
+    padding:34px 26px;border-radius:20px
+  }
+  .pq-icon{margin-bottom:18px}
+  .pq-card h3{
+    font-size:18px;letter-spacing:-0.35px;
+    margin-bottom:11px;line-height:1.28
+  }
+  .pq-card p{font-size:14px;line-height:1.82}
+
+  /* pq-extra hover → en móvil siempre visible (no hay hover) */
+  .pq-extra{
+    max-height:none!important;opacity:1!important;
+    margin-top:14px!important
+  }
+  .pq-extra img{height:90px;border-radius:8px}
+  .pq-extra-detail{font-size:12.5px;line-height:1.68}
+
+  /* ── TESTIMONIOS ───────────────────────────────────────── */
+  .test-grid{grid-template-columns:1fr;gap:14px}
+  .test-card{
+    padding:32px 26px;border-radius:20px
+  }
+  .test-stars{margin-bottom:16px}
+  .test-text{
+    font-size:15px;line-height:1.82;
+    text-align:left;margin-bottom:24px
+  }
+  .test-author{
+    gap:14px;justify-content:flex-start
+  }
+  .test-av{width:44px;height:44px;font-size:14px}
+  .test-name{font-size:14px}
+  .test-role{font-size:12px}
+
+  /* ── PRECIOS ───────────────────────────────────────────── */
+  .precios-grid{grid-template-columns:1fr;gap:14px}
+  .precios-header{
+    flex-direction:column;gap:18px;
+    text-align:center;margin-bottom:36px
+  }
+  .precios-note{
+    border-left:none;border-top:2px solid rgba(0,200,240,.3);
+    padding-left:0;padding-top:14px;
+    max-width:100%;text-align:center
+  }
+  .precio-card{padding:36px 26px;border-radius:20px}
+  .pc-name{font-size:10.5px;letter-spacing:1.3px;margin-bottom:16px}
+  .pc-monto{font-size:38px;letter-spacing:-1px}
+  .pc-desc{font-size:13.5px;line-height:1.75;margin-bottom:22px}
+  .pc-features{gap:12px;margin-bottom:26px}
+  .pc-features li{
+    font-size:13.5px;line-height:1.68;gap:10px;
+    align-items:flex-start
+  }
+  .pc-features li svg,.pc-features li::before{margin-top:3px;flex-shrink:0}
+  .btn-pc{
+    padding:16px;font-size:14px;
+    width:100%;text-align:center
+  }
+  .precio-note-estimacion{
+    font-size:13px;line-height:1.78;
+    margin-top:28px;padding:20px;border-radius:14px
+  }
+
+  /* ── CTA FINAL ─────────────────────────────────────────── */
+  .cta-box{padding:56px var(--mx);border-radius:24px}
+  .cta-box h2{
+    font-size:clamp(25px,7vw,30px);
+    letter-spacing:-0.8px;margin-bottom:16px;line-height:1.2
+  }
+  .cta-box p{font-size:15px;line-height:1.78;margin-bottom:32px}
+  .cta-btns{
+    flex-direction:column;align-items:stretch;gap:12px
+  }
+  .btn-wa,.cta-btns .btn-ghost{
+    width:100%;justify-content:center;
+    padding:17px 24px;font-size:14px
+  }
+  .cta-info{
+    gap:18px;flex-direction:column;
+    align-items:center;margin-top:28px
+  }
+  .cta-info-item{font-size:13px}
+
+  /* ── FOOTER ────────────────────────────────────────────── */
+  footer{
+    flex-direction:column;text-align:center;
+    padding:28px var(--mx);gap:14px
+  }
+  .fl{justify-content:center;flex-wrap:wrap;gap:16px}
+
+  /* ── DYNAMIC ISLAND ─────────────────────────────────────── */
+  .dynamic-island{
+    font-size:12px;
+    padding:8px 16px 8px 10px;
+    bottom:18px;
+    max-width:calc(100vw - 32px)
+  }
+  .di-avatar{width:22px;height:22px;font-size:10px}
+}
+
+/* ── EXTRA SMALL: iPhone SE / Android pequeño ≤ 390px ──── */
+@media(max-width:390px){
+  .hero h1{font-size:27px;letter-spacing:-1px}
+  .sec-title{font-size:24px}
+  .metric-card{min-width:148px}
+  .metric-num{font-size:27px}
+  .srv-card,.pq-card,.test-card,.precio-card{padding:30px 20px}
+  .cta-box{padding:48px 20px}
+  .container{padding:0 18px}
+}
 </style>
 </head>
 <body>
