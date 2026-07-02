@@ -1800,10 +1800,19 @@ footer .logo{font-size:16px}
 
 <script>
 const io = new IntersectionObserver(
-  entries => entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } }),
+  entries => entries.forEach(e => {
+    if(e.isIntersecting){
+      e.target.classList.add('in');
+      e.target.style.animationPlayState = 'running';
+      io.unobserve(e.target);
+    }
+  }),
   {threshold:0.08, rootMargin:'0px 0px -32px 0px'}
 );
-document.querySelectorAll('.fade').forEach(el => io.observe(el));
+document.querySelectorAll('.fade,.fade-up').forEach(el => {
+  el.style.animationPlayState = 'paused';
+  io.observe(el);
+});
 
 // Nav active link
 const secs = [...document.querySelectorAll('section[id]')];
@@ -1913,20 +1922,7 @@ document.querySelectorAll('.srv-card').forEach(card => {
   });
 });
 
-// ── SCROLL REVEAL ──────────────────────────────────────────────────────────────
-const io = new IntersectionObserver((entries) => {
-  entries.forEach(e => {
-    if (e.isIntersecting) {
-      e.target.style.animationPlayState = 'running';
-      io.unobserve(e.target);
-    }
-  });
-}, { threshold: 0.1 });
-
-document.querySelectorAll('.fade,.fade-up').forEach(el => {
-  el.style.animationPlayState = 'paused';
-  io.observe(el);
-});
+// ── SCROLL REVEAL — handled by the single io observer above ────────────────
 </script>
 </body>
 </html>
