@@ -997,6 +997,204 @@ footer .logo{font-size:16px}
   border-radius:8px;margin-bottom:8px;display:block
 }
 .pq-extra-detail{font-size:12px;color:var(--muted);line-height:1.65;font-style:italic}
+
+/* ══════════════════════════════════════════════════════════════
+   CULT UI EQUIVALENTS — vanilla CSS/JS
+══════════════════════════════════════════════════════════════ */
+
+/* ── 1. COSMIC BUTTON ─────────────────────────────────────── */
+@keyframes cosmic-spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+
+.btn-primary{position:relative;overflow:hidden;z-index:0}
+.btn-primary::before{
+  content:'';position:absolute;inset:-2px;
+  background:conic-gradient(from 0deg,#00C8F0,#8B6CF6,#f0507a,#ffb347,#00C8F0);
+  border-radius:11px;z-index:-2;
+  animation:cosmic-spin 3s linear infinite;
+  opacity:0;transition:opacity .35s
+}
+.btn-primary::after{
+  content:'';position:absolute;inset:2px;
+  background:var(--cyan);border-radius:8px;z-index:-1
+}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 14px 44px rgba(0,200,240,.42)}
+.btn-primary:hover::before{opacity:1}
+
+.btn-shimmer{
+  position:absolute;top:0;left:-120%;width:55%;height:100%;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.28),transparent);
+  transform:skewX(-20deg);pointer-events:none;
+  transition:left .55s ease;z-index:1
+}
+.btn-primary:hover .btn-shimmer{left:160%}
+
+/* nav cta cosmic border */
+.nav-cta{position:relative;overflow:hidden;z-index:0}
+.nav-cta::before{
+  content:'';position:absolute;inset:-2px;
+  background:conic-gradient(from 0deg,#00C8F0,#8B6CF6,#f0507a,#00C8F0);
+  border-radius:10px;z-index:-1;
+  animation:cosmic-spin 3s linear infinite;
+  opacity:0;transition:opacity .3s
+}
+.nav-cta:hover::before{opacity:1}
+.nav-cta:hover{transform:translateY(-1px);box-shadow:0 6px 22px rgba(0,200,240,.32)}
+
+/* ── 2. TEXT ANIMATE H1 ───────────────────────────────────── */
+@keyframes wordBlurIn{
+  from{opacity:0;filter:blur(10px);transform:translateY(10px)}
+  to{opacity:1;filter:blur(0);transform:translateY(0)}
+}
+.hero h1.text-anim-ready .wanim{
+  display:inline-block;
+  opacity:0;
+  animation:wordBlurIn .65s cubic-bezier(.22,.68,0,1.2) both
+}
+
+/* ── 3. FAMILY DRAWER — mobile nav ───────────────────────── */
+.nav-hamburger{
+  display:none;background:none;border:none;cursor:pointer;
+  color:var(--white);padding:7px;
+  flex-direction:column;gap:5px;align-items:center;
+  border-radius:8px;transition:background .2s
+}
+.nav-hamburger:hover{background:rgba(255,255,255,.07)}
+.nav-hamburger span{
+  display:block;width:22px;height:2px;
+  background:var(--white);border-radius:2px;
+  transition:transform .32s cubic-bezier(.32,.72,0,1),opacity .2s
+}
+.nav-hamburger.ham-open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.nav-hamburger.ham-open span:nth-child(2){opacity:0;transform:scaleX(0)}
+.nav-hamburger.ham-open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+
+.drawer-backdrop{
+  position:fixed;inset:0;z-index:299;
+  background:rgba(7,9,15,.65);backdrop-filter:blur(5px);
+  opacity:0;pointer-events:none;transition:opacity .3s
+}
+.drawer-backdrop.drawer-open{opacity:1;pointer-events:auto}
+
+.drawer-panel{
+  position:fixed;top:0;right:0;bottom:0;
+  width:min(340px,82vw);z-index:300;
+  background:var(--navy2);
+  border-left:1px solid rgba(0,200,240,.12);
+  padding:84px 36px 48px;
+  transform:translateX(105%);
+  transition:transform .45s cubic-bezier(0.32,0.72,0,1);
+  display:flex;flex-direction:column;gap:2px;
+  overflow-y:auto
+}
+.drawer-panel.drawer-open{transform:translateX(0)}
+
+.drawer-close-btn{
+  position:absolute;top:20px;right:20px;
+  background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);
+  border-radius:8px;cursor:pointer;
+  color:var(--muted);font-size:15px;padding:8px 13px;
+  transition:background .2s,color .2s;line-height:1
+}
+.drawer-close-btn:hover{background:rgba(255,255,255,.12);color:var(--white)}
+
+.drawer-link{
+  color:var(--white);text-decoration:none;
+  font-family:'Space Grotesk',sans-serif;
+  font-size:22px;font-weight:600;
+  padding:17px 0;border-bottom:1px solid rgba(255,255,255,.07);
+  display:flex;align-items:center;justify-content:space-between;
+  transition:color .2s,padding-left .25s
+}
+.drawer-link:last-of-type{border-bottom:none}
+.drawer-link:hover{color:var(--cyan);padding-left:5px}
+.drawer-link .dl-arrow{opacity:.35;font-size:16px;transition:opacity .2s,transform .2s}
+.drawer-link:hover .dl-arrow{opacity:1;transform:translateX(4px)}
+
+.drawer-cta-btn{
+  margin-top:28px;background:var(--cyan);color:var(--navy);
+  padding:16px 24px;border-radius:9px;
+  font-family:'Space Grotesk',sans-serif;font-size:15px;font-weight:700;
+  text-align:center;text-decoration:none;display:block;
+  transition:transform .15s,box-shadow .2s
+}
+.drawer-cta-btn:hover{transform:translateY(-1px);box-shadow:0 8px 28px rgba(0,200,240,.32)}
+
+.drawer-footer-note{
+  margin-top:auto;padding-top:28px;
+  font-size:12px;color:var(--muted);line-height:1.6;
+  border-top:1px solid rgba(255,255,255,.06)
+}
+
+@media(max-width:768px){
+  .nav-hamburger{display:flex}
+  .nav-links,.nav-cta{display:none!important}
+}
+
+/* ── 4. DYNAMIC ISLAND — social proof pill ────────────────── */
+.dynamic-island{
+  position:fixed;bottom:26px;left:50%;
+  transform:translateX(-50%) translateY(120px);
+  z-index:150;
+  background:rgba(11,15,23,.93);
+  border:1px solid rgba(0,200,240,.22);
+  border-radius:100px;
+  padding:9px 18px 9px 11px;
+  display:flex;align-items:center;gap:9px;
+  font-size:13px;color:var(--muted);
+  font-family:'Space Grotesk',sans-serif;
+  backdrop-filter:blur(22px);
+  box-shadow:0 8px 32px rgba(0,0,0,.55),0 0 0 1px rgba(0,200,240,.07);
+  transition:transform .55s cubic-bezier(0.32,0.72,0,1),opacity .4s;
+  opacity:0;white-space:nowrap;
+  max-width:calc(100vw - 40px);
+  overflow:hidden;text-overflow:ellipsis;
+  pointer-events:none
+}
+.dynamic-island.di-show{
+  transform:translateX(-50%) translateY(0);opacity:1
+}
+@keyframes di-pulse{
+  0%,100%{box-shadow:0 0 0 0 rgba(0,200,240,.5)}
+  50%{box-shadow:0 0 0 5px rgba(0,200,240,0)}
+}
+.di-dot{
+  width:8px;height:8px;border-radius:50%;
+  background:var(--cyan);flex-shrink:0;
+  animation:di-pulse 2.2s ease-in-out infinite
+}
+.di-avatar{
+  width:26px;height:26px;border-radius:50%;
+  background:rgba(0,200,240,.12);border:1px solid rgba(0,200,240,.25);
+  display:flex;align-items:center;justify-content:center;
+  font-size:11px;font-weight:700;color:var(--cyan);flex-shrink:0
+}
+.di-msg strong{color:rgba(240,244,255,.9)}
+
+/* ── 5. GLOWING EFFECT — testimonial mouse glow ───────────── */
+.test-card{
+  --gx:50%;--gy:50%;
+  position:relative;overflow:hidden
+}
+.test-card::before{
+  content:'';
+  position:absolute;inset:0;
+  background:radial-gradient(220px circle at var(--gx) var(--gy),rgba(0,200,240,.13),transparent 70%);
+  opacity:0;transition:opacity .4s;pointer-events:none;z-index:0;border-radius:inherit
+}
+.test-card:hover::before{opacity:1}
+.test-card > *{position:relative;z-index:1}
+
+/* ── 6. HERO BG ANIMATED GRADIENT ────────────────────────── */
+@keyframes heroGradDrift{
+  0%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0% 50%}
+}
+.hero-bg{
+  background:linear-gradient(135deg,#07090F 0%,#0b1220 25%,#07090F 50%,#0a0e1a 75%,#07090F 100%);
+  background-size:300% 300%;
+  animation:heroGradDrift 14s ease infinite
+}
 </style>
 </head>
 <body>
@@ -1021,7 +1219,23 @@ footer .logo{font-size:16px}
     <li><a href="#precios">Precios</a></li>
   </ul>
   <a href="https://wa.me/524431009366?text=Hola%2C+quiero+saber+m%C3%A1s+sobre+Nexus+Digital" target="_blank" class="nav-cta">Empecemos →</a>
+  <button class="nav-hamburger" id="nav-hamburger" aria-label="Menú" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
+
+<!-- ── FAMILY DRAWER ── -->
+<div class="drawer-backdrop" id="drawer-backdrop"></div>
+<aside class="drawer-panel" id="drawer-panel" role="dialog" aria-modal="true" aria-label="Menú de navegación">
+  <button class="drawer-close-btn" id="drawer-close" aria-label="Cerrar menú">✕</button>
+  <a href="#servicios" class="drawer-link">Servicios<span class="dl-arrow">→</span></a>
+  <a href="#proceso" class="drawer-link">Proceso<span class="dl-arrow">→</span></a>
+  <a href="#proyectos" class="drawer-link">Proyectos<span class="dl-arrow">→</span></a>
+  <a href="#testimonios" class="drawer-link">Clientes<span class="dl-arrow">→</span></a>
+  <a href="#precios" class="drawer-link">Precios<span class="dl-arrow">→</span></a>
+  <a href="https://wa.me/524431009366?text=Hola%2C+quiero+saber+m%C3%A1s+sobre+Nexus+Digital" target="_blank" class="drawer-cta-btn">Empecemos →</a>
+  <p class="drawer-footer-note">Agencia Digital · México<br>hola@nexusdigital.mx</p>
+</aside>
 
 <!-- ═══════════════════════════════════
      HERO
@@ -1047,6 +1261,7 @@ footer .logo{font-size:16px}
 
     <div class="hero-actions">
       <a href="https://wa.me/524431009366?text=Hola%2C+quiero+hablar+sobre+mi+proyecto" target="_blank" class="btn-primary">
+        <span class="btn-shimmer"></span>
         <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
         Agendar una llamada
       </a>
@@ -1996,6 +2211,131 @@ document.querySelectorAll('.srv-card').forEach(card => {
 });
 
 // ── SCROLL REVEAL — handled by the single io observer above ────────────────
+
+// ══════════════════════════════════════════════════════════════
+// CULT UI EQUIVALENTS
+// ══════════════════════════════════════════════════════════════
+
+// ── 2. TEXT ANIMATE — H1 word-by-word blur reveal ──────────────────────────
+(function(){
+  const h1 = document.querySelector('.hero h1');
+  if (!h1) return;
+  const html = h1.innerHTML;
+  let delay = 0.05;
+  // Wrap each word in a span, preserving HTML tags (<br>, <em>)
+  const animated = html.replace(/(<[^>]+>)|([^\s<]+)/g, function(match, tag, word){
+    if (tag) return tag;
+    if (!word) return match;
+    const d = (delay).toFixed(2);
+    delay += 0.075;
+    return '<span class="wanim" style="animation-delay:' + d + 's">' + word + '</span>';
+  });
+  h1.innerHTML = animated;
+  h1.classList.add('text-anim-ready');
+})();
+
+// ── 3. FAMILY DRAWER — open / close / close-on-link ───────────────────────
+(function(){
+  const hamburger  = document.getElementById('nav-hamburger');
+  const backdrop   = document.getElementById('drawer-backdrop');
+  const panel      = document.getElementById('drawer-panel');
+  const closeBtn   = document.getElementById('drawer-close');
+  if (!hamburger || !panel) return;
+
+  function openDrawer(){
+    panel.classList.add('drawer-open');
+    backdrop.classList.add('drawer-open');
+    hamburger.classList.add('ham-open');
+    hamburger.setAttribute('aria-expanded','true');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeDrawer(){
+    panel.classList.remove('drawer-open');
+    backdrop.classList.remove('drawer-open');
+    hamburger.classList.remove('ham-open');
+    hamburger.setAttribute('aria-expanded','false');
+    document.body.style.overflow = '';
+  }
+
+  hamburger.addEventListener('click', function(){
+    panel.classList.contains('drawer-open') ? closeDrawer() : openDrawer();
+  });
+  if (closeBtn) closeBtn.addEventListener('click', closeDrawer);
+  backdrop.addEventListener('click', closeDrawer);
+
+  // Close when any drawer link is clicked
+  panel.querySelectorAll('a').forEach(function(a){
+    a.addEventListener('click', closeDrawer);
+  });
+
+  // Close on Escape key
+  document.addEventListener('keydown', function(e){
+    if (e.key === 'Escape') closeDrawer();
+  });
+})();
+
+// ── 5. GLOWING EFFECT — mouse-tracking radial glow on testimonials ─────────
+(function(){
+  document.querySelectorAll('.test-card').forEach(function(card){
+    card.addEventListener('mousemove', function(e){
+      const r = card.getBoundingClientRect();
+      const x = ((e.clientX - r.left) / r.width  * 100).toFixed(1) + '%';
+      const y = ((e.clientY - r.top)  / r.height * 100).toFixed(1) + '%';
+      card.style.setProperty('--gx', x);
+      card.style.setProperty('--gy', y);
+    });
+  });
+})();
+
+// ── 4. DYNAMIC ISLAND — social proof notification cycle ────────────────────
+(function(){
+  const island  = document.getElementById('dynamic-island');
+  const msgEl   = document.getElementById('di-msg');
+  const avatarEl= document.getElementById('di-avatar');
+  if (!island || !msgEl) return;
+
+  const proofs = [
+    { initials:'M', html:'<strong>Maximiliano B.</strong> automatizó sus reservas esta semana' },
+    { initials:'B', html:'<strong>Brenda N.</strong> redujo el abandono de carrito en Bywell' },
+    { initials:'AC', html:'<strong>Ana Cristina S.</strong> cerró colaboración con su media kit' },
+    { initials:'NX', html:'<strong>3 proyectos</strong> nuevos en proceso este mes — ¿el tuyo?' },
+    { initials:'HP', html:'<strong>Hotel La Parroquia</strong> recibió 47 reservas vía chatbot' }
+  ];
+
+  let idx = 0;
+
+  function showProof(i){
+    const p = proofs[i];
+    msgEl.innerHTML   = p.html;
+    avatarEl.textContent = p.initials;
+  }
+
+  function cycle(){
+    // Hide first
+    island.classList.remove('di-show');
+    setTimeout(function(){
+      idx = (idx + 1) % proofs.length;
+      showProof(idx);
+      island.classList.add('di-show');
+    }, 600);
+  }
+
+  // First appearance after 3s
+  setTimeout(function(){
+    showProof(0);
+    island.classList.add('di-show');
+    // Cycle every 5s after that
+    setInterval(cycle, 5000);
+  }, 3000);
+})();
 </script>
+
+<!-- ── DYNAMIC ISLAND ── -->
+<div class="dynamic-island" id="dynamic-island" role="status" aria-live="polite">
+  <div class="di-dot"></div>
+  <div class="di-avatar" id="di-avatar">M</div>
+  <span class="di-msg" id="di-msg"><strong>Maximiliano B.</strong> automatizó sus reservas esta semana</span>
+</div>
+
 </body>
 </html>
